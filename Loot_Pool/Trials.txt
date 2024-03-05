@@ -1,0 +1,17 @@
+Shayura's Wrath ; Aggressive Frame ; SMG ; Void
+The Inmortal ; Aggressive Frame ; SMG ; Strand
+Reed's Regret ; Aggressive Frame ; Linear Fusion Rifle ; Stasis
+Incisor ; Adaptive Frame ; Trace Rifle ; Strand
+Igneous Hammer ; Aggressive Frame ; Hand Cannon ; Solar
+Unexpected Resurgence ; Adaptive Frame ; Glaive ; Arc
+Eye of Sol ; Adaptive Frame ; Sniper Rifle ; Kinetic
+The Messenger ; High-Impact Frame ; Pulse Rifle ; Kinetic
+The Summoner ; Adaptive Frame ; Auto Rifle ; Solar
+Cataphract GL3 ; Adaptive Frame ; Grenade Launcher ; Strand
+Whistler's Whim ; Lightweight Frame ; Bow ; Kinetic
+Astral Horizon ; Aggressive Frame ; Shotgun ; Kinetic
+Unwavering Duty ; Adaptive Frame ; Machine Gun ; Solar
+Forgiveness ; Aggressive Burst ; Sidearm ; Arc
+The Inquisitor ; Pinpoint Slug Frame ; Shotgun ; Arc
+Burden of Guilt ; Adaptive Frame ; Fusion Rifle ; Stasis
+Aisha's Embrace ; Rapid-Fire Frame ; Scout Rifle ; Void
