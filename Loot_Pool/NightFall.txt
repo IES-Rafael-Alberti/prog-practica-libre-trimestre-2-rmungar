@@ -1,0 +1,17 @@
+Undercurrent ; Wave Frame ; Grenade Launcher ; Arc
+Uzume RR4 ; Adaptive Frame ; Sniper Rifle ; Solar
+Pre Astyanax IV ; Precision Frame ; Bow ; Solar
+Braytech Osprey ; High-Impact Frame ; Rocket Launcher ; Void
+Warden's Law ; Heavy Burst ; Hand Cannon ; Kinetic
+Loaded Question ; High-Impact Frame ; Fusion Rifle ; Arc
+The Swarm ; High-Impact Frame ; Machine Gun ; Arc
+Buzzard ; Adaptive Frame ; Sidearm ; Kinetic
+Wendigo GL3 ; Adaptive Frame ; Grenade Launcher ; Arc
+The Slammer ; Vortex Frame ; Sword ; Stasis
+Hung Jury SR4 ; Precision Frame ; Scout Rifle ; Kinetic
+Mindbender's Ambition ; Aggressive Frame ; Shotgun ; Solar
+The Militia's Birthright ; Lightweight Frame ; Grenade Launcher ; Kinetic
+Horror's Least ; Rapid-Fire Frame ; Pulse Rifle ; Arc
+The Hothead ; Adaptive Frame ; Rocket Launcher ; Arc
+D.F.A. ; Adaptive Frame ; Hand Cannon ; Kinetic
+Plug One.1 ; Precision Frame ; Fusion Rifle ; Arc

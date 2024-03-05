@@ -1,0 +1,12 @@
+Malediction ; Aggressive Frame ; Hand Cannon ; Kinetic
+Last Rite ; Aggressive Frame ; Scout Rifle ; Kinetic
+Chivalric Fire ; Caster Frame ; Sword ; Void
+Trust ; Precision Frame ; Hand Cannon ; Solar
+Laser Painter ; Precision Frame ; Linear Fusion Rifle ; Strand
+Albruna ; Aggressive Frame ; Sniper Rifle ; Arc
+Veles-X ; Aggressive Frame ; Pulse Rifle ; Void
+Cry Mutiny ; Adaptive Frame ; Grenade Launcher ; Solar
+Yesteryear ; Adaptive Frame ; Pulse Rifle ; Void
+Herod-C ; High-Impact Frame ; Auto Rifle ; Stasis
+Bottom Dollar ; Aggressive Frame ; Hand Cannon ; Void
+Crowd Pleaser ; Adaptive Frame ; Grenade Launcher ; Void
