@@ -1,17 +1,17 @@
-Shayura's Wrath ; Aggressive Frame ; SMG ; Void
-The Inmortal ; Aggressive Frame ; SMG ; Strand
-Reed's Regret ; Aggressive Frame ; Linear Fusion Rifle ; Stasis
-Incisor ; Adaptive Frame ; Trace Rifle ; Strand
-Igneous Hammer ; Aggressive Frame ; Hand Cannon ; Solar
-Unexpected Resurgence ; Adaptive Frame ; Glaive ; Arc
-Eye of Sol ; Adaptive Frame ; Sniper Rifle ; Kinetic
-The Messenger ; High-Impact Frame ; Pulse Rifle ; Kinetic
-The Summoner ; Adaptive Frame ; Auto Rifle ; Solar
-Cataphract GL3 ; Adaptive Frame ; Grenade Launcher ; Strand
-Whistler's Whim ; Lightweight Frame ; Bow ; Kinetic
-Astral Horizon ; Aggressive Frame ; Shotgun ; Kinetic
-Unwavering Duty ; Adaptive Frame ; Machine Gun ; Solar
-Forgiveness ; Aggressive Burst ; Sidearm ; Arc
-The Inquisitor ; Pinpoint Slug Frame ; Shotgun ; Arc
-Burden of Guilt ; Adaptive Frame ; Fusion Rifle ; Stasis
-Aisha's Embrace ; Rapid-Fire Frame ; Scout Rifle ; Void
+Shayura's Wrath ; Aggressive Frame ; SMG ; Void ; Legendary
+The Inmortal ; Aggressive Frame ; SMG ; Strand ; Legendary
+Reed's Regret ; Aggressive Frame ; Linear Fusion Rifle ; Stasis ; Legendary
+Incisor ; Adaptive Frame ; Trace Rifle ; Strand ; Legendary
+Igneous Hammer ; Aggressive Frame ; Hand Cannon ; Solar ; Legendary
+Unexpected Resurgence ; Adaptive Frame ; Glaive ; Arc ; Legendary
+Eye of Sol ; Adaptive Frame ; Sniper Rifle ; Kinetic ; Legendary
+The Messenger ; High-Impact Frame ; Pulse Rifle ; Kinetic ; Legendary
+The Summoner ; Adaptive Frame ; Auto Rifle ; Solar ; Legendary
+Cataphract GL3 ; Adaptive Frame ; Grenade Launcher ; Strand ; Legendary
+Whistler's Whim ; Lightweight Frame ; Bow ; Kinetic ; Legendary
+Astral Horizon ; Aggressive Frame ; Shotgun ; Kinetic ; Legendary
+Unwavering Duty ; Adaptive Frame ; Machine Gun ; Solar ; Legendary
+Forgiveness ; Aggressive Burst ; Sidearm ; Arc ; Legendary
+The Inquisitor ; Pinpoint Slug Frame ; Shotgun ; Arc ; Legendary
+Burden of Guilt ; Adaptive Frame ; Fusion Rifle ; Stasis ; Legendary
+Aisha's Embrace ; Rapid-Fire Frame ; Scout Rifle ; Void ; Legendary

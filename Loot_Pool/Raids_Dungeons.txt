@@ -1,0 +1,17 @@
+Rufus's Fury ; Rapid-Fire Frame ; Auto Rifle ; Strand ; Legendary
+Word of Crota ; Precision Frame ; Hand Cannon ; Void; Legendary
+Defiance of Yasmin ; Adaptive Frame ; Sniper Rifle ; Kinetic ; Legendary
+Apex Predator ; Adaptive Frame ; Rocket Launcher ; Solar ; Legendary
+Oversoul Edict ; Rapid-Fire Frame ; Pulse Rifle ; Arc ; Legendary
+Fatebringer ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
+Cataclysmic ; Precision Frame ; Linear Fusion Rifle ; Solar; Legendary
+Sacred Provenance ; Aggressive Burst ; Pulse Fire ; Kinetic; Legendary
+Adjudicator ; Precision Frame ; SMG ; Kinetic ; Legendary
+Eyasluna ; Adaptive Frame ; Hand Cannon ; Stasis ; Legendary
+Lingering Dread ; Lightweight Frame ; Grenade Launcher ; Stasis ; Legendary
+Necrochasm ; Variable Frame ; Auto Rifle ; Kinetic ; Exotic
+Conditional Finality ; Dual Barrel ; Shotgun ; Stasis & Solar ; Exotic
+One Thousand Voices ; Heavy Burst Frame ; Fusion Rifle ; Solar ; Exotic
+Vex Mythoclast ; 360 - RPM ; Fusion Rifle ; Solar ; Exotic
+Wish-Ender ; Precision Frame ; Bow ; Kinetic ;  Exotic
+Hierarchy of Needs ; Adaptive Frame ; Bow ; Solar ; Exotic
