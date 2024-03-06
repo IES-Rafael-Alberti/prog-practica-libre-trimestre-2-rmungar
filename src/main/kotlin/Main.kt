@@ -1,5 +1,7 @@
 package org.practicatrim2
 import com.google.gson.Gson
+import org.practicatrim2.items.Arma
+import org.practicatrim2.items.Elementos
 import java.io.File
 
 fun main() {
@@ -11,11 +13,11 @@ fun main() {
     println(armaAleatoria)
 
     //CONVERTIR OBJETOS A TEXTO
-    /**
+
     val armaPrueba = Arma("Palindromo", "Aggressive Frame", "Hand Cannon", Elementos.VOID)
     val guardarArma = gson.toJson(armaPrueba)
-    File("$workingDirectory/Datos_Guardado/Vault.json").writeText(guardarArma)
-    */
+    File("$workingDirectory/Datos_Guardado/Vault.json").appendText(guardarArma)
+
 
     //LEER DATOS Y CONVERTIRLOS A OBJETOS
     /**

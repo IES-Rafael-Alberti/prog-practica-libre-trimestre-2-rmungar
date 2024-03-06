@@ -1,17 +1,22 @@
-Shayura's Wrath ; Aggressive Frame ; SMG ; Void ; Legendary
-The Inmortal ; Aggressive Frame ; SMG ; Strand ; Legendary
-Reed's Regret ; Aggressive Frame ; Linear Fusion Rifle ; Stasis ; Legendary
-Incisor ; Adaptive Frame ; Trace Rifle ; Strand ; Legendary
-Igneous Hammer ; Aggressive Frame ; Hand Cannon ; Solar ; Legendary
-Unexpected Resurgence ; Adaptive Frame ; Glaive ; Arc ; Legendary
-Eye of Sol ; Adaptive Frame ; Sniper Rifle ; Kinetic ; Legendary
-The Messenger ; High-Impact Frame ; Pulse Rifle ; Kinetic ; Legendary
-The Summoner ; Adaptive Frame ; Auto Rifle ; Solar ; Legendary
-Cataphract GL3 ; Adaptive Frame ; Grenade Launcher ; Strand ; Legendary
-Whistler's Whim ; Lightweight Frame ; Bow ; Kinetic ; Legendary
-Astral Horizon ; Aggressive Frame ; Shotgun ; Kinetic ; Legendary
-Unwavering Duty ; Adaptive Frame ; Machine Gun ; Solar ; Legendary
-Forgiveness ; Aggressive Burst ; Sidearm ; Arc ; Legendary
-The Inquisitor ; Pinpoint Slug Frame ; Shotgun ; Arc ; Legendary
-Burden of Guilt ; Adaptive Frame ; Fusion Rifle ; Stasis ; Legendary
-Aisha's Embrace ; Rapid-Fire Frame ; Scout Rifle ; Void ; Legendary
+W ; Shayura's Wrath ; Aggressive Frame ; SMG ; Void ; Legendary
+W ; The Inmortal ; Aggressive Frame ; SMG ; Strand ; Legendary
+W ; Reed's Regret ; Aggressive Frame ; Linear Fusion Rifle ; Stasis ; Legendary
+W ; Incisor ; Adaptive Frame ; Trace Rifle ; Strand ; Legendary
+W ; Igneous Hammer ; Aggressive Frame ; Hand Cannon ; Solar ; Legendary
+W ; Unexpected Resurgence ; Adaptive Frame ; Glaive ; Arc ; Legendary
+W ; Eye of Sol ; Adaptive Frame ; Sniper Rifle ; Kinetic ; Legendary
+W ; The Messenger ; High-Impact Frame ; Pulse Rifle ; Kinetic ; Legendary
+W ; The Summoner ; Adaptive Frame ; Auto Rifle ; Solar ; Legendary
+W ; Cataphract GL3 ; Adaptive Frame ; Grenade Launcher ; Strand ; Legendary
+W ; Whistler's Whim ; Lightweight Frame ; Bow ; Kinetic ; Legendary
+W ; Astral Horizon ; Aggressive Frame ; Shotgun ; Kinetic ; Legendary
+W ; Unwavering Duty ; Adaptive Frame ; Machine Gun ; Solar ; Legendary
+W ; Forgiveness ; Aggressive Burst ; Sidearm ; Arc ; Legendary
+W ; The Inquisitor ; Pinpoint Slug Frame ; Shotgun ; Arc ; Legendary
+W ; Burden of Guilt ; Adaptive Frame ; Fusion Rifle ; Stasis ; Legendary
+W ; Aisha's Embrace ; Rapid-Fire Frame ; Scout Rifle ; Void ; Legendary
+A ; Atavistic Idol ; Helmet ; Legendary
+A ; Atavistic Idol ; Arms ; Legendary
+A ; Atavistic Idol ; Chest ; Legendary
+A ; Atavistic Idol ; Legs ; Legendary
+A ; Atavistic Idol ; Class Item ; Legendary

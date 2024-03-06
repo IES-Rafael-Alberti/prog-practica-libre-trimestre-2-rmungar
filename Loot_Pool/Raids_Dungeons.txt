@@ -1,17 +1,22 @@
-Rufus's Fury ; Rapid-Fire Frame ; Auto Rifle ; Strand ; Legendary
-Word of Crota ; Precision Frame ; Hand Cannon ; Void; Legendary
-Defiance of Yasmin ; Adaptive Frame ; Sniper Rifle ; Kinetic ; Legendary
-Apex Predator ; Adaptive Frame ; Rocket Launcher ; Solar ; Legendary
-Oversoul Edict ; Rapid-Fire Frame ; Pulse Rifle ; Arc ; Legendary
-Fatebringer ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
-Cataclysmic ; Precision Frame ; Linear Fusion Rifle ; Solar; Legendary
-Sacred Provenance ; Aggressive Burst ; Pulse Fire ; Kinetic; Legendary
-Adjudicator ; Precision Frame ; SMG ; Kinetic ; Legendary
-Eyasluna ; Adaptive Frame ; Hand Cannon ; Stasis ; Legendary
-Lingering Dread ; Lightweight Frame ; Grenade Launcher ; Stasis ; Legendary
-Necrochasm ; Variable Frame ; Auto Rifle ; Kinetic ; Exotic
-Conditional Finality ; Dual Barrel ; Shotgun ; Stasis & Solar ; Exotic
-One Thousand Voices ; Heavy Burst Frame ; Fusion Rifle ; Solar ; Exotic
-Vex Mythoclast ; 360 - RPM ; Fusion Rifle ; Solar ; Exotic
-Wish-Ender ; Precision Frame ; Bow ; Kinetic ;  Exotic
-Hierarchy of Needs ; Adaptive Frame ; Bow ; Solar ; Exotic
+W ; Rufus's Fury ; Rapid-Fire Frame ; Auto Rifle ; Strand ; Legendary
+W ; Word of Crota ; Precision Frame ; Hand Cannon ; Void; Legendary
+W ; Defiance of Yasmin ; Adaptive Frame ; Sniper Rifle ; Kinetic ; Legendary
+W ; Apex Predator ; Adaptive Frame ; Rocket Launcher ; Solar ; Legendary
+W ; Oversoul Edict ; Rapid-Fire Frame ; Pulse Rifle ; Arc ; Legendary
+W ; Fatebringer ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
+W ; Cataclysmic ; Precision Frame ; Linear Fusion Rifle ; Solar; Legendary
+W ; Sacred Provenance ; Aggressive Burst ; Pulse Fire ; Kinetic; Legendary
+W ; Adjudicator ; Precision Frame ; SMG ; Kinetic ; Legendary
+W ; Eyasluna ; Adaptive Frame ; Hand Cannon ; Stasis ; Legendary
+W ; Lingering Dread ; Lightweight Frame ; Grenade Launcher ; Stasis ; Legendary
+W ; Necrochasm ; Variable Frame ; Auto Rifle ; Kinetic ; Exotic
+W ; Conditional Finality ; Dual Barrel ; Shotgun ; Stasis & Solar ; Exotic
+W ; One Thousand Voices ; Heavy Burst Frame ; Fusion Rifle ; Solar ; Exotic
+W ; Vex Mythoclast ; 360 - RPM ; Fusion Rifle ; Solar ; Exotic
+W ; Wish-Ender ; Precision Frame ; Bow ; Kinetic ;  Exotic
+W ; Hierarchy of Needs ; Adaptive Frame ; Bow ; Solar ; Exotic
+A ; War Numen's ; Helmet ; Legendary
+A ; Resonant Fury ; Arms ; Legendary
+A ; Legacy's Oath ; Chest ; Legendary
+A ; Kabr ; Legs ; Legendary
+A ; Kentarch 3 ; Class Item ; Legendary

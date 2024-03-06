@@ -1,17 +1,22 @@
-Undercurrent ; Wave Frame ; Grenade Launcher ; Arc ; Legendary
-Uzume RR4 ; Adaptive Frame ; Sniper Rifle ; Solar ; Legendary
-Pre Astyanax IV ; Precision Frame ; Bow ; Solar ; Legendary
-Braytech Osprey ; High-Impact Frame ; Rocket Launcher ; Void ; Legendary
-Warden's Law ; Heavy Burst ; Hand Cannon ; Kinetic ; Legendary
-Loaded Question ; High-Impact Frame ; Fusion Rifle ; Arc ; Legendary
-The Swarm ; High-Impact Frame ; Machine Gun ; Arc ; Legendary
-Buzzard ; Adaptive Frame ; Sidearm ; Kinetic ; Legendary
-Wendigo GL3 ; Adaptive Frame ; Grenade Launcher ; Arc ; Legendary
-The Slammer ; Vortex Frame ; Sword ; Stasis ; Legendary
-Hung Jury SR4 ; Precision Frame ; Scout Rifle ; Kinetic ; Legendary
-Mindbender's Ambition ; Aggressive Frame ; Shotgun ; Solar ; Legendary
-The Militia's Birthright ; Lightweight Frame ; Grenade Launcher ; Kinetic ; Legendary
-Horror's Least ; Rapid-Fire Frame ; Pulse Rifle ; Arc ; Legendary
-The Hothead ; Adaptive Frame ; Rocket Launcher ; Arc ; Legendary
-D.F.A. ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
-Plug One.1 ; Precision Frame ; Fusion Rifle ; Arc ; Legendary
+W ; Undercurrent ; Wave Frame ; Grenade Launcher ; Arc ; Legendary
+W ; Uzume RR4 ; Adaptive Frame ; Sniper Rifle ; Solar ; Legendary
+W ; Pre Astyanax IV ; Precision Frame ; Bow ; Solar ; Legendary
+W ; Braytech Osprey ; High-Impact Frame ; Rocket Launcher ; Void ; Legendary
+W ; Warden's Law ; Heavy Burst ; Hand Cannon ; Kinetic ; Legendary
+W ; Loaded Question ; High-Impact Frame ; Fusion Rifle ; Arc ; Legendary
+W ; The Swarm ; High-Impact Frame ; Machine Gun ; Arc ; Legendary
+W ; Buzzard ; Adaptive Frame ; Sidearm ; Kinetic ; Legendary
+W ; Wendigo GL3 ; Adaptive Frame ; Grenade Launcher ; Arc ; Legendary
+W ; The Slammer ; Vortex Frame ; Sword ; Stasis ; Legendary
+W ; Hung Jury SR4 ; Precision Frame ; Scout Rifle ; Kinetic ; Legendary
+W ; Mindbender's Ambition ; Aggressive Frame ; Shotgun ; Solar ; Legendary
+W ; The Militia's Birthright ; Lightweight Frame ; Grenade Launcher ; Kinetic ; Legendary
+W ; Horror's Least ; Rapid-Fire Frame ; Pulse Rifle ; Arc ; Legendary
+W ; The Hothead ; Adaptive Frame ; Rocket Launcher ; Arc ; Legendary
+W ; D.F.A. ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
+W ; Plug One.1 ; Precision Frame ; Fusion Rifle ; Arc ; Legendary
+A ; Photosuede ; Helmet ; Legendary
+A ; Photosuede ; Arms ; Legendary
+A ; Photosuede ; Chest ; Legendary
+A ; Photosuede ; Legs ; Legendary
+A ; Photosuede ; Class Item ; Legendary

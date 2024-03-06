@@ -1,17 +1,22 @@
-Malediction ; Aggressive Frame ; Hand Cannon ; Kinetic ; Legendary
-Last Rite ; Aggressive Frame ; Scout Rifle ; Kinetic ; Legendary
-Chivalric Fire ; Caster Frame ; Sword ; Void ; Legendary
-Trust ; Precision Frame ; Hand Cannon ; Solar ; Legendary
-Laser Painter ; Precision Frame ; Linear Fusion Rifle ; Strand ; Legendary
-Albruna-D ; Aggressive Frame ; Sniper Rifle ; Arc ; Legendary
-Veles-X ; Aggressive Frame ; Pulse Rifle ; Void ; Legendary
-Cry Mutiny ; Adaptive Frame ; Grenade Launcher ; Solar ; Legendary
-Yesteryear ; Adaptive Frame ; Pulse Rifle ; Void ; Legendary
-Herod-C ; High-Impact Frame ; Auto Rifle ; Stasis ; Legendary
-Bottom Dollar ; Aggressive Frame ; Hand Cannon ; Void ; Legendary
-Crowd Pleaser ; Adaptive Frame ; Grenade Launcher ; Void ; Legendary
-Trinary System ; Adaptive Frame ; Fusion Rifle ; Solar ; Legendary
-Borrowed Time ; Aggressive Frame ; SMG ; Solar ; Legendary
-Gnawing Hunger ; Adaptive Frame ; Auto Rifle ; Void ; Legendary
-Servant Leader ; Rapid-Fire Frame ; Scout Rifle ; Kinetic ; Legendary
-Qua Xaphan ; High-Impact Frame ; Machine Gun ; Void ; Legendary
+W ; Malediction ; Aggressive Frame ; Hand Cannon ; Kinetic ; Legendary
+W ; Last Rite ; Aggressive Frame ; Scout Rifle ; Kinetic ; Legendary
+W ; Chivalric Fire ; Caster Frame ; Sword ; Void ; Legendary
+W ; Trust ; Precision Frame ; Hand Cannon ; Solar ; Legendary
+W ; Laser Painter ; Precision Frame ; Linear Fusion Rifle ; Strand ; Legendary
+W ; Albruna-D ; Aggressive Frame ; Sniper Rifle ; Arc ; Legendary
+W ; Veles-X ; Aggressive Frame ; Pulse Rifle ; Void ; Legendary
+W ; Cry Mutiny ; Adaptive Frame ; Grenade Launcher ; Solar ; Legendary
+W ; Yesteryear ; Adaptive Frame ; Pulse Rifle ; Void ; Legendary
+W ; Herod-C ; High-Impact Frame ; Auto Rifle ; Stasis ; Legendary
+W ; Bottom Dollar ; Aggressive Frame ; Hand Cannon ; Void ; Legendary
+W ; Crowd Pleaser ; Adaptive Frame ; Grenade Launcher ; Void ; Legendary
+W ; Trinary System ; Adaptive Frame ; Fusion Rifle ; Solar ; Legendary
+W ; Borrowed Time ; Aggressive Frame ; SMG ; Solar ; Legendary
+W ; Gnawing Hunger ; Adaptive Frame ; Auto Rifle ; Void ; Legendary
+W ; Servant Leader ; Rapid-Fire Frame ; Scout Rifle ; Kinetic ; Legendary
+W ; Qua Xaphan ; High-Impact Frame ; Machine Gun ; Void ; Legendary
+A ; Viperidax ; Helmet ; Legendary
+A ; Viperidax ; Arms ; Legendary
+A ; Viperidax ; Chest ; Legendary
+A ; Viperidax ; Legs ; Legendary
+A ; Viperidax ; Class Item ; Legendary
