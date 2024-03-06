@@ -14,6 +14,6 @@ class Warlock(nombre:String, genero:String, raza: Razas): Personaje(nombre, gene
         return "CURRENT ARMOR SET \n${armaduraEquipada[0]} hood \n${armaduraEquipada[1]} gloves\n ${armaduraEquipada[2]} robes\n ${armaduraEquipada[3]} boots \n${armaduraEquipada[4]} bond"
     }
     override fun armaEquipadaToString():String{
-        return "CURRENT WEAPONS SET \n${armaEquipada[0].toString()} \n${armaEquipada[1].toString()} \n ${armaEquipada[2].toString()} "
+        return "CURRENT WEAPONS SET \n${armaEquipada[0]} \n${armaEquipada[1]} \n ${armaEquipada[2]} "
     }
 }

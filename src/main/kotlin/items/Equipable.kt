@@ -1,5 +1,5 @@
 package org.practicatrim2.items
 
-interface Equipable {
+interface Equipable<T> {
     fun equipable():Boolean
 }
