@@ -3,6 +3,7 @@ package org.practicatrim2
 import java.io.File
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.items.Item
+import org.practicatrim2.juego.GestionJuego
 import org.practicatrim2.juego.Juego
 
 
@@ -28,9 +29,14 @@ fun main() {
     val arma = itemPrueba.procesarItem(armaAleatoria)
     val t = Terminal()
     val juego = Juego()
-    juego.mostrarMenuPersonaje()
-    juego.mostrarInformacionClases()
-    juego.selectorClasePersonaje()
+    val gestor = GestionJuego()
+    //juego.mostrarMenuPersonaje()
+    //juego.mostrarInformacionClases()
+    //juego.selectorClasePersonaje()
+    gestor.jugar()
+    //juego.mostrarRazaPersonaje()
+    //juego.mostrarInformacionRazas()
+    //juego.selectorRazaPersonaje()
     /**
     val a = t.textAnimation<Int> { frame ->
         (1..196).joinToString("") {

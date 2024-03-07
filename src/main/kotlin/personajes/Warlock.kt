@@ -11,9 +11,9 @@ class Warlock(nombre:String, genero:String, raza: Razas): Personaje(nombre, gene
         return "$nombre is a $genero Titan, born and risen in the ${raza.description} race. \n${armaEquipadaToString()}"
     }
     override fun armaduraEquipadaToString():String{
-        return "CURRENT ARMOR SET \n${armaduraEquipada[0]} hood \n${armaduraEquipada[1]} gloves\n ${armaduraEquipada[2]} robes\n ${armaduraEquipada[3]} boots \n${armaduraEquipada[4]} bond"
+        return "CURRENT ARMOR SET \n${armaduraEquipada[0].nombre} hood \n${armaduraEquipada[1].nombre} gloves\n ${armaduraEquipada[2].nombre} robes\n ${armaduraEquipada[3].nombre} boots \n${armaduraEquipada[4].nombre} bond"
     }
     override fun armaEquipadaToString():String{
-        return "CURRENT WEAPONS SET \n${armaEquipada[0]} \n${armaEquipada[1]} \n ${armaEquipada[2]} "
+        return "CURRENT WEAPONS SET \n${armaEquipada[0].mostrarInformacion()} \n${armaEquipada[1].mostrarInformacion()} \n ${armaEquipada[2].mostrarInformacion()} "
     }
 }

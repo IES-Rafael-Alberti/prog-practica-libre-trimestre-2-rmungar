@@ -1,7 +1,7 @@
 package org.practicatrim2.items
 
 import com.github.ajalt.mordant.rendering.TextColors
-import juego.GameModes
+import org.practicatrim2.modosDeJuego.GameModes
 import java.io.File
 import com.github.ajalt.mordant.terminal.Terminal
 import com.github.ajalt.mordant.rendering.TextColors.*

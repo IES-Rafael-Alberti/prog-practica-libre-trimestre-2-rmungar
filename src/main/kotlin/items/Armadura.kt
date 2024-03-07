@@ -5,15 +5,15 @@ import com.github.ajalt.mordant.rendering.TextStyle
 import com.github.ajalt.mordant.terminal.Terminal
 import java.io.File
 
-class Armadura(val nombre:String, val parte:String, val rareza:String, private val rarity:TextStyle) : Equipable<List<Armadura>>,Sustituible<Armadura, MutableList<Armadura>>,Guardable<Armadura>, Item(){
+class Armadura(val nombre:String, val parte:String, val rareza:String, private val rarity:TextStyle) : Equipable<List<Armadura>>,Sustituible<Armadura, MutableList<Armadura>>, Guardable<Armadura>, Item(){
     private val t = Terminal() //Variable empleada para
     override fun equipable(armaduraEquipada : List<Armadura>): Boolean {
         if (armaduraEquipada.size == 5){
-            println("You already have 5 armor items equipped, would you like to replace the currently equipped one?:")
+            println("You already have 5 armor items equipped")
             return false
         }
         else{
-            armaduraEquipada.find { it.parte == parte }.let { println("You already have one of this item type equipped, exchange?") }
+            armaduraEquipada.find { it.parte == parte }.let { println("You already have one of this item type equipped") }
             return true
         }
     }

@@ -2,31 +2,38 @@ package org.practicatrim2.juego
 
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
-import com.github.ajalt.mordant.widgets.Text
 import org.practicatrim2.capitalizar
-import org.practicatrim2.personajes.Clases
-import org.practicatrim2.personajes.Personaje
+import org.practicatrim2.personajes.*
 
 open class Juego() {
 
     private val colorTitanes = TextColors.brightRed // Color para mordant para la clase Titan
     private val colorWarlocks = TextColors.brightYellow // Color para mordant para la clase Warlock
     private val colorHunters = TextColors.rgb("#00eeff") // Color para mordant para la clase Hunter
-    val terminal = Terminal() // Variable empleada para todo lo relacionado con mordant
-    fun crearPersonaje(clase: Clases){
+    private val terminal = Terminal() // Variable empleada para lo relacionado con mordant
+    fun crearPersonaje(clase: Clases):Personaje{
         val nombre = pedirNombrePersonaje()
+        val genero = pedirGeneroPersonaje()
+        val raza = selectorRazaPersonaje()
         when (clase){
-            Clases.TITAN ->{}
-            Clases.WARLOCK ->{}
-            Clases.HUNTER -> {}
+            Clases.TITAN ->{
+                return Titan(nombre, genero, raza)
+            }
+            Clases.WARLOCK ->{
+                return Warlock(nombre, genero, raza)
+            }
+            Clases.HUNTER -> {
+                return Hunter(nombre, genero, raza)
+            }
         }
     }
+
     fun pedirNombrePersonaje():String{
         println()
-        terminal.println((TextColors.brightWhite) ("                                                                                      Please enter a name: "))
+        terminal.print((TextColors.brightWhite) ("                                                                              Please enter a name: "))
         var nombre = readln() //Cadena para el nombre del personaje
         while (nombre == "" || nombre.isEmpty() || nombre.isBlank()){
-            terminal.println((TextColors.brightYellow) ("                                                                               Please enter a valid name: "))
+            terminal.print((TextColors.brightYellow) ("                                                                           Please enter a valid name: "))
             nombre = readln().capitalizar()
         }
         return nombre
@@ -35,7 +42,7 @@ open class Juego() {
     fun pedirGeneroPersonaje():String{
         println()
         while(true) {
-            terminal.println((TextColors.brightWhite)("                                                                             Do you wish them to be male or female: "))
+            terminal.print((TextColors.brightWhite)("                                                                    Do you wish them to be male or female: "))
             val genero = readln().capitalizar()
             when(genero){
                 "Male" -> return "Male"
@@ -45,12 +52,48 @@ open class Juego() {
         }
     }
 
+    fun mostrarRazaPersonaje(){
+        println()
+        terminal.println(TextColors.brightWhite("                                                                       CHOOSE A RACE FOR YOUR CHARACTER"))
+        println()
+        terminal.println("                                  ${colorTitanes ("HUMAN")}                                              ${colorWarlocks ("AWOKEN")}                                               ${colorHunters ("EXO")}")
+    }
+
+    fun mostrarInformacionRazas(){
+        println()
+        println("                  The survivors of a race whose kindgom,               A humanoid race that was born when a                 Humanoid race that appeared during\n" +
+                "                 extended past the Solar System now fight              colony ship disappeared in a space -                Earth's Golden Age. They are robots \n" +
+                "                     for survival after the Traveller                     time anomaly during the first                     with conscience and feelings built\n" +
+                "                  unintentionally led them to their first                          collapse.                                           by humanity.\n" +
+                "                                 collapse.")
+    }
+
+    fun selectorRazaPersonaje():Razas {
+        mostrarRazaPersonaje()
+        mostrarInformacionRazas()
+        while (true) {
+            println()
+            terminal.print((TextColors.brightWhite)("                                                                     Enter the race you wish them to be: "))
+            val razaAcrear = readln().uppercase() //Cadena ingresada por el usuario a comprobar
+            when (razaAcrear) {
+                "HUMAN" -> return Razas.HUMAN
+
+                "AWOKEN" -> return Razas.AWOKEN
+
+                "EXO" -> return Razas.EXO
+
+                else -> terminal.println(TextColors.brightYellow("                                                                Please, answer the requested prompt correctly"))
+            }
+        }
+    }
 
     fun mostrarMenuPersonaje(){
+        println()
         terminal.println(TextColors.brightWhite("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
         println()
         terminal.println("                                  ${colorTitanes ("TITAN")}                                             ${colorWarlocks ("WARLOCK")}                                             ${colorHunters ("HUNTER")}")
     }
+
     fun mostrarInformacionClases(){
         println()
         println("                  Titans are specialized in close combat,              Warlocks are specialized in magic,                  Hunters are specialized in tactics,\n" +
@@ -62,6 +105,7 @@ open class Juego() {
 
     fun selectorClasePersonaje():Clases{
         while (true) {
+            println()
             terminal.print((TextColors.brightWhite)("                                                            Enter the class you wish to create a character of: "))
             val claseAcrear = readln().uppercase()
             when(claseAcrear){
@@ -75,7 +119,9 @@ open class Juego() {
             }
         }
     }
-    fun cargarDatos(){
-        TODO()
+
+    fun mostrarMenuModosJuego(){
+        terminal.println("                                  ${colorTitanes ("TITAN")}                                             ${colorWarlocks ("WARLOCK")}                                             ${colorHunters ("HUNTER")}")
     }
+
 }
