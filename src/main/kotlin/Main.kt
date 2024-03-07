@@ -1,5 +1,7 @@
 package org.practicatrim2
 
+import com.github.ajalt.mordant.animation.textAnimation
+import com.github.ajalt.mordant.rendering.TextColors
 import java.io.File
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.items.Item
@@ -33,11 +35,12 @@ fun main() {
     //juego.mostrarMenuPersonaje()
     //juego.mostrarInformacionClases()
     //juego.selectorClasePersonaje()
-    gestor.jugar()
+    //gestor.jugar()
     //juego.mostrarRazaPersonaje()
     //juego.mostrarInformacionRazas()
     //juego.selectorRazaPersonaje()
-    /**
+    //juego.mostrarMenuModosJuego()
+
     val a = t.textAnimation<Int> { frame ->
         (1..196).joinToString("") {
             val hue = (frame + it) * 3 % 360
@@ -49,7 +52,7 @@ fun main() {
         a.update(it)
         Thread.sleep(25)
     }
-    */
+
 
     //CONVERTIR OBJETOS A TEXTO
     /**

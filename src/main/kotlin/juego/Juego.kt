@@ -3,6 +3,7 @@ package org.practicatrim2.juego
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.capitalizar
+import org.practicatrim2.modosDeJuego.GameModes
 import org.practicatrim2.personajes.*
 
 open class Juego() {
@@ -121,7 +122,10 @@ open class Juego() {
     }
 
     fun mostrarMenuModosJuego(){
-        terminal.println("                                  ${colorTitanes ("TITAN")}                                             ${colorWarlocks ("WARLOCK")}                                             ${colorHunters ("HUNTER")}")
+        println()
+        terminal.println(TextColors.brightWhite("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
+        println()
+        terminal.println("                   ${GameModes.GAMBIT.color ("GAMBIT PRIME")}                               ${GameModes.NIGHTFALL.color ("GRANDMASTER NIGHTFALL")}                               ${GameModes.TRIALS.color ("TRIALS OF OSIRIS")}                               ${GameModes.RAIDS_DUNGEONS.color("RAIDS & DUNGEONS")}")
     }
 
 }
