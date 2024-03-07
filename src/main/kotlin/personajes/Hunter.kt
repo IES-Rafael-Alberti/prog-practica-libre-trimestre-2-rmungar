@@ -14,6 +14,6 @@ class Hunter (nombre:String, genero:String, razas: Razas):Personaje(nombre, gene
         return "CURRENT ARMOR SET \n${armaduraEquipada[0]} helmet \n${armaduraEquipada[1]} grips\n ${armaduraEquipada[2]} vest\n ${armaduraEquipada[3]} strides \n${armaduraEquipada[4]} cloak"
     }
     override fun armaEquipadaToString():String{
-        return "CURRENT WEAPONS SET \n${armaEquipada[0].toString()} \n${armaEquipada[1].toString()} \n ${armaEquipada[2].toString()} "
+        return "CURRENT WEAPONS SET \n${armaEquipada[0].mostrarInformacion()} \n${armaEquipada[1].mostrarInformacion()} \n ${armaEquipada[2].mostrarInformacion()} "
     }
 }

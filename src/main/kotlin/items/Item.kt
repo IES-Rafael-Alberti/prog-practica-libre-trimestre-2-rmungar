@@ -5,6 +5,7 @@ import juego.GameModes
 import java.io.File
 import com.github.ajalt.mordant.terminal.Terminal
 import com.github.ajalt.mordant.rendering.TextColors.*
+import com.github.ajalt.mordant.rendering.TextStyle
 
 open class Item {
     fun obtenerItem(modoDeJuego: GameModes): Item {
@@ -35,9 +36,9 @@ open class Item {
         }
     }
 
-    private fun obtenerElemento(itemAprocesar: List<String>): Pair<Elementos,TextColors> {
+    private fun obtenerElemento(itemAprocesar: List<String>): Pair<Elementos,TextStyle> {
         when (itemAprocesar[4]) {
-            "Void" -> return Pair(Elementos.VOID, magenta)
+            "Void" -> return Pair(Elementos.VOID, TextColors.rgb("#9500ff"))
             "Solar" -> return Pair(Elementos.SOLAR, brightRed)
             "Arc" -> return Pair(Elementos.ARC, brightCyan)
             "Strand" -> return Pair(Elementos.STRAND, green)
@@ -45,11 +46,11 @@ open class Item {
         }
         return Pair(Elementos.KINETIC, brightWhite)
     }
-    fun obtenerRareza(itemAprocesar: List<String>):TextColors{
+    fun obtenerRareza(itemAprocesar: List<String>):TextStyle{
         when(itemAprocesar[itemAprocesar.size - 1]){
-            "Exotic" -> return yellow
+            "Exotic" -> return TextColors.rgb("#bf8506")
         }
-        return magenta
+        return TextColors.rgb("#9500ff")
     }
     open fun mostrarInformacion(){
         val t = Terminal()
