@@ -27,14 +27,14 @@ object GestionJuego :Juego(), Comprobable<String> {
                 TextColors.hsv(hue, 1, 1)("·")
             }
         }
-        repeat(180) {
+        repeat(120) {
             a.update(it)
             Thread.sleep(25)
         }
         return a
     }
     private fun separador(){
-        repeat(35){
+        repeat(15){
             println()
         }
     }

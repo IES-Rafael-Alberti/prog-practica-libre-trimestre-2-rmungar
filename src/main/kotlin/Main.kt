@@ -32,14 +32,7 @@ fun main() {
     val juego = Juego()
     val gestor = GestionJuego
     gestor.comprobarDatosPrevios()
-    //juego.mostrarMenuPersonaje()
-    //juego.mostrarInformacionClases()
-    //juego.selectorClasePersonaje()
     gestor.jugar()
-    //juego.mostrarRazaPersonaje()
-    //juego.mostrarInformacionRazas()
-    //juego.selectorRazaPersonaje()
-    //juego.mostrarMenuModosJuego()
     /**
     val a = t.textAnimation<Int> { frame ->
         (1..196).joinToString("") {
