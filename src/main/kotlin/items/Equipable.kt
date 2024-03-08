@@ -11,3 +11,23 @@ interface Sustituible<T,E> {
 interface Guardable<A>{
     fun guardar(a:A)
 }
+
+interface Comprobable<T> {
+    fun comprobarAccion(t:T):Boolean
+    fun comprobarDatosPrevios():Boolean
+    fun comprobarDatosArmaduras():Boolean
+    fun comprobarDatosArmas():Boolean
+}
+
+interface Mostrable{
+    fun mostrarRazaPersonaje()
+    fun mostrarClasePersonaje()
+    fun mostrarInformacionClases()
+    fun mostrarInformacionRazas()
+    fun mostrarMenuModosJuego()
+
+}
+
+interface Informable{
+    fun mostrarInformacion()
+}

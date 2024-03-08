@@ -5,11 +5,11 @@ import com.github.ajalt.mordant.rendering.TextStyle
 import com.github.ajalt.mordant.terminal.Terminal
 import java.io.File
 
-class Armadura(val nombre:String, val parte:String, val rareza:String, private val rarity:TextStyle) : Equipable<List<Armadura>>,Sustituible<Armadura, MutableList<Armadura>>, Guardable<Armadura>, Item(){
-    private val t = Terminal() //Variable empleada para
+class Armadura(val nombre:String, val parte:String, val rareza:String, private val rarity:TextStyle) : Equipable<List<Armadura>>,Sustituible<Armadura, MutableList<Armadura>>, Guardable<Armadura>, Informable, Item(){
+    private val terminal = Terminal() //Variable empleada para
     override fun equipable(armaduraEquipada : List<Armadura>): Boolean {
         if (armaduraEquipada.size == 5){
-            println("You already have 5 armor items equipped")
+            terminal.println("You already have 5 armor items equipped")
             return false
         }
         else{
@@ -18,14 +18,9 @@ class Armadura(val nombre:String, val parte:String, val rareza:String, private v
         }
     }
 
-    override fun mostrarInformacion() {
-        val t = Terminal()
-        t.println("${rarity(nombre)} -- ${rarity(rareza)} $parte")
-    }
-
     override fun sustituir(armadura: Armadura, armaduraEquipada: MutableList<Armadura>) {
         while(true) {
-            println("Exchange armor? (y / n)")
+            terminal.println("Exchange armor? (y / n)")
             val decision = readln().lowercase() //String para obtener la respuesta del usuario
             var posicionArmadura = 0 //Entero para iterar en la lista de Armaduras
 
@@ -36,7 +31,7 @@ class Armadura(val nombre:String, val parte:String, val rareza:String, private v
                             val armaduraPrevia = armaduraEquipada[posicionArmadura] //Armadura equipada actualmente en el personaje
                             armaduraEquipada.remove(armaduraEquipada[posicionArmadura])
                             armaduraEquipada.add(armadura)
-                            t.println(TextColors.brightGreen("Armor equipped successfully"))
+                            terminal.println(TextColors.brightGreen("Armor equipped successfully"))
                             preguntarParaGuardar(armaduraPrevia)
                         }
                         posicionArmadura++
@@ -45,14 +40,14 @@ class Armadura(val nombre:String, val parte:String, val rareza:String, private v
                 "n", "no" -> {
                     preguntarParaGuardar(armadura)
                 }
-                else -> t.println(TextColors.brightYellow("Please, answer the requested prompt correctly"))
+                else -> terminal.println(TextColors.brightYellow("Please, answer the requested prompt correctly"))
             }
         }
     }
 
     fun preguntarParaGuardar(armadura: Armadura){
         while (true) {
-            println("Would you like to save the armor you had previousy equipped? (y / n)")
+            terminal.println("Would you like to store ${armadura.rarity(armadura.nombre)}? (y / n)")
             val decision = readln().lowercase()
             when (decision) {
                 "y", "yes" ->{
@@ -60,18 +55,23 @@ class Armadura(val nombre:String, val parte:String, val rareza:String, private v
                     break
                 }
                 "n", "no" -> {
-                    t.println(TextColors.brightRed("Armor sent to the DCV, rest in peace"))
+                    terminal.println(TextColors.brightRed("Armor sent to the DCV, rest in peace"))
                     break
                 }
-                else -> t.println(TextColors.brightYellow("Please, answer the requested prompt correctly"))
+                else -> terminal.println(TextColors.brightYellow("Please, answer the requested prompt correctly"))
             }
         }
     }
 
     override fun guardar(a: Armadura) {
         val workingDirectory = System.getProperty("user.dir")
-        val armaduraFormateada = "W ; ${a.nombre} ; ${a.parte} ; ${a.rareza}"
+        val armaduraFormateada = "A ; ${a.nombre} ; ${a.parte} ; ${a.rareza}"
         File("$workingDirectory/Datos_Guardado/Vault.txt").appendText(armaduraFormateada, Charsets.UTF_8)
-        t.println(TextColors.brightGreen("Armor stored successfully"))
+        terminal.println(TextColors.brightGreen("${a.rarity(a.nombre)} stored successfully"))
+    }
+
+    override fun mostrarInformacion() {
+        val t = Terminal()
+        t.println("${rarity(nombre)} -- ${rarity(rareza)} $parte")
     }
 }

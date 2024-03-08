@@ -27,20 +27,20 @@ fun String.capitalizar():String{
 fun main() {
     val workingDirectory = System.getProperty("user.dir")
     val armaAleatoria = File("$workingDirectory/Loot_Pool/Raids_Dungeons.txt").useLines { it.toList() }.random()
-    val itemPrueba = Item()
-    val arma = itemPrueba.procesarItem(armaAleatoria)
+    val itemPrueba = Item.procesarItem(armaAleatoria)
     val t = Terminal()
     val juego = Juego()
-    val gestor = GestionJuego()
+    val gestor = GestionJuego
+    gestor.comprobarDatosPrevios()
     //juego.mostrarMenuPersonaje()
     //juego.mostrarInformacionClases()
     //juego.selectorClasePersonaje()
-    //gestor.jugar()
+    gestor.jugar()
     //juego.mostrarRazaPersonaje()
     //juego.mostrarInformacionRazas()
     //juego.selectorRazaPersonaje()
     //juego.mostrarMenuModosJuego()
-
+    /**
     val a = t.textAnimation<Int> { frame ->
         (1..196).joinToString("") {
             val hue = (frame + it) * 3 % 360
@@ -52,7 +52,7 @@ fun main() {
         a.update(it)
         Thread.sleep(25)
     }
-
+    */
 
     //CONVERTIR OBJETOS A TEXTO
     /**
