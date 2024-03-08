@@ -46,7 +46,7 @@ open class Juego():Mostrable {
 
                 "WARLOCK" -> return Clases.WARLOCK
 
-                else -> terminal.println(TextColors.brightYellow("                                                                Please, answer the requested prompt correctly"))
+                else -> terminal.warning(TextColors.brightYellow("                                                                Please, answer the requested prompt correctly"))
             }
         }
     }
@@ -81,7 +81,7 @@ open class Juego():Mostrable {
         terminal.print((TextColors.brightWhite) ("                                                                              Please enter a name: "))
         var nombre = readln() //Cadena para el nombre del personaje
         while (nombre == "" || nombre.isEmpty() || nombre.isBlank()){
-            terminal.print((TextColors.brightYellow) ("                                                                           Please enter a valid name: "))
+            terminal.warning("                                                                           Please enter a valid name: ")
             nombre = readln().capitalizar()
         }
         return nombre
@@ -95,7 +95,7 @@ open class Juego():Mostrable {
             when(genero){
                 "Male" -> return "Male"
                 "Female" -> return "Female"
-                else -> terminal.println(TextColors.brightYellow("                                                                Please, answer the requested prompt correctly"))
+                else -> terminal.warning(TextColors.brightYellow("                                                                Please, answer the requested prompt correctly"))
             }
         }
     }
@@ -130,7 +130,7 @@ open class Juego():Mostrable {
 
                 "EXO" -> return Razas.EXO
 
-                else -> terminal.println(TextColors.brightYellow("                                                                Please, answer the requested prompt correctly"))
+                else -> terminal.warning("                                                                Please, answer the requested prompt correctly")
             }
         }
     }

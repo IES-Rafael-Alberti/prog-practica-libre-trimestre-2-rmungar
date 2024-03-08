@@ -1,9 +1,8 @@
 package org.practicatrim2.juego
 
-import com.github.ajalt.mordant.animation.Animation
-import com.github.ajalt.mordant.animation.textAnimation
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
+import org.practicatrim2.animaciones.AnimationManager
 import org.practicatrim2.items.Armadura
 import org.practicatrim2.items.Comprobable
 import java.io.File
@@ -20,19 +19,8 @@ object GestionJuego :Juego(), Comprobable<String> {
     private val FicheroArmaduras = File("$workingDirectory/Datos_Guardado/Armor_Set.txt") // Fichero donde se guardan las armaduras de una partida previa
     private val FicheroArmas = File("$workingDirectory/Datos_Guardado/Weapons_Set.txt") // Fichero donde se guardan las armas de una partida previa
     private val FicheroVault = File("$workingDirectory/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
-    private fun animacionCargando():Animation<Int>{
-        val a = terminal.textAnimation<Int> { frame ->
-            (1..196).joinToString("") {
-                val hue = (frame + it) * 3 % 360
-                TextColors.hsv(hue, 1, 1)("·")
-            }
-        }
-        repeat(120) {
-            a.update(it)
-            Thread.sleep(25)
-        }
-        return a
-    }
+
+
     private fun separador(){
         repeat(15){
             println()
@@ -62,7 +50,12 @@ object GestionJuego :Juego(), Comprobable<String> {
     override fun comprobarAccion(accion:String):Boolean{
         when(accion){
             "1" -> {
-                generarNuevoJuego()
+                val datosExistentes = comprobarDatosPrevios()
+                if (!datosExistentes) {
+                    terminal.warning("No game data")
+                    generarNuevoJuego()
+                }
+
                 return true
             }
             "2" -> {
@@ -74,7 +67,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                 return true
             }
             else -> {
-                terminal.println(TextColors.brightYellow("                                                                      Please, answer the requested prompt correctly"))
+                terminal.warning("                                                                      Please, answer the requested prompt correctly")
                 return false
             }
 
@@ -93,7 +86,7 @@ object GestionJuego :Juego(), Comprobable<String> {
     }
 
 
-    override fun comprobarDatosPrevios():Boolean{
+    override fun comprobarDatosPrevios(){
         val datosArmaduras = comprobarDatosArmaduras()
         val datosArmas = comprobarDatosArmas()
         if (!datosArmaduras && !datosArmas) {
@@ -103,27 +96,26 @@ object GestionJuego :Juego(), Comprobable<String> {
                 when (decision) {
                     "y", "yes" -> {
                         separador()
-                        terminal.println((color_Rojo)("                                                                                  OVERWRITING DATA...."))
-                        animacionCargando()
+                        terminal.println((color_Rojo)("                                                                                  OVERWRITING DATA"))
+                        val animacion = AnimationManager.animacionCargando()
                         println()
-                        terminal.println((color_Verde)("                                                                                   DATA OVERWRITTEN"))
+                        terminal.println((color_Verde)("                                                                                  DATA OVERWRITTEN"))
                         generarNuevoJuego()
-                        return false
                     }
 
                     "n", "no" -> {
                         separador()
                         terminal.println((color_Verde)("                                                                                   LOADING GAME...."))
-                        animacionCargando()
-                        return true
+                        val animacion = AnimationManager.animacionCargando()
+                        cargarDatos()
                     }
                     else -> {
-                        terminal.println(TextColors.brightYellow("                                                                      Please, answer the requested prompt correctly"))
+                        terminal.warning("                                                                      Please, answer the requested prompt correctly")
                     }
                 }
             }
         }
-        else return true
+
     }
 
     override fun comprobarDatosArmaduras():Boolean{
@@ -136,7 +128,10 @@ object GestionJuego :Juego(), Comprobable<String> {
     }
 
     fun cargarDatos() {
-        FicheroArmaduras.useLines { it.toList() }
+        val armaduras = FicheroArmaduras.useLines { it.toList() }
+        armaduras.forEach {
+            val armadura = Armadura(it[0].toString(),it[1].toString(),it[2].toString(),TextColors.rgb("${it[3]}"))
+        }
     }
     fun generarNuevoJuego(){
         FicheroArmaduras.writeText("")

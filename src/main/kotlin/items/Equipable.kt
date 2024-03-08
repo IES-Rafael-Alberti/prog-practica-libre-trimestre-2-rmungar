@@ -14,7 +14,7 @@ interface Guardable<A>{
 
 interface Comprobable<T> {
     fun comprobarAccion(t:T):Boolean
-    fun comprobarDatosPrevios():Boolean
+    fun comprobarDatosPrevios()
     fun comprobarDatosArmaduras():Boolean
     fun comprobarDatosArmas():Boolean
 }

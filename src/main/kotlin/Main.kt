@@ -1,12 +1,10 @@
 package org.practicatrim2
 
-import com.github.ajalt.mordant.animation.textAnimation
-import com.github.ajalt.mordant.rendering.TextColors
-import java.io.File
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.items.Item
 import org.practicatrim2.juego.GestionJuego
 import org.practicatrim2.juego.Juego
+import java.io.File
 
 
 fun String.capitalizar():String{
@@ -33,6 +31,7 @@ fun main() {
     val gestor = GestionJuego
     gestor.comprobarDatosPrevios()
     gestor.jugar()
+
     /**
     val a = t.textAnimation<Int> { frame ->
         (1..196).joinToString("") {
