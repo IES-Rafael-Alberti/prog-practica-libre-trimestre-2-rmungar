@@ -6,34 +6,33 @@ import com.github.ajalt.mordant.terminal.Terminal
 import java.io.File
 
 
-class Arma( override var nombre:String, override var arquetipo:String, override var tipoArma:String, override var elemento: Elementos, override var rareza :String, override var rarity:TextStyle, override var colorElemento:TextStyle): Equipable<List<Arma>>, Sustituible<Arma, MutableList<Arma>>, Guardable<Arma>, Informable, Item(){
+class Arma( override var nombre:String, override var arquetipo:String, override var tipoArma:String, override var elemento: Elementos, override var rareza :String, override var rarity:TextStyle, override var colorElemento:TextStyle): Equipable<MutableList<Item>>, Sustituible<Item, MutableList<Item>>, Guardable<Item>, Informable, Item(){
     private val terminal = Terminal()
 
-    override fun equipable(armaEquipada: List<Arma>): Boolean {
-        val t = Terminal()
+    override fun equipable(t: MutableList<Item>): Boolean {
         var cont = 1
-        if(armaEquipada.size == 3){
+        if(t.size == 3){
             println("You already have 3 weapons equipped, choose one to replace:")
             return false
         }
         else{
-            t.println("${rarity(nombre)} has been equipped")
+            terminal.println("${rarity(nombre)} has been equipped")
             return true
         }
     }
-    override fun sustituir(arma: Arma, armasEquipadas: MutableList<Arma>) {
+    override fun sustituir(t: Item, e: MutableList<Item>) {
         var seleccionValida1 = false // Booleano para abrir y cerrar el primer bucle while, indica si el usuario ha ingresado una entrada válida
         var seleccionValida2 = false // Booleano para abrir y cerrar el segundo bucle while, indica si el usuario ha ingresado una entrada válida
-        if (armasEquipadas.size == 3) {
+        if (e.size == 3) {
             while (!seleccionValida1) {
                 println("Exchange weapon? (y / n)")
                 val decision = readln().lowercase() // String para obtener la respuesta del usuario
                 var cont = 1 // Entero para mostrar por pantalla
                 when (decision) {
                     "y", "yes" -> {
-                        armasEquipadas.forEach {
+                        e.forEach {
                             println("$cont - ")
-                            it.mostrarInformacion()
+                            (it as Arma).mostrarInformacion()
                             cont++
                         }
                         while (!seleccionValida2){
@@ -41,26 +40,26 @@ class Arma( override var nombre:String, override var arquetipo:String, override 
                             val slot = readln()
                             when(slot){
                                 "1" -> {
-                                    val armaAguardar = armasEquipadas[0]
-                                    armasEquipadas.remove(armaAguardar)
-                                    armasEquipadas[0] = arma
-                                    preguntarParaGuardar(armaAguardar)
+                                    val armaAguardar = e[0]
+                                    e.remove(armaAguardar)
+                                    e[0] = t
+                                    preguntarParaGuardar(armaAguardar as Arma)
                                     seleccionValida2 = true
                                     seleccionValida1 = true
                                 }
                                 "2" -> {
-                                    val armaAguardar = armasEquipadas[1]
-                                    armasEquipadas.remove(armaAguardar)
-                                    armasEquipadas[1] = arma
-                                    preguntarParaGuardar(armaAguardar)
+                                    val armaAguardar = e[1]
+                                    e.remove(armaAguardar)
+                                    e[1] = t
+                                    preguntarParaGuardar(armaAguardar as Arma)
                                     seleccionValida2 = true
                                     seleccionValida1 = true
                                 }
                                 "3" -> {
-                                    val armaAguardar = armasEquipadas[2]
-                                    armasEquipadas.remove(armaAguardar)
-                                    armasEquipadas[2] = arma
-                                    preguntarParaGuardar(armaAguardar)
+                                    val armaAguardar = e[2]
+                                    e.remove(armaAguardar)
+                                    e[2] = t
+                                    preguntarParaGuardar(armaAguardar as Arma)
                                     seleccionValida2 = true
                                     seleccionValida1 = true
                                 }
@@ -71,7 +70,7 @@ class Arma( override var nombre:String, override var arquetipo:String, override 
                         }
                     }
                     "n", "no" -> {
-                        preguntarParaGuardar(arma)
+                        preguntarParaGuardar(t as Arma)
                         seleccionValida2 = true
                         seleccionValida1 = true
                     }
@@ -80,7 +79,7 @@ class Arma( override var nombre:String, override var arquetipo:String, override 
             }
         }
         else{
-            armasEquipadas[2] = arma
+            e[2] = t
         }
     }
     fun preguntarParaGuardar(arma: Arma){
@@ -100,7 +99,7 @@ class Arma( override var nombre:String, override var arquetipo:String, override 
             }
         }
     }
-    override fun guardar(a: Arma) {
+    override fun guardar(a: Item) {
         val workingDirectory = System.getProperty("user.dir")
         val armaFormateada = "\nW ; ${a.nombre} ; ${a.arquetipo} ; ${a.tipoArma} ; ${a.elemento} ;${a.rareza}"
         File("$workingDirectory/Datos_Guardado/Vault.txt").appendText(armaFormateada)
@@ -108,7 +107,6 @@ class Arma( override var nombre:String, override var arquetipo:String, override 
     }
 
     override fun mostrarInformacion() {
-        val t = Terminal()
-        t.println("${rarity(nombre)} -- ${colorElemento(elemento.desc)} -- ${rarity(rareza)} $tipoArma \n -------------- $arquetipo")
+        terminal.println("${rarity(nombre)} -- ${colorElemento(elemento.desc)} -- ${rarity(rareza)} $tipoArma \n -------------- $arquetipo")
     }
 }

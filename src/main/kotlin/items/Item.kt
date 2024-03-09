@@ -3,19 +3,17 @@ package org.practicatrim2.items
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.rendering.TextColors.*
 import com.github.ajalt.mordant.rendering.TextStyle
-import org.practicatrim2.modosDeJuego.GameModes
-import java.io.File
+import org.practicatrim2.personajes.Personaje
 
 
 interface GestorItem{       //DIP --> SOLID
-    fun obtenerItem(modoDeJuego: GameModes): Item
     fun procesarItem(item: String): Item
     fun clasificarItem(itemAprocesar: List<String>): Item
     fun obtenerElemento(itemAprocesar: List<String>): Pair<Elementos,TextStyle>
     fun obtenerRareza(itemAprocesar: List<String>): TextStyle
 }
 
-open class Item :GestorItem{
+open class Item:GestorItem, Equipable<MutableList<Item>>, Sustituible<Item, MutableList<Item>>, Guardable<Item>{
     open var nombre: String = ""
     open var parte: String = ""
     open var rareza: String = ""
@@ -24,14 +22,9 @@ open class Item :GestorItem{
     open var tipoArma: String = ""
     open var elemento: Elementos = Elementos.KINETIC
     open var colorElemento:TextStyle = brightWhite
-     override fun obtenerItem(modoDeJuego: GameModes): Item {
-        val directorioActual = System.getProperty("user.dir")
-        val itemObtenido: String = File("$directorioActual/Loot_Pool/${modoDeJuego.desc}.txt").useLines { it.toList() }.random()
-        val itemProcesado = procesarItem(itemObtenido)
-        return itemProcesado
-    }
 
-    override fun procesarItem(item: String) : Item {
+
+    override fun procesarItem(item: String): Item {
         val itemAprocesar = item.split(" ; ")
         val itemProcesado = clasificarItem(itemAprocesar)
         return itemProcesado
@@ -67,5 +60,25 @@ open class Item :GestorItem{
             "Exotic" -> return TextColors.rgb("#bf8506")
         }
         return TextColors.rgb("#9500ff")
+    }
+
+    override fun equipable(t: MutableList<Item>): Boolean {
+        return false
+    }
+
+    override fun guardar(a: Item) {
+
+    }
+
+    override fun preguntarParaEquipar(item: Item): Boolean {
+        return false
+    }
+
+    override fun equipar(item: Item, personaje: Personaje) {
+
+    }
+
+    override fun sustituir(t: Item, e: MutableList<Item>) {
+
     }
 }

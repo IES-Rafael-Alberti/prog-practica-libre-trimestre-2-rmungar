@@ -4,6 +4,9 @@ import org.practicatrim2.personajes.Personaje
 
 interface Equipable<T> {
     fun equipable(t: T):Boolean
+    fun equipar(item: Item, personaje: Personaje)
+
+    fun preguntarParaEquipar(item: Item):Boolean
 }
 
 interface Sustituible<T,E> {
@@ -36,9 +39,9 @@ interface Informable{
 }
 
 interface Jugable{
-    fun jugarGambito()
-    fun jugarOcaso()
-    fun jugarTrials()
-    fun jugarRyD()
+    fun jugarGambito(personaje: Personaje)
+    fun jugarOcaso(personaje: Personaje)
+    fun jugarTrials(personaje: Personaje)
+    fun jugarRyD(personaje: Personaje)
 
 }

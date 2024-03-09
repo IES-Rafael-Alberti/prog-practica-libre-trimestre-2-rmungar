@@ -27,6 +27,7 @@ fun main() {
     val juego = Juego()
     val gestor = GestionJuego
     val manager = AnimationManager
+
     //terminal.println(TextColors.brightWhite("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
     //juego.mostrarMenuModosJuego()
     //gestor.comprobarDatosPrevios()
@@ -35,5 +36,4 @@ fun main() {
     //      ═════ ⋆★⋆ ═════
     //      ✦═✦═✦═✦═✦═✦═✦
     // 🚀
-    val animacion = manager.nave()
 }

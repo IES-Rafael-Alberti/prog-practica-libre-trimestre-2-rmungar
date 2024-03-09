@@ -3,44 +3,64 @@ package org.practicatrim2.items
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.rendering.TextStyle
 import com.github.ajalt.mordant.terminal.Terminal
+import org.practicatrim2.personajes.Personaje
 import java.io.File
 
-class Armadura(override var nombre:String, override var parte:String, override var rareza:String, override var rarity:TextStyle) : Equipable<List<Armadura>>,Sustituible<Armadura, MutableList<Armadura>>, Guardable<Armadura>, Informable, Item(){
+class Armadura(override var nombre:String, override var parte:String, override var rareza:String, override var rarity:TextStyle) : Equipable<MutableList<Item>>, Sustituible<Item, MutableList<Item>>, Guardable<Item>, Informable, Item(){
     private val terminal = Terminal() //Variable empleada para
-    override fun equipable(armaduraEquipada : List<Armadura>): Boolean {
-        if (armaduraEquipada.size == 5){
-            terminal.println("You already have 5 armor items equipped")
-            return false
+    override fun equipable(t : MutableList<Item>): Boolean {
+        if (t.size == 5){
+            terminal.warning("You already have 5 armor items equipped")
         }
-        else{
-            armaduraEquipada.find { it.parte == parte }.let { println("You already have one of this item type equipped") }
-            return true
+        else if(t.size < 5) {
+            t.find { it.parte == parte }.let {
+                terminal.warning("You already have one of this item type equipped")
+                return false
+            }
+        }
+        return true
+    }
+
+    override fun equipar(item: Item, personaje: Personaje) {
+        personaje.armaduraEquipada.add(item as Armadura)
+        terminal.println(TextColors.brightGreen("Armor equipped successfully"))
+    }
+
+    override fun preguntarParaEquipar(item: Item): Boolean{
+        terminal.println(TextColors.brightWhite("Do you wish to equip: ${item.rarity(item.nombre)}? (y / n)"))
+        val respuesta = readln().lowercase()
+        while (true) {
+            when (respuesta) {
+                "y", "yes" -> return true
+                "n", "no" -> return false
+                else -> terminal.warning("Please, answer the requested prompt correctly")
+            }
         }
     }
 
-    override fun sustituir(armadura: Armadura, armaduraEquipada: MutableList<Armadura>) {
+    override fun sustituir(t: Item, e: MutableList<Item>) {
         while(true) {
-            terminal.println("Exchange armor? (y / n)")
+            terminal.println(TextColors.brightWhite("Exchange armor? (y / n)"))
             val decision = readln().lowercase() //String para obtener la respuesta del usuario
             var posicionArmadura = 0 //Entero para iterar en la lista de Armaduras
 
             when(decision) {
                 "y", "yes" -> {
-                    armaduraEquipada.forEach {
-                        if (armaduraEquipada[posicionArmadura].parte == armadura.parte) {
-                            val armaduraPrevia = armaduraEquipada[posicionArmadura] //Armadura equipada actualmente en el personaje
-                            armaduraEquipada.remove(armaduraEquipada[posicionArmadura])
-                            armaduraEquipada.add(armadura)
+                    e.forEach {
+                        if (e[posicionArmadura].parte == t.parte) {
+                            val armaduraPrevia = e[posicionArmadura] //Armadura equipada actualmente en el personaje
+                            e.remove(e[posicionArmadura])
+                            e.add(t)
                             terminal.println(TextColors.brightGreen("Armor equipped successfully"))
-                            preguntarParaGuardar(armaduraPrevia)
+                            preguntarParaGuardar(armaduraPrevia as Armadura)
                         }
                         posicionArmadura++
                     }
                 }
                 "n", "no" -> {
-                    preguntarParaGuardar(armadura)
+                    preguntarParaGuardar(t as Armadura)
                 }
-                else -> terminal.println(TextColors.brightYellow("Please, answer the requested prompt correctly"))
+                else -> terminal.warning("Please, answer the requested prompt correctly")
             }
         }
     }
@@ -58,12 +78,12 @@ class Armadura(override var nombre:String, override var parte:String, override v
                     terminal.println(TextColors.brightRed("Armor sent to the DCV, rest in peace"))
                     break
                 }
-                else -> terminal.println(TextColors.brightYellow("Please, answer the requested prompt correctly"))
+                else -> terminal.warning("Please, answer the requested prompt correctly")
             }
         }
     }
 
-    override fun guardar(a: Armadura) {
+    override fun guardar(a: Item) {
         val workingDirectory = System.getProperty("user.dir")
         val armaduraFormateada = "\nA ; ${a.nombre} ; ${a.parte} ; ${a.rareza}"
         File("$workingDirectory/Datos_Guardado/Vault.txt").appendText(armaduraFormateada, Charsets.UTF_8)
@@ -71,7 +91,6 @@ class Armadura(override var nombre:String, override var parte:String, override v
     }
 
     override fun mostrarInformacion() {
-        val t = Terminal()
-        t.println("${rarity(nombre)} -- ${rarity(rareza)} $parte")
+        terminal.println("${rarity(nombre)} -- ${rarity(rareza)} $parte")
     }
 }

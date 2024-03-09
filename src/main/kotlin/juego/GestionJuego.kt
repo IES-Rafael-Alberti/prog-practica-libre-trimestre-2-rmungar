@@ -17,7 +17,6 @@ object GestionJuego :Juego(), Comprobable<String> {
     private val terminal = Terminal() //Variable apra el uso de Mordant
 
     private val color_Blanco = TextColors.brightWhite // Variable del color blanco
-    private val color_Verde = TextColors.brightGreen // Variable del color verde
     private val color_Rojo = TextColors.brightRed // Variable del color rojo
     private val color_Amarillo = TextColors.brightYellow // Variable del color amarillo
 
@@ -80,10 +79,10 @@ object GestionJuego :Juego(), Comprobable<String> {
         while (true) {
             val entrada: String = readln().lowercase()
             when(entrada){
-                "1","gambit","gambit prime" -> jugarGambito()
-                "2","nightfall","grandmaster nightfall" -> jugarOcaso()
-                "3", "trials","trials of osiris" -> jugarTrials()
-                "4", "raids", "dungeons", "raids_dungeons","raids and dungeons" -> jugarRyD()
+                "1","gambit","gambit prime" -> jugarGambito(personaje)
+                "2","nightfall","grandmaster nightfall" -> jugarOcaso(personaje)
+                "3", "trials","trials of osiris" -> jugarTrials(personaje)
+                "4", "raids", "dungeons", "raids_dungeons","raids and dungeons" -> jugarRyD(personaje)
                 "s", "save" -> guardarDatos(personaje)
             }
         }
@@ -192,6 +191,9 @@ object GestionJuego :Juego(), Comprobable<String> {
         FicheroPersonaje.writeText("")
         personaje.armaEquipada.forEach {
             FicheroArmas.appendText("\nW ; ${it.nombre} ; ${it.arquetipo} ; ${it.tipoArma} ; ${it.elemento} ; ${it.rareza} ; ${it.rarity} ; ${it.colorElemento}")
+        }
+        personaje.armaduraEquipada.forEach {
+            FicheroArmaduras.appendText("\nA ; ${it.nombre} ; ${it.parte} ; ${it.rareza} ; ${it.rarity}")
         }
     }
     fun acabarJuego(){

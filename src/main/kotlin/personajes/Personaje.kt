@@ -13,4 +13,5 @@ abstract class Personaje(val nombre: String,val genero:String, val raza:Razas, v
         return armaEquipada.toString()
     }
 
+
 }
