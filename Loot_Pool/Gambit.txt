@@ -15,6 +15,7 @@ W ; Borrowed Time ; Aggressive Frame ; SMG ; Solar ; Legendary
 W ; Gnawing Hunger ; Adaptive Frame ; Auto Rifle ; Void ; Legendary
 W ; Servant Leader ; Rapid-Fire Frame ; Scout Rifle ; Kinetic ; Legendary
 W ; Qua Xaphan ; High-Impact Frame ; Machine Gun ; Void ; Legendary
+W ; Malfeasance ; Explosive Shadow ; Hand Cannon ; Kinetic ; Exotic
 A ; Viperidax ; Helmet ; Legendary
 A ; Viperidax ; Arms ; Legendary
 A ; Viperidax ; Chest ; Legendary

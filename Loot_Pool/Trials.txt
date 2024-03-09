@@ -1,5 +1,5 @@
 W ; Shayura's Wrath ; Aggressive Frame ; SMG ; Void ; Legendary
-W ; The Inmortal ; Aggressive Frame ; SMG ; Strand ; Legendary
+W ; The Immortal ; Aggressive Frame ; SMG ; Strand ; Legendary
 W ; Reed's Regret ; Aggressive Frame ; Linear Fusion Rifle ; Stasis ; Legendary
 W ; Incisor ; Adaptive Frame ; Trace Rifle ; Strand ; Legendary
 W ; Igneous Hammer ; Aggressive Frame ; Hand Cannon ; Solar ; Legendary
@@ -15,6 +15,9 @@ W ; Forgiveness ; Aggressive Burst ; Sidearm ; Arc ; Legendary
 W ; The Inquisitor ; Pinpoint Slug Frame ; Shotgun ; Arc ; Legendary
 W ; Burden of Guilt ; Adaptive Frame ; Fusion Rifle ; Stasis ; Legendary
 W ; Aisha's Embrace ; Rapid-Fire Frame ; Scout Rifle ; Void ; Legendary
+W ; Dead Man's Tale ; Cranial Spike ; Scout Frame ; Kinetic ; Exotic
+W ; Hawk moon ; Paracasual Shot ; Hand Cannon ; Kinetic ; Exotic
+W ; Vigilance Wing ; Harsh Truths ; Pulse Rifle ; Kinetic ; Exotic
 A ; Atavistic Idol ; Helmet ; Legendary
 A ; Atavistic Idol ; Arms ; Legendary
 A ; Atavistic Idol ; Chest ; Legendary

@@ -3,16 +3,25 @@ package org.practicatrim2.juego
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.capitalizar
+import org.practicatrim2.items.Jugable
 import org.practicatrim2.items.Mostrable
 import org.practicatrim2.modosDeJuego.GameModes
 import org.practicatrim2.personajes.*
+import java.io.File
 
-open class Juego():Mostrable {
+open class Juego():Mostrable,Jugable {
+    private val terminal = Terminal() // Variable empleada para lo relacionado con mordant
 
     private val colorTitanes = TextColors.brightRed // Color para mordant para la clase Titan
     private val colorWarlocks = TextColors.brightYellow // Color para mordant para la clase Warlock
     private val colorHunters = TextColors.rgb("#00eeff") // Color para mordant para la clase Hunter
-    private val terminal = Terminal() // Variable empleada para lo relacionado con mordant
+    private val color_Blanco = TextColors.brightWhite
+
+    val workingDirectory = System.getProperty("user.dir") // Directorio actual
+    private val LootGambit = File("${workingDirectory}/Loot_Pool/Gambit.txt") // Fichero donde se guardan las posibles recompensas del modo Gambit
+    private val LootNightfall = File("${workingDirectory}/Loot_Pool/Nightfall.txt") // Fichero donde se guardan las posibles recompensas del modo Nightfall
+    private val LootTrials = File("${workingDirectory}/Loot_Pool/Trials.txt") // Fichero donde se guardan las posibles recompensas del modo Trials
+    private val LootRyD = File("${workingDirectory}/Loot_Pool/Raids_Dungeons.txt") // Fichero donde se guardan las posibles recompensas del modo Raids and Dungeons
     private fun separador(){
         repeat(35){
             println()
@@ -20,7 +29,7 @@ open class Juego():Mostrable {
     }
     override fun mostrarClasePersonaje(){
         separador()
-        terminal.println(TextColors.brightWhite("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
+        terminal.println(color_Blanco("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
         println()
         terminal.println("                                  ${colorTitanes ("TITAN")}                                             ${colorWarlocks ("WARLOCK")}                                             ${colorHunters ("HUNTER")}")
     }
@@ -37,7 +46,7 @@ open class Juego():Mostrable {
     fun selectorClasePersonaje():Clases{
         while (true) {
             println()
-            terminal.print((TextColors.brightWhite)("                                                            Enter the class you wish to create a character of: "))
+            terminal.print(color_Blanco("                                                            Enter the class you wish to create a character of: "))
             val claseAcrear = readln().uppercase()
             when(claseAcrear){
                 "TITAN" -> return Clases.TITAN
@@ -46,16 +55,24 @@ open class Juego():Mostrable {
 
                 "WARLOCK" -> return Clases.WARLOCK
 
-                else -> terminal.warning(TextColors.brightYellow("                                                                Please, answer the requested prompt correctly"))
+                else -> terminal.warning("                                                                Please, answer the requested prompt correctly")
             }
         }
     }
 
     override fun mostrarMenuModosJuego(){
+        terminal.print(color_Blanco("                                                                             LOADING STAR CHART"))
+        repeat(3){
+            Thread.sleep(1000)
+            terminal.print(color_Blanco("."))
+        }
         separador()
-        terminal.println(TextColors.brightWhite("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
+        Thread.sleep(500)
+        terminal.println(color_Blanco("                                                                                 --STAR CHART--"))
         println()
-        terminal.println("                   ${GameModes.GAMBIT.color ("GAMBIT PRIME")}                               ${GameModes.NIGHTFALL.color ("GRANDMASTER NIGHTFALL")}                               ${GameModes.TRIALS.color ("TRIALS OF OSIRIS")}                               ${GameModes.RAIDS_DUNGEONS.color("RAIDS & DUNGEONS")}")
+        terminal.println("       ${GameModes.GAMBIT.color ("⟁ GAMBIT PRIME ⟁")}                               ${GameModes.NIGHTFALL.color ("★ GRANDMASTER NIGHTFALL ★")}                               ${GameModes.TRIALS.color ("⚔ TRIALS OF OSIRIS ⚔")}                               ${GameModes.RAIDS_DUNGEONS.color("✦ RAIDS & DUNGEONS ✦")}")
+        terminal.println("                                                         ${color_Blanco("s: Save")}                                                           ${color_Blanco("e: Exit")}")
+        terminal.print(color_Blanco("                                                                                       > "))
     }
 
 
@@ -78,7 +95,7 @@ open class Juego():Mostrable {
 
     private fun pedirNombrePersonaje():String{
         separador()
-        terminal.print((TextColors.brightWhite) ("                                                                              Please enter a name: "))
+        terminal.print(color_Blanco("                                                                              Please enter a name: "))
         var nombre = readln() //Cadena para el nombre del personaje
         while (nombre == "" || nombre.isEmpty() || nombre.isBlank()){
             terminal.warning("                                                                           Please enter a valid name: ")
@@ -90,19 +107,19 @@ open class Juego():Mostrable {
     private fun pedirGeneroPersonaje():String{
         println()
         while(true) {
-            terminal.print((TextColors.brightWhite)("                                                                    Do you wish them to be male or female?: "))
+            terminal.print(color_Blanco("                                                                    Do you wish them to be male or female?: "))
             val genero = readln().capitalizar()
             when(genero){
                 "Male" -> return "Male"
                 "Female" -> return "Female"
-                else -> terminal.warning(TextColors.brightYellow("                                                                Please, answer the requested prompt correctly"))
+                else -> terminal.warning("                                                                Please, answer the requested prompt correctly")
             }
         }
     }
 
     override fun mostrarRazaPersonaje(){
         separador()
-        terminal.println(TextColors.brightWhite("                                                                       CHOOSE A RACE FOR YOUR CHARACTER"))
+        terminal.println(color_Blanco("                                                                       CHOOSE A RACE FOR YOUR CHARACTER"))
         println()
         terminal.println("                                  ${colorTitanes ("HUMAN")}                                              ${colorWarlocks ("AWOKEN")}                                               ${colorHunters ("EXO")}")
     }
@@ -121,7 +138,7 @@ open class Juego():Mostrable {
         mostrarInformacionRazas()
         while (true) {
             println()
-            terminal.print((TextColors.brightWhite)("                                                                     Enter the race you wish them to be: "))
+            terminal.print(color_Blanco("                                                                     Enter the race you wish them to be: "))
             val razaAcrear = readln().uppercase() //Cadena ingresada por el usuario a comprobar
             when (razaAcrear) {
                 "HUMAN" -> return Razas.HUMAN
@@ -135,6 +152,20 @@ open class Juego():Mostrable {
         }
     }
 
+    override fun jugarGambito() {
 
+    }
+
+    override fun jugarOcaso() {
+        TODO("Not yet implemented")
+    }
+
+    override fun jugarRyD() {
+        TODO("Not yet implemented")
+    }
+
+    override fun jugarTrials() {
+        TODO("Not yet implemented")
+    }
 
 }

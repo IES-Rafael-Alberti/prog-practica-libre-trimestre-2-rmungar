@@ -21,7 +21,6 @@ object GestionJuego :Juego(), Comprobable<String> {
     private val color_Rojo = TextColors.brightRed // Variable del color rojo
     private val color_Amarillo = TextColors.brightYellow // Variable del color amarillo
 
-    private val workingDirectory = System.getProperty("user.dir") // Directorio actual
     private val FicheroArmaduras = File("$workingDirectory/Datos_Guardado/Armor_Set.txt") // Fichero donde se guardan las armaduras de una partida previa
     private val FicheroArmas = File("$workingDirectory/Datos_Guardado/Weapons_Set.txt") // Fichero donde se guardan las armas de una partida previa
     private val FicheroVault = File("$workingDirectory/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
@@ -75,6 +74,21 @@ object GestionJuego :Juego(), Comprobable<String> {
 
         }
     }
+
+    override fun comprobarSeleccionModoJuego(personaje: Personaje) {
+        mostrarMenuModosJuego()
+        while (true) {
+            val entrada: String = readln().lowercase()
+            when(entrada){
+                "1","gambit","gambit prime" -> jugarGambito()
+                "2","nightfall","grandmaster nightfall" -> jugarOcaso()
+                "3", "trials","trials of osiris" -> jugarTrials()
+                "4", "raids", "dungeons", "raids_dungeons","raids and dungeons" -> jugarRyD()
+                "s", "save" -> guardarDatos(personaje)
+            }
+        }
+    }
+
 
     fun jugar(){
         terminal.println((color_Blanco)("                                                                          WELCOME TO DESTINY - LITE"))

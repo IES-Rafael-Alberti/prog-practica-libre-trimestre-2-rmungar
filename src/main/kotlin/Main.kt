@@ -1,9 +1,9 @@
 package org.practicatrim2
 
 import com.github.ajalt.mordant.terminal.Terminal
+import org.practicatrim2.animaciones.AnimationManager
 import org.practicatrim2.juego.GestionJuego
 import org.practicatrim2.juego.Juego
-import java.io.File
 
 
 fun String.capitalizar():String{
@@ -23,14 +23,17 @@ fun String.capitalizar():String{
 
 fun main() {
     val workingDirectory = System.getProperty("user.dir")
-    File("$workingDirectory/Datos_Guardado/Weapons_Set.txt").appendText("A")
-    File("$workingDirectory/Datos_Guardado/Weapons_Set.txt").appendText("\nb")
-    val palabras = File("$workingDirectory/Datos_Guardado/Weapons_Set.txt").useLines { it.toList() }.forEach { println(it) }
-    val t = Terminal()
+    val terminal = Terminal()
     val juego = Juego()
     val gestor = GestionJuego
+    val manager = AnimationManager
+    //terminal.println(TextColors.brightWhite("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
+    //juego.mostrarMenuModosJuego()
     //gestor.comprobarDatosPrevios()
     //gestor.jugar()
-
-
+    //      ─────  ⚔  ─────
+    //      ═════ ⋆★⋆ ═════
+    //      ✦═✦═✦═✦═✦═✦═✦
+    // 🚀
+    val animacion = manager.nave()
 }

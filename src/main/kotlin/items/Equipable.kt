@@ -1,5 +1,7 @@
 package org.practicatrim2.items
 
+import org.practicatrim2.personajes.Personaje
+
 interface Equipable<T> {
     fun equipable(t: T):Boolean
 }
@@ -17,6 +19,7 @@ interface Comprobable<T> {
     fun comprobarDatosPrevios()
     fun comprobarDatosArmaduras():Boolean
     fun comprobarDatosArmas():Boolean
+    fun comprobarSeleccionModoJuego(personaje: Personaje)
 }
 
 interface Mostrable{
@@ -30,4 +33,12 @@ interface Mostrable{
 
 interface Informable{
     fun mostrarInformacion()
+}
+
+interface Jugable{
+    fun jugarGambito()
+    fun jugarOcaso()
+    fun jugarTrials()
+    fun jugarRyD()
+
 }

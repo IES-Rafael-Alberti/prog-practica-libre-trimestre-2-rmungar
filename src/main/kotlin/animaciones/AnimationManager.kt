@@ -4,6 +4,7 @@ import com.github.ajalt.mordant.animation.Animation
 import com.github.ajalt.mordant.animation.textAnimation
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
+import kotlin.concurrent.thread
 
 object AnimationManager {
     private val totalFrames = 120
@@ -23,5 +24,30 @@ object AnimationManager {
         }
 
         return a
+    }
+
+
+
+    fun nave() {
+        val dots = "·"
+        val spaceShip = "🚀"
+        val terminalWidth = 196
+
+        thread {
+            var dotsCount = 0
+
+            // Animation for dots
+            repeat(1) {
+                // Move cursor back to the spaceship position
+
+                for (i in 0 until dotsCount) {
+                    print(dots)
+
+                }
+                Thread.sleep(50)
+                dotsCount = (dotsCount + 1) % terminalWidth
+                print(spaceShip)
+            }
+        }
     }
 }

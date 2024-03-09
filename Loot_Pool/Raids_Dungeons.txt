@@ -9,12 +9,12 @@ W ; Sacred Provenance ; Aggressive Burst ; Pulse Fire ; Kinetic ; Legendary
 W ; Adjudicator ; Precision Frame ; SMG ; Kinetic ; Legendary
 W ; Eyasluna ; Adaptive Frame ; Hand Cannon ; Stasis ; Legendary
 W ; Lingering Dread ; Lightweight Frame ; Grenade Launcher ; Stasis ; Legendary
-W ; Necrochasm ; Variable Frame ; Auto Rifle ; Kinetic ; Exotic
-W ; Conditional Finality ; Dual Barrel ; Shotgun ; Stasis & Solar ; Exotic
-W ; One Thousand Voices ; Heavy Burst Frame ; Fusion Rifle ; Solar ; Exotic
-W ; Vex Mythoclast ; 360-RPM ; Fusion Rifle ; Solar ; Exotic
-W ; Wish-Ender ; Precision Frame ; Bow ; Kinetic ; Exotic
-W ; Hierarchy of Needs ; Adaptive Frame ; Bow ; Solar ; Exotic
+W ; Necrochasm ; Cursebringer ; Auto Rifle ; Kinetic ; Exotic
+W ; Conditional Finality ; Split Decision ; Shotgun ; Stasis & Solar ; Exotic
+W ; One Thousand Voices ; Ahamkara's Eye ; Fusion Rifle ; Solar ; Exotic
+W ; Vex Mythoclast ; Timeless Mythoclast ; Fusion Rifle ; Solar ; Exotic
+W ; Wish-Ender ; Queen's Wrath ; Bow ; Kinetic ; Exotic
+W ; Hierarchy of Needs ; Guidance Ring ; Bow ; Solar ; Exotic
 A ; War Numen's ; Helmet ; Legendary
 A ; Resonant Fury ; Arms ; Legendary
 A ; Legacy's Oath ; Chest ; Legendary

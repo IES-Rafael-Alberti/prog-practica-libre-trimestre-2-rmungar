@@ -15,6 +15,8 @@ W ; Horror's Least ; Rapid-Fire Frame ; Pulse Rifle ; Arc ; Legendary
 W ; The Hothead ; Adaptive Frame ; Rocket Launcher ; Arc ; Legendary
 W ; D.F.A. ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
 W ; Plug One.1 ; Precision Frame ; Fusion Rifle ; Arc ; Legendary
+W ; Riskrunner ; Arc Conductor ; SMG ; Arc ; Exotic
+W ; Tractor Cannon ; Scientific Method ; Shotgun ; Void ; Exotic
 A ; Photosuede ; Helmet ; Legendary
 A ; Photosuede ; Arms ; Legendary
 A ; Photosuede ; Chest ; Legendary
