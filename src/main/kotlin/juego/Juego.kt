@@ -12,7 +12,7 @@ import org.practicatrim2.personajes.*
 import java.io.File
 import kotlin.random.Random
 
-open class Juego():Mostrable,Jugable {
+open class Juego :Mostrable,Jugable {
     private val terminal = Terminal() // Variable empleada para lo relacionado con mordant
 
     private val colorTitanes = TextColors.brightRed // Color para mordant para la clase Titan
@@ -26,7 +26,7 @@ open class Juego():Mostrable,Jugable {
 
     private var item = Item()
     private val veces = 1
-    private val NumeroEasterEgg = 33
+    private val numeroEasterEgg = 33
     
     private fun separador(){
         repeat(35){
@@ -86,15 +86,17 @@ open class Juego():Mostrable,Jugable {
         val nombre = pedirNombrePersonaje()
         val genero = pedirGeneroPersonaje()
         val raza = selectorRazaPersonaje()
-        when (clase){
+        return when (clase){
             Clases.TITAN ->{
-                return Titan(nombre, genero, raza)
+                Titan(nombre, genero, raza)
             }
+
             Clases.WARLOCK ->{
-                return Warlock(nombre, genero, raza)
+                Warlock(nombre, genero, raza)
             }
+
             Clases.HUNTER -> {
-                return Hunter(nombre, genero, raza)
+                Hunter(nombre, genero, raza)
             }
         }
     }
@@ -289,9 +291,9 @@ open class Juego():Mostrable,Jugable {
         terminal.println(colorBlanco("YOU FOUND ${colorMythic(huevo[1])} ${colorMythic(huevo[5])} ${colorMythic(huevo[2])}!! WHOSE SPECIAL ABILITY IS: ${colorMythic(huevo[3])} AND DEALS ${colorMythic(huevo[4])} DAMAGE!!"))
     }
 
-    fun encontrarEasterEgg(probabilidadEasterEgg: Int){
-        if (probabilidadEasterEgg == NumeroEasterEgg){
-            val huevoEncontrado = File(workingDirectory+"/Loot_Pool/EasterEggs.txt").useLines { it.toList() }.random().split(" ; ")
+    private fun encontrarEasterEgg(probabilidadEasterEgg: Int){
+        if (probabilidadEasterEgg == numeroEasterEgg){
+            val huevoEncontrado = File("$workingDirectory/Loot_Pool/EasterEggs.txt").useLines { it.toList() }.random().split(" ; ")
             terminal.warning("HEY, YOU FOUND AN EASTER EGG!!!")
             mostrarEasterEgg(huevoEncontrado)
         }
