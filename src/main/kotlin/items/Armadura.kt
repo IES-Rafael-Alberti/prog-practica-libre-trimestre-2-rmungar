@@ -5,7 +5,7 @@ import com.github.ajalt.mordant.rendering.TextStyle
 import com.github.ajalt.mordant.terminal.Terminal
 import java.io.File
 
-class Armadura(val nombre:String, val parte:String, val rareza:String, private val rarity:TextStyle) : Equipable<List<Armadura>>,Sustituible<Armadura, MutableList<Armadura>>, Guardable<Armadura>, Informable, Item(){
+class Armadura(override var nombre:String, override var parte:String, override var rareza:String, override var rarity:TextStyle) : Equipable<List<Armadura>>,Sustituible<Armadura, MutableList<Armadura>>, Guardable<Armadura>, Informable, Item(){
     private val terminal = Terminal() //Variable empleada para
     override fun equipable(armaduraEquipada : List<Armadura>): Boolean {
         if (armaduraEquipada.size == 5){
@@ -65,7 +65,7 @@ class Armadura(val nombre:String, val parte:String, val rareza:String, private v
 
     override fun guardar(a: Armadura) {
         val workingDirectory = System.getProperty("user.dir")
-        val armaduraFormateada = "A ; ${a.nombre} ; ${a.parte} ; ${a.rareza}"
+        val armaduraFormateada = "\nA ; ${a.nombre} ; ${a.parte} ; ${a.rareza}"
         File("$workingDirectory/Datos_Guardado/Vault.txt").appendText(armaduraFormateada, Charsets.UTF_8)
         terminal.println(TextColors.brightGreen("${a.rarity(a.nombre)} stored successfully"))
     }

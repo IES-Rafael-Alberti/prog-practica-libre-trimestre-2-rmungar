@@ -1,7 +1,6 @@
 package org.practicatrim2
 
 import com.github.ajalt.mordant.terminal.Terminal
-import org.practicatrim2.items.Item
 import org.practicatrim2.juego.GestionJuego
 import org.practicatrim2.juego.Juego
 import java.io.File
@@ -24,39 +23,14 @@ fun String.capitalizar():String{
 
 fun main() {
     val workingDirectory = System.getProperty("user.dir")
-    val armaAleatoria = File("$workingDirectory/Loot_Pool/Raids_Dungeons.txt").useLines { it.toList() }.random()
-    val itemPrueba = Item.procesarItem(armaAleatoria)
+    File("$workingDirectory/Datos_Guardado/Weapons_Set.txt").appendText("A")
+    File("$workingDirectory/Datos_Guardado/Weapons_Set.txt").appendText("\nb")
+    val palabras = File("$workingDirectory/Datos_Guardado/Weapons_Set.txt").useLines { it.toList() }.forEach { println(it) }
     val t = Terminal()
     val juego = Juego()
     val gestor = GestionJuego
-    gestor.comprobarDatosPrevios()
-    gestor.jugar()
+    //gestor.comprobarDatosPrevios()
+    //gestor.jugar()
 
-    /**
-    val a = t.textAnimation<Int> { frame ->
-        (1..196).joinToString("") {
-            val hue = (frame + it) * 3 % 360
-            TextColors.hsv(hue, 1, 1)("·")
-        }
-    }
 
-    repeat(240) {
-        a.update(it)
-        Thread.sleep(25)
-    }
-    */
-
-    //CONVERTIR OBJETOS A TEXTO
-    /**
-        val armaPrueba = Arma("Palindromo", "Aggressive Frame", "Hand Cannon", Elementos.VOID)
-        val guardarArma = gson.toJson(armaPrueba)
-        File("$workingDirectory/Datos_Guardado/Vault.txt").appendText(guardarArma)
-    */
-
-    //LEER DATOS Y CONVERTIRLOS A OBJETOS
-    /**
-        val json = File("$workingDirectory/Datos_Guardado/Vault.txt").readText()
-        val sacarArmaDelVault = gson.fromJson(json, Arma::class.java)
-        println(sacarArmaDelVault.toString())
-    */
 }

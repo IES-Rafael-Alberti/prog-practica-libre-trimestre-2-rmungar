@@ -6,7 +6,7 @@ import com.github.ajalt.mordant.terminal.Terminal
 import java.io.File
 
 
-class Arma(val nombre:String, val arquetipo:String, val tipoArma:String, val elemento: Elementos, val rareza :String,private var rarity:TextStyle, val colorElemento:TextStyle): Equipable<List<Arma>>, Sustituible<Arma, MutableList<Arma>>, Guardable<Arma>, Informable, Item(){
+class Arma( override var nombre:String, override var arquetipo:String, override var tipoArma:String, override var elemento: Elementos, override var rareza :String, override var rarity:TextStyle, override var colorElemento:TextStyle): Equipable<List<Arma>>, Sustituible<Arma, MutableList<Arma>>, Guardable<Arma>, Informable, Item(){
     private val terminal = Terminal()
 
     override fun equipable(armaEquipada: List<Arma>): Boolean {
@@ -102,7 +102,7 @@ class Arma(val nombre:String, val arquetipo:String, val tipoArma:String, val ele
     }
     override fun guardar(a: Arma) {
         val workingDirectory = System.getProperty("user.dir")
-        val armaFormateada = "W ; ${a.nombre} ; ${a.arquetipo} ; ${a.tipoArma} ; ${a.elemento} ;${a.rareza}"
+        val armaFormateada = "\nW ; ${a.nombre} ; ${a.arquetipo} ; ${a.tipoArma} ; ${a.elemento} ;${a.rareza}"
         File("$workingDirectory/Datos_Guardado/Vault.txt").appendText(armaFormateada)
         terminal.println(TextColors.brightGreen("${a.rarity(a.nombre)} stored successfully"))
     }

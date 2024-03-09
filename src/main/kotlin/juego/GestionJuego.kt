@@ -3,8 +3,14 @@ package org.practicatrim2.juego
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.animaciones.AnimationManager
+import org.practicatrim2.items.Arma
 import org.practicatrim2.items.Armadura
 import org.practicatrim2.items.Comprobable
+import org.practicatrim2.items.Item
+import org.practicatrim2.personajes.Hunter
+import org.practicatrim2.personajes.Personaje
+import org.practicatrim2.personajes.Titan
+import org.practicatrim2.personajes.Warlock
 import java.io.File
 
 object GestionJuego :Juego(), Comprobable<String> {
@@ -19,6 +25,7 @@ object GestionJuego :Juego(), Comprobable<String> {
     private val FicheroArmaduras = File("$workingDirectory/Datos_Guardado/Armor_Set.txt") // Fichero donde se guardan las armaduras de una partida previa
     private val FicheroArmas = File("$workingDirectory/Datos_Guardado/Weapons_Set.txt") // Fichero donde se guardan las armas de una partida previa
     private val FicheroVault = File("$workingDirectory/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
+    private val FicheroPersonaje = File("$workingDirectory/Datos_Guardado/Character.txt") // Fichero donde se guardan los datos del personaje de una partida previa
 
 
     private fun separador(){
@@ -50,12 +57,7 @@ object GestionJuego :Juego(), Comprobable<String> {
     override fun comprobarAccion(accion:String):Boolean{
         when(accion){
             "1" -> {
-                val datosExistentes = comprobarDatosPrevios()
-                if (!datosExistentes) {
-                    terminal.warning("No game data")
-                    generarNuevoJuego()
-                }
-
+                comprobarDatosPrevios()
                 return true
             }
             "2" -> {
@@ -81,7 +83,8 @@ object GestionJuego :Juego(), Comprobable<String> {
         mostrarClasePersonaje()
         mostrarInformacionClases()
         val clase = selectorClasePersonaje()
-        crearPersonaje(clase)
+        val personaje = crearPersonaje(clase)
+
 
     }
 
@@ -128,17 +131,56 @@ object GestionJuego :Juego(), Comprobable<String> {
     }
 
     fun cargarDatos() {
-        val armaduras = FicheroArmaduras.useLines { it.toList() }
-        armaduras.forEach {
-            val armadura = Armadura(it[0].toString(),it[1].toString(),it[2].toString(),TextColors.rgb("${it[3]}"))
+        val datosPersonaje = FicheroPersonaje.useLines { it.toString() }
+        val datosArmaduras = FicheroArmaduras.useLines { it.toList() }
+        val datosArmas = FicheroArmas.useLines { it.toList() }
+        val personaje = separarPersonajes(datosPersonaje)
+
+        datosArmaduras.forEach {
+            val armaduraItem = Item().procesarItem(it)
+            val armadura = Armadura(armaduraItem.nombre, armaduraItem.parte, armaduraItem.rareza, armaduraItem.rarity)
+            personaje.armaduraEquipada.add(armadura)
+        }
+        datosArmas.forEach {
+            val armaItem = Item().procesarItem(it)
+            val arma = Arma(armaItem.nombre, armaItem.arquetipo, armaItem.tipoArma, armaItem.elemento, armaItem.rareza, armaItem.rarity, armaItem.colorElemento)
+            personaje.armaEquipada.add(arma)
+        }
+
+    }
+    fun separarPersonajes(datosPersonaje: String):Personaje{
+        when (datosPersonaje[0].toString()){
+            "W" -> {
+                val warlock = Warlock.generarPersonaje(datosPersonaje)
+                return warlock
+            }
+            "T" -> {
+                val titan = Titan.generarPersonaje(datosPersonaje)
+                return titan
+            }
+            else -> {
+                val hunter = Hunter.generarPersonaje(datosPersonaje)
+                return hunter
+            }
         }
     }
+
     fun generarNuevoJuego(){
         FicheroArmaduras.writeText("")
         FicheroArmas.writeText("")
         FicheroVault.writeText("")
+        FicheroPersonaje.writeText("")
+    }
+
+    fun guardarDatos(personaje: Personaje){
+        FicheroArmas.writeText("")
+        FicheroArmaduras.writeText("")
+        FicheroPersonaje.writeText("")
+        personaje.armaEquipada.forEach {
+            FicheroArmas.appendText("\nW ; ${it.nombre} ; ${it.arquetipo} ; ${it.tipoArma} ; ${it.elemento} ; ${it.rareza} ; ${it.rarity} ; ${it.colorElemento}")
+        }
     }
     fun acabarJuego(){
-        TODO()
+
     }
 }

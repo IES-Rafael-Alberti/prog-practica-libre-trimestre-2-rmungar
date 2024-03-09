@@ -76,7 +76,7 @@ open class Juego():Mostrable {
         }
     }
 
-    fun pedirNombrePersonaje():String{
+    private fun pedirNombrePersonaje():String{
         separador()
         terminal.print((TextColors.brightWhite) ("                                                                              Please enter a name: "))
         var nombre = readln() //Cadena para el nombre del personaje
@@ -87,7 +87,7 @@ open class Juego():Mostrable {
         return nombre
     }
 
-    fun pedirGeneroPersonaje():String{
+    private fun pedirGeneroPersonaje():String{
         println()
         while(true) {
             terminal.print((TextColors.brightWhite)("                                                                    Do you wish them to be male or female?: "))
@@ -116,7 +116,7 @@ open class Juego():Mostrable {
                 "                                 collapse.")
     }
 
-    fun selectorRazaPersonaje():Razas {
+    private fun selectorRazaPersonaje():Razas {
         mostrarRazaPersonaje()
         mostrarInformacionRazas()
         while (true) {
