@@ -7,10 +7,7 @@ import org.practicatrim2.items.Arma
 import org.practicatrim2.items.Armadura
 import org.practicatrim2.items.Comprobable
 import org.practicatrim2.items.Item
-import org.practicatrim2.personajes.Hunter
 import org.practicatrim2.personajes.Personaje
-import org.practicatrim2.personajes.Titan
-import org.practicatrim2.personajes.Warlock
 import java.io.File
 
 object GestionJuego :Juego(), Comprobable<String> {
@@ -38,7 +35,7 @@ object GestionJuego :Juego(), Comprobable<String> {
     fun menuInicio(){
         println()
         terminal.println((color_Amarillo)("                                                                                    1 - New Game"))
-        terminal.println((color_Verde)("                                                                                    2 - Continue Game"))
+        terminal.println((colorVerde)("                                                                                    2 - Continue Game"))
         terminal.println((color_Rojo)("                                                                                    3 - Exit Game"))
     }
 
@@ -115,13 +112,13 @@ object GestionJuego :Juego(), Comprobable<String> {
                         terminal.println((color_Rojo)("                                                                                  OVERWRITING DATA"))
                         val animacion = AnimationManager.animacionCargando()
                         println()
-                        terminal.println((color_Verde)("                                                                                  DATA OVERWRITTEN"))
+                        terminal.println((colorVerde)("                                                                                  DATA OVERWRITTEN"))
                         generarNuevoJuego()
                     }
 
                     "n", "no" -> {
                         separador()
-                        terminal.println((color_Verde)("                                                                                   LOADING GAME...."))
+                        terminal.println((colorVerde)("                                                                                   LOADING GAME...."))
                         val animacion = AnimationManager.animacionCargando()
                         cargarDatos()
                     }
@@ -147,7 +144,8 @@ object GestionJuego :Juego(), Comprobable<String> {
         val datosPersonaje = FicheroPersonaje.useLines { it.toString() }
         val datosArmaduras = FicheroArmaduras.useLines { it.toList() }
         val datosArmas = FicheroArmas.useLines { it.toList() }
-        val personaje = separarPersonajes(datosPersonaje)
+        val personaje = Personaje.generarPersonaje(datosPersonaje)
+
 
         datosArmaduras.forEach {
             val armaduraItem = Item().procesarItem(it)
@@ -160,22 +158,6 @@ object GestionJuego :Juego(), Comprobable<String> {
             personaje.armaEquipada.add(arma)
         }
 
-    }
-    fun separarPersonajes(datosPersonaje: String):Personaje{
-        when (datosPersonaje[0].toString()){
-            "W" -> {
-                val warlock = Warlock.generarPersonaje(datosPersonaje)
-                return warlock
-            }
-            "T" -> {
-                val titan = Titan.generarPersonaje(datosPersonaje)
-                return titan
-            }
-            else -> {
-                val hunter = Hunter.generarPersonaje(datosPersonaje)
-                return hunter
-            }
-        }
     }
 
     fun generarNuevoJuego(){

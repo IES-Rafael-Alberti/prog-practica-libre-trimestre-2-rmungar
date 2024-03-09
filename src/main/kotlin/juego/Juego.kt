@@ -3,7 +3,10 @@ package org.practicatrim2.juego
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.capitalizar
-import org.practicatrim2.items.*
+import org.practicatrim2.items.Armadura
+import org.practicatrim2.items.Item
+import org.practicatrim2.items.Jugable
+import org.practicatrim2.items.Mostrable
 import org.practicatrim2.modosDeJuego.GameModes
 import org.practicatrim2.personajes.*
 import java.io.File
@@ -15,16 +18,10 @@ open class Juego():Mostrable,Jugable {
     private val colorWarlocks = TextColors.brightYellow // Color para mordant para la clase Warlock
     private val colorHunters = TextColors.rgb("#00eeff") // Color para mordant para la clase Hunter
 
-    private val color_Blanco = TextColors.brightWhite // Variable para el color blanco
-    val color_Verde = TextColors.brightGreen // Variable para el color verde
-    private val color_Rojo = TextColors.brightRed // Variable del color rojo
-    private val color_Amarillo = TextColors.brightYellow // Variable del color amarillo
+    private val colorBlanco = TextColors.brightWhite // Variable para el color blanco
+    val colorVerde = TextColors.brightGreen // Variable para el color verde
 
-    val workingDirectory = System.getProperty("user.dir") // Directorio actual
-    private val LootGambit = File("${workingDirectory}/Loot_Pool/Gambit.txt") // Fichero donde se guardan las posibles recompensas del modo Gambit
-    private val LootNightfall = File("${workingDirectory}/Loot_Pool/Nightfall.txt") // Fichero donde se guardan las posibles recompensas del modo Nightfall
-    private val LootTrials = File("${workingDirectory}/Loot_Pool/Trials.txt") // Fichero donde se guardan las posibles recompensas del modo Trials
-    private val LootRyD = File("${workingDirectory}/Loot_Pool/Raids_Dungeons.txt") // Fichero donde se guardan las posibles recompensas del modo Raids and Dungeons
+    val workingDirectory = System.getProperty("user.dir")!! // Directorio actual
 
     private var item = Item()
     
@@ -35,7 +32,7 @@ open class Juego():Mostrable,Jugable {
     }
     override fun mostrarClasePersonaje(){
         separador()
-        terminal.println(color_Blanco("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
+        terminal.println(colorBlanco("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
         println()
         terminal.println("                                  ${colorTitanes ("TITAN")}                                             ${colorWarlocks ("WARLOCK")}                                             ${colorHunters ("HUNTER")}")
     }
@@ -52,7 +49,7 @@ open class Juego():Mostrable,Jugable {
     fun selectorClasePersonaje():Clases{
         while (true) {
             println()
-            terminal.print(color_Blanco("                                                            Enter the class you wish to create a character of: "))
+            terminal.print(colorBlanco("                                                            Enter the class you wish to create a character of: "))
             val claseAcrear = readln().uppercase()
             when(claseAcrear){
                 "TITAN" -> return Clases.TITAN
@@ -67,18 +64,18 @@ open class Juego():Mostrable,Jugable {
     }
 
     override fun mostrarMenuModosJuego(){
-        terminal.print(color_Blanco("                                                                             LOADING STAR CHART"))
+        terminal.print(colorBlanco("                                                                             LOADING STAR CHART"))
         repeat(3){
             Thread.sleep(1000)
-            terminal.print(color_Blanco("."))
+            terminal.print(colorBlanco("."))
         }
         separador()
         Thread.sleep(500)
-        terminal.println(color_Blanco("                                                                                 --STAR CHART--"))
+        terminal.println(colorBlanco("                                                                                 --STAR CHART--"))
         println()
         terminal.println("       ${GameModes.GAMBIT.color ("⟁ GAMBIT PRIME ⟁")}                               ${GameModes.NIGHTFALL.color ("★ GRANDMASTER NIGHTFALL ★")}                               ${GameModes.TRIALS.color ("⚔ TRIALS OF OSIRIS ⚔")}                               ${GameModes.RAIDS_DUNGEONS.color("✦ RAIDS & DUNGEONS ✦")}")
-        terminal.println("                                                         ${color_Blanco("s: Save")}                                                           ${color_Blanco("e: Exit")}")
-        terminal.print(color_Blanco("                                                                                       > "))
+        terminal.println("                                                         ${colorBlanco("s: Save")}                                                           ${colorBlanco("e: Exit")}")
+        terminal.print(colorBlanco("                                                                                       > "))
     }
 
 
@@ -101,7 +98,7 @@ open class Juego():Mostrable,Jugable {
 
     private fun pedirNombrePersonaje():String{
         separador()
-        terminal.print(color_Blanco("                                                                              Please enter a name: "))
+        terminal.print(colorBlanco("                                                                              Please enter a name: "))
         var nombre = readln() //Cadena para el nombre del personaje
         while (nombre == "" || nombre.isEmpty() || nombre.isBlank()){
             terminal.warning("                                                                           Please enter a valid name: ")
@@ -113,7 +110,7 @@ open class Juego():Mostrable,Jugable {
     private fun pedirGeneroPersonaje():String{
         println()
         while(true) {
-            terminal.print(color_Blanco("                                                                    Do you wish them to be male or female?: "))
+            terminal.print(colorBlanco("                                                                    Do you wish them to be male or female?: "))
             val genero = readln().capitalizar()
             when(genero){
                 "Male" -> return "Male"
@@ -125,7 +122,7 @@ open class Juego():Mostrable,Jugable {
 
     override fun mostrarRazaPersonaje(){
         separador()
-        terminal.println(color_Blanco("                                                                       CHOOSE A RACE FOR YOUR CHARACTER"))
+        terminal.println(colorBlanco("                                                                       CHOOSE A RACE FOR YOUR CHARACTER"))
         println()
         terminal.println("                                  ${colorTitanes ("HUMAN")}                                              ${colorWarlocks ("AWOKEN")}                                               ${colorHunters ("EXO")}")
     }
@@ -144,7 +141,7 @@ open class Juego():Mostrable,Jugable {
         mostrarInformacionRazas()
         while (true) {
             println()
-            terminal.print(color_Blanco("                                                                     Enter the race you wish them to be: "))
+            terminal.print(colorBlanco("                                                                     Enter the race you wish them to be: "))
             val razaAcrear = readln().uppercase() //Cadena ingresada por el usuario a comprobar
             when (razaAcrear) {
                 "HUMAN" -> return Razas.HUMAN
@@ -158,7 +155,7 @@ open class Juego():Mostrable,Jugable {
         }
     }
 
-    fun obtenerItem(modoDeJuego: GameModes): String {
+    private fun obtenerItem(modoDeJuego: GameModes): String {
         val directorioActual = System.getProperty("user.dir")
         val itemObtenido: String = File("$directorioActual/Loot_Pool/${modoDeJuego.desc}.txt").useLines { it.toList() }.random()
         return itemObtenido
@@ -173,18 +170,17 @@ open class Juego():Mostrable,Jugable {
             terminal.print(GameModes.GAMBIT.color("."))
         }
         val itemObtenido = obtenerItem(gameMode)
-        val itemObtenidoProcesado = item.procesarItem(itemObtenido)
-        when(itemObtenidoProcesado){
+        when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
             is Armadura -> {
                 if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item as Armadura).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item as Armadura).equipar(itemObtenidoProcesado, personaje)
-                    else (item as Armadura).sustituir(itemObtenidoProcesado, (personaje.armaduraEquipada as MutableList<Item>))
+                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, personaje)
                 }
             }
             else -> {
                 if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item as Arma).equipable(personaje.armaEquipada as MutableList<Item>)) (item as Arma).equipar(itemObtenidoProcesado, personaje)
-                    else (item as Arma).sustituir(itemObtenidoProcesado, personaje.armaEquipada as MutableList<Item>)
+                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, personaje)
                 }
             }
         }
@@ -201,14 +197,14 @@ open class Juego():Mostrable,Jugable {
         when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
             is Armadura -> {
                 if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item as Armadura).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item as Armadura).equipar(itemObtenidoProcesado, personaje)
-                    else (item as Armadura).sustituir(itemObtenidoProcesado, (personaje.armaduraEquipada as MutableList<Item>))
+                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, (personaje))
                 }
             }
             else -> {
                 if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item as Arma).equipable(personaje.armaEquipada as MutableList<Item>)) (item as Arma).equipar(itemObtenidoProcesado, personaje)
-                    else (item as Arma).sustituir(itemObtenidoProcesado, personaje.armaEquipada as MutableList<Item>)
+                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, personaje)
                 }
             }
         }
@@ -225,14 +221,14 @@ open class Juego():Mostrable,Jugable {
         when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
             is Armadura -> {
                 if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item as Armadura).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item as Armadura).equipar(itemObtenidoProcesado, personaje)
-                    else (item as Armadura).sustituir(itemObtenidoProcesado, (personaje.armaduraEquipada as MutableList<Item>))
+                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, (personaje))
                 }
             }
             else -> {
                 if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item as Arma).equipable(personaje.armaEquipada as MutableList<Item>)) (item as Arma).equipar(itemObtenidoProcesado, personaje)
-                    else (item as Arma).sustituir(itemObtenidoProcesado, personaje.armaEquipada as MutableList<Item>)
+                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, personaje)
                 }
             }
         }
@@ -249,14 +245,14 @@ open class Juego():Mostrable,Jugable {
         when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
             is Armadura -> {
                 if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item as Armadura).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item as Armadura).equipar(itemObtenidoProcesado, personaje)
-                    else (item as Armadura).sustituir(itemObtenidoProcesado, (personaje.armaduraEquipada as MutableList<Item>))
+                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, (personaje))
                 }
             }
             else -> {
                 if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item as Arma).equipable(personaje.armaEquipada as MutableList<Item>)) (item as Arma).equipar(itemObtenidoProcesado, personaje)
-                    else (item as Arma).sustituir(itemObtenidoProcesado, personaje.armaEquipada as MutableList<Item>)
+                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, personaje)
                 }
             }
         }

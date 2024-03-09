@@ -29,11 +29,6 @@ fun main() {
     val manager = AnimationManager
 
     //terminal.println(TextColors.brightWhite("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
-    //juego.mostrarMenuModosJuego()
-    //gestor.comprobarDatosPrevios()
-    //gestor.jugar()
-    //      ─────  ⚔  ─────
-    //      ═════ ⋆★⋆ ═════
-    //      ✦═✦═✦═✦═✦═✦═✦
-    // 🚀
+    juego.mostrarMenuModosJuego()
+
 }
