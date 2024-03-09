@@ -33,14 +33,14 @@ object GestionJuego :Juego(), Comprobable<String> {
     fun comenzarJuego():Juego{
         TODO()
     }
-    fun menuInicio(){
+    private fun menuInicio(){
         println()
         terminal.println(color_Amarillo("                                                                                    1 - New Game"))
         terminal.println(colorVerde("                                                                                    2 - Continue Game"))
         terminal.println(color_Rojo("                                                                                    3 - Exit Game"))
     }
 
-    fun ejecutarAccionInicial(){
+    private fun ejecutarAccionInicial(){
         println()
         val persona = cargarDatos()
         terminal.print(color_Blanco("                                                                        What are you going to do today? :"))
@@ -160,7 +160,7 @@ object GestionJuego :Juego(), Comprobable<String> {
         return datosArmas.isEmpty()
     }
 
-    fun cargarDatos():Personaje {
+    private fun cargarDatos():Personaje {
         val datosPersonaje = FicheroPersonaje.useLines { it.toString() }
         val datosArmaduras = FicheroArmaduras.useLines { it.toList() }
         val datosArmas = FicheroArmas.useLines { it.toList() }
@@ -180,14 +180,14 @@ object GestionJuego :Juego(), Comprobable<String> {
         return personaje
     }
 
-    fun generarNuevoJuego(){
+    private fun generarNuevoJuego(){
         FicheroArmaduras.writeText("")
         FicheroArmas.writeText("")
         FicheroVault.writeText("")
         FicheroPersonaje.writeText("")
     }
 
-    fun guardarDatos(personaje: Personaje){
+    private fun guardarDatos(personaje: Personaje){
         FicheroArmas.writeText("")
         FicheroArmaduras.writeText("")
         FicheroPersonaje.writeText("")
@@ -198,7 +198,7 @@ object GestionJuego :Juego(), Comprobable<String> {
             FicheroArmaduras.appendText("\nA ; ${it.nombre} ; ${it.parte} ; ${it.rareza} ; ${it.rarity}")
         }
     }
-    fun acabarJuego(personaje: Personaje):Boolean{
+    private fun acabarJuego(personaje: Personaje):Boolean{
         guardarDatos(personaje)
         return false
     }

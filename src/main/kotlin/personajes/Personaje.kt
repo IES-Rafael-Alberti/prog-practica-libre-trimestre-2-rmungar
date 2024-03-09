@@ -35,7 +35,7 @@ abstract class Personaje(open val nombre: String, open val genero:String, open v
     }
 
     fun armaduraEquipadaToString():String{
-        return "CURRENT ARMOR SET \n${armaduraEquipada[0].nombre} hood \n${armaduraEquipada[1].nombre} gloves\n ${armaduraEquipada[2].nombre} robes\n ${armaduraEquipada[3].nombre} boots \n${armaduraEquipada[4].nombre} bond"
+        return "CURRENT ARMOR SET \n${armaduraEquipada[0].nombre} helmet \n${armaduraEquipada[1].nombre} gloves\n ${armaduraEquipada[2].nombre} robes\n ${armaduraEquipada[3].nombre} boots \n${armaduraEquipada[4].nombre} class item"
     }
     fun armaEquipadaToString():String{
         return "CURRENT WEAPONS SET \n${armaEquipada[0].mostrarInformacion(armaEquipada[0])} \n${armaEquipada[1].mostrarInformacion(armaEquipada[1])} \n ${armaEquipada[2].mostrarInformacion(armaEquipada[2])} "
