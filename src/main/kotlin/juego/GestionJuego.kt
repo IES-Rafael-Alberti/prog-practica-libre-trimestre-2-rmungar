@@ -9,6 +9,7 @@ import org.practicatrim2.items.Comprobable
 import org.practicatrim2.items.Item
 import org.practicatrim2.personajes.Personaje
 import java.io.File
+import kotlin.random.Random
 
 object GestionJuego :Juego(), Comprobable<String> {
     private val terminal = Terminal() //Variable apra el uso de Mordant
@@ -34,53 +35,72 @@ object GestionJuego :Juego(), Comprobable<String> {
     }
     fun menuInicio(){
         println()
-        terminal.println((color_Amarillo)("                                                                                    1 - New Game"))
-        terminal.println((colorVerde)("                                                                                    2 - Continue Game"))
-        terminal.println((color_Rojo)("                                                                                    3 - Exit Game"))
+        terminal.println(color_Amarillo("                                                                                    1 - New Game"))
+        terminal.println(colorVerde("                                                                                    2 - Continue Game"))
+        terminal.println(color_Rojo("                                                                                    3 - Exit Game"))
     }
 
     fun ejecutarAccionInicial(){
         println()
-        terminal.print((color_Blanco)("                                                                        What are you going to do today? :"))
+        val persona = cargarDatos()
+        terminal.print(color_Blanco("                                                                        What are you going to do today? :"))
         var accion = readln()
-        while(!comprobarAccion(accion)){
-            terminal.print((color_Blanco)("                                                                         What are you going to do today? :"))
+        while(comprobarAccion(accion,persona) in 1..3){
+            terminal.print(color_Blanco("                                                                         What are you going to do today? :"))
             accion = readln()
         }
     }
 
-    override fun comprobarAccion(accion:String):Boolean{
+    override fun comprobarAccion(accion:String,personaje: Personaje):Int {
         when(accion){
             "1" -> {
                 comprobarDatosPrevios()
-                return true
+                return 1
             }
             "2" -> {
                 cargarDatos()
-                return true
+                return 2
             }
             "3" -> {
-                acabarJuego()
-                return true
+                acabarJuego(personaje)
+                return 3
             }
             else -> {
                 terminal.warning("                                                                      Please, answer the requested prompt correctly")
-                return false
+                return 4
             }
-
         }
     }
 
     override fun comprobarSeleccionModoJuego(personaje: Personaje) {
         mostrarMenuModosJuego()
         while (true) {
+            val focusedMode = Random.nextInt(1,4)
             val entrada: String = readln().lowercase()
             when(entrada){
-                "1","gambit","gambit prime" -> jugarGambito(personaje)
-                "2","nightfall","grandmaster nightfall" -> jugarOcaso(personaje)
-                "3", "trials","trials of osiris" -> jugarTrials(personaje)
-                "4", "raids", "dungeons", "raids_dungeons","raids and dungeons" -> jugarRyD(personaje)
+                "1","gambit","gambit prime" -> {
+                    var featured = false
+                    if (focusedMode == 1) featured = true
+                    jugarGambito(personaje, featured)
+                }
+                "2","nightfall","grandmaster nightfall" -> {
+                    var featured = false
+                    if (focusedMode == 2) featured = true
+                    jugarOcaso(personaje, featured)
+                }
+                "3", "trials","trials of osiris" -> {
+                    var featured = false
+                    if (focusedMode == 3) featured = true
+                    jugarTrials(personaje, featured)
+                }
+                "4", "raids", "dungeons", "raids_dungeons","raids and dungeons" -> {
+                    var featured = false
+                    if (focusedMode == 4) featured = true
+                    jugarRyD(personaje, featured)
+                }
                 "s", "save" -> guardarDatos(personaje)
+                "e", "exit" -> acabarJuego(personaje)
+                else -> terminal.warning("                                                                      Please, answer the requested prompt correctly")
             }
         }
     }
@@ -140,7 +160,7 @@ object GestionJuego :Juego(), Comprobable<String> {
         return datosArmas.isEmpty()
     }
 
-    fun cargarDatos() {
+    fun cargarDatos():Personaje {
         val datosPersonaje = FicheroPersonaje.useLines { it.toString() }
         val datosArmaduras = FicheroArmaduras.useLines { it.toList() }
         val datosArmas = FicheroArmas.useLines { it.toList() }
@@ -157,7 +177,7 @@ object GestionJuego :Juego(), Comprobable<String> {
             val arma = Arma(armaItem.nombre, armaItem.arquetipo, armaItem.tipoArma, armaItem.elemento, armaItem.rareza, armaItem.rarity, armaItem.colorElemento)
             personaje.armaEquipada.add(arma)
         }
-
+        return personaje
     }
 
     fun generarNuevoJuego(){
@@ -178,7 +198,8 @@ object GestionJuego :Juego(), Comprobable<String> {
             FicheroArmaduras.appendText("\nA ; ${it.nombre} ; ${it.parte} ; ${it.rareza} ; ${it.rarity}")
         }
     }
-    fun acabarJuego(){
-
+    fun acabarJuego(personaje: Personaje):Boolean{
+        guardarDatos(personaje)
+        return false
     }
 }

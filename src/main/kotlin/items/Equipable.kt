@@ -20,7 +20,7 @@ interface Guardable<A>{
 }
 
 interface Comprobable<T> {
-    fun comprobarAccion(accion: T):Boolean
+    fun comprobarAccion(accion: T, personaje: Personaje):Int
 
     fun comprobarDatosPrevios()
 
@@ -42,6 +42,8 @@ interface Mostrable{
 
     fun mostrarMenuModosJuego()
 
+    fun mostrarEasterEgg(huevo:List<String>)
+
 }
 
 interface Informable{
@@ -49,11 +51,11 @@ interface Informable{
 }
 
 interface Jugable{
-    fun jugarGambito(personaje: Personaje)
+    fun jugarGambito(personaje: Personaje, featured:Boolean)
 
-    fun jugarOcaso(personaje: Personaje)
+    fun jugarOcaso(personaje: Personaje, featured:Boolean)
 
-    fun jugarTrials(personaje: Personaje)
+    fun jugarTrials(personaje: Personaje, featured:Boolean)
 
-    fun jugarRyD(personaje: Personaje)
+    fun jugarRyD(personaje: Personaje, featured:Boolean)
 }

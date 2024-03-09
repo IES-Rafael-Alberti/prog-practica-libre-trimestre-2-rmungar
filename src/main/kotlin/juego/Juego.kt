@@ -10,6 +10,7 @@ import org.practicatrim2.items.Mostrable
 import org.practicatrim2.modosDeJuego.GameModes
 import org.practicatrim2.personajes.*
 import java.io.File
+import kotlin.random.Random
 
 open class Juego():Mostrable,Jugable {
     private val terminal = Terminal() // Variable empleada para lo relacionado con mordant
@@ -20,10 +21,12 @@ open class Juego():Mostrable,Jugable {
 
     private val colorBlanco = TextColors.brightWhite // Variable para el color blanco
     val colorVerde = TextColors.brightGreen // Variable para el color verde
-
+    val colorMythic = TextColors.rgb("#da86e3")
     val workingDirectory = System.getProperty("user.dir")!! // Directorio actual
 
     private var item = Item()
+    private val veces = 1
+    private val NumeroEasterEgg = 33
     
     private fun separador(){
         repeat(35){
@@ -162,100 +165,135 @@ open class Juego():Mostrable,Jugable {
     }
 
 
-    override fun jugarGambito(personaje: Personaje) {
+    override fun jugarGambito(personaje: Personaje, featured:Boolean) {
         val gameMode:GameModes = GameModes.GAMBIT
         terminal.print(GameModes.GAMBIT.color("                                                                             TRAVELLING TO THE DRIFTER'S REALM"))
         repeat(3){
             Thread.sleep(1000)
             terminal.print(GameModes.GAMBIT.color("."))
         }
-        val itemObtenido = obtenerItem(gameMode)
-        when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
-            is Armadura -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, personaje)
+        var rotations = veces
+        if (featured) rotations++
+        repeat(rotations){
+            val probabilidadEasterEgg = Random.nextInt(1,100)
+            encontrarEasterEgg(probabilidadEasterEgg)
+            val itemObtenido = obtenerItem(gameMode)
+            when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
+                is Armadura -> {
+                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
+                        if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                        else (item).sustituir(itemObtenidoProcesado, personaje)
+                    }
                 }
-            }
-            else -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, personaje)
+                else -> {
+                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
+                        if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                        else (item).sustituir(itemObtenidoProcesado, personaje)
+                    }
                 }
             }
         }
     }
 
-    override fun jugarOcaso(personaje: Personaje) {
+    override fun jugarOcaso(personaje: Personaje, featured:Boolean) {
         val gameMode:GameModes = GameModes.NIGHTFALL
         terminal.print(GameModes.NIGHTFALL.color("                                                                             TRAVELLING TO THE SCARLET KEEP"))
         repeat(3){
             Thread.sleep(1000)
             terminal.print(GameModes.NIGHTFALL.color("."))
         }
-        val itemObtenido = obtenerItem(gameMode)
-        when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
-            is Armadura -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, (personaje))
+        var rotations = veces
+        if (featured) rotations++
+        repeat(rotations){
+            val probabilidadEasterEgg = Random.nextInt(1,100)
+            encontrarEasterEgg(probabilidadEasterEgg)
+            val itemObtenido = obtenerItem(gameMode)
+            when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
+                is Armadura -> {
+                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
+                        if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                        else (item).sustituir(itemObtenidoProcesado, (personaje))
+                    }
                 }
-            }
-            else -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, personaje)
+                else -> {
+                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
+                        if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                        else (item).sustituir(itemObtenidoProcesado, personaje)
+                    }
                 }
             }
         }
     }
 
-    override fun jugarRyD(personaje: Personaje) {
+    override fun jugarRyD(personaje: Personaje, featured:Boolean) {
         val gameMode:GameModes = GameModes.RAIDS_DUNGEONS
         terminal.print(GameModes.RAIDS_DUNGEONS.color("                                                                             TRAVELLING TO THE ROOT OF NIGHTMARES"))
         repeat(3){
             Thread.sleep(1000)
             terminal.print(GameModes.RAIDS_DUNGEONS.color("."))
         }
-        val itemObtenido = obtenerItem(gameMode)
-        when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
-            is Armadura -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, (personaje))
+        var rotations = veces
+        if (featured) rotations++
+        repeat(rotations){
+            val probabilidadEasterEgg = Random.nextInt(1,100)
+            encontrarEasterEgg(probabilidadEasterEgg)
+            val itemObtenido = obtenerItem(gameMode)
+            when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
+                is Armadura -> {
+                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
+                        if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                        else (item).sustituir(itemObtenidoProcesado, (personaje))
+                    }
                 }
-            }
-            else -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, personaje)
+                else -> {
+                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
+                        if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                        else (item).sustituir(itemObtenidoProcesado, personaje)
+                    }
                 }
             }
         }
     }
 
-    override fun jugarTrials(personaje: Personaje) {
+    override fun jugarTrials(personaje: Personaje, featured:Boolean) {
         val gameMode:GameModes = GameModes.TRIALS
         terminal.print(GameModes.TRIALS.color("                                                                             TRAVELLING TO THE LIGHTHOUSE"))
         repeat(3){
             Thread.sleep(1000)
             terminal.print(GameModes.TRIALS.color("."))
         }
-        val itemObtenido = obtenerItem(gameMode)
-        when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
-            is Armadura -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, (personaje))
+        var rotations = veces
+        if (featured) rotations++
+        repeat(rotations){
+            val probabilidadEasterEgg = Random.nextInt(1,100)
+            encontrarEasterEgg(probabilidadEasterEgg)
+            val itemObtenido = obtenerItem(gameMode)
+            when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
+                is Armadura -> {
+                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
+                        if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                        else (item).sustituir(itemObtenidoProcesado, (personaje))
+                    }
                 }
-            }
-            else -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, personaje)
+                else -> {
+                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
+                        if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                        else (item).sustituir(itemObtenidoProcesado, personaje)
+                    }
                 }
             }
         }
     }
 
+    override fun mostrarEasterEgg(huevo: List<String>) {
+        terminal.println(colorBlanco("YOU FOUND ${colorMythic(huevo[1])} ${colorMythic(huevo[5])} ${colorMythic(huevo[2])}!! WHOSE SPECIAL ABILITY IS: ${colorMythic(huevo[3])} AND DEALS ${colorMythic(huevo[4])} DAMAGE!!"))
+    }
+
+    fun encontrarEasterEgg(probabilidadEasterEgg: Int){
+        if (probabilidadEasterEgg == NumeroEasterEgg){
+            val huevoEncontrado = File(workingDirectory+"/Loot_Pool/EasterEggs.txt").useLines { it.toList() }.random().split(" ; ")
+            terminal.warning("HEY, YOU FOUND AN EASTER EGG!!!")
+            mostrarEasterEgg(huevoEncontrado)
+        }
+    }
 }

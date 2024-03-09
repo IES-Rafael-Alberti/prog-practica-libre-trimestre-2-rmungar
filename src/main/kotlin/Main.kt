@@ -1,5 +1,6 @@
 package org.practicatrim2
 
+import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.animaciones.AnimationManager
 import org.practicatrim2.juego.GestionJuego
@@ -28,7 +29,7 @@ fun main() {
     val gestor = GestionJuego
     val manager = AnimationManager
 
-    //terminal.println(TextColors.brightWhite("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
-    juego.mostrarMenuModosJuego()
+    terminal.println(TextColors.rgb("#da86e3")("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
+    //juego.mostrarMenuModosJuego()
 
 }
