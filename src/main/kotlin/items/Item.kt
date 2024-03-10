@@ -66,28 +66,34 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
     }
 
     override fun equipable(itemsEquipados: MutableList<Item>): Boolean {
-        when(itemsEquipados[0]){
-            is Armadura -> {
-                if (itemsEquipados.size == 5){
-                    terminal.warning("You already have 5 armor items equipped")
-                }
-                else if(itemsEquipados.size < 5) {
-                    itemsEquipados.find { it.parte == parte }.let {
-                        terminal.warning("You already have one of this item type equipped")
+        if (itemsEquipados.isNotEmpty()){
+            when(itemsEquipados[0]){
+                is Armadura -> {
+                    if (itemsEquipados.size == 5){
+                        terminal.warning("You already have 5 armor items equipped")
                         return false
                     }
+                    else if(itemsEquipados.size < 5) {
+                        itemsEquipados.find { it.parte == parte }.let {
+                            terminal.warning("You already have one of this item type equipped")
+                            return false
+                        }
+                    }
+                    else return true
                 }
-                return true
+                else -> {
+                    if(itemsEquipados.size == 3){
+                        terminal.warning("You already have 3 weapons equipped")
+                        return false
+                    }
+                    else{
+                        return true
+                    }
+                }
             }
-            else -> {
-                if(itemsEquipados.size == 3){
-                    terminal.warning("You already have 3 weapons equipped")
-                    return false
-                }
-                else{
-                    return true
-                }
-            }
+        }
+        else{
+            return true
         }
     }
 
@@ -118,7 +124,7 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                     break
                 }
                 "n", "no" -> {
-                    terminal.println(brightRed("Armor sent to the DCV, rest in peace"))
+                    terminal.println(brightRed("Item sent to the DCV, rest in peace"))
                     break
                 }
                 else -> terminal.warning("Please, answer the requested prompt correctly")
@@ -126,16 +132,36 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
         }
     }
 
-    override fun preguntarParaEquipar(item: Item): Boolean {
-        terminal.println(brightWhite("Do you wish to equip: ${item.rarity(item.nombre)}? (y / n)"))
-        val respuesta = readln().lowercase()
+    override fun preguntarParaEquipar(item: Item, personaje: Personaje): Boolean {
         while (true) {
-            when (respuesta) {
-                "y", "yes" -> return true
-                "n", "no" -> return false
-                else -> terminal.warning("Please, answer the requested prompt correctly")
+            when(item){
+                is Armadura -> {
+                    terminal.println(brightWhite("Do you wish to equip: ${item.rarity(item.nombre)} ${item.parte}? (y / n)"))
+                    val respuesta = readln().lowercase()
+                    when (respuesta) {
+                        "y", "yes" -> {
+                            equipar(item, personaje)
+                            break
+                        }
+                        "n", "no" -> return false
+                        else -> terminal.warning("Please, answer the requested prompt correctly")
+                    }
+                }
+                else -> {
+                    terminal.println(brightWhite("Do you wish to equip: ${item.rarity(item.nombre)}? (y / n)"))
+                    val respuesta = readln().lowercase()
+                    when (respuesta) {
+                        "y", "yes" -> {
+                            equipar(item, personaje)
+                            break
+                        }
+                        "n", "no" -> return false
+                        else -> terminal.warning("Please, answer the requested prompt correctly")
+                    }
+                }
             }
         }
+        return true
     }
 
     override fun equipar(item: Item, personaje: Personaje) {
@@ -146,7 +172,7 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
             }
             else -> {
                 personaje.armaEquipada.add(item as Arma)
-                terminal.println(brightGreen("Armor equipped successfully"))
+                terminal.println(brightGreen("Weapon equipped successfully"))
             }
         }
     }
@@ -158,7 +184,6 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                     terminal.println(brightWhite("Exchange armor? (y / n)"))
                     val decision = readln().lowercase() //String para obtener la respuesta del usuario
                     var posicionArmadura = 0 //Entero para iterar en la lista de Armaduras
-
                     when(decision) {
                         "y", "yes" -> {
                             repeat(personaje.armaduraEquipada.size) {
@@ -171,9 +196,11 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                                 }
                                 posicionArmadura++
                             }
+                            break
                         }
                         "n", "no" -> {
                             preguntarParaGuardar(item)
+                            break
                         }
                         else -> terminal.warning("Please, answer the requested prompt correctly")
                     }
@@ -197,8 +224,8 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                                 while (!seleccionValida2){
                                     terminal.println(brightWhite("Select a weapon slot :"))
                                     val slot = readln()
-                                    when(slot){
-                                        "1" -> {
+                                    when(slot.toInt()-1){
+                                        1 -> {
                                             val armaAguardar = personaje.armaEquipada[0]
                                             personaje.armaEquipada.remove(armaAguardar)
                                             personaje.armaEquipada[0] = item as Arma
@@ -206,7 +233,7 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                                             seleccionValida2 = true
                                             seleccionValida1 = true
                                         }
-                                        "2" -> {
+                                        2 -> {
                                             val armaAguardar = personaje.armaEquipada[1]
                                             personaje.armaEquipada.remove(armaAguardar)
                                             personaje.armaEquipada[1] = item as Arma
@@ -214,7 +241,7 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                                             seleccionValida2 = true
                                             seleccionValida1 = true
                                         }
-                                        "3" -> {
+                                        3 -> {
                                             val armaAguardar = personaje.armaEquipada[2]
                                             personaje.armaEquipada.remove(armaAguardar)
                                             personaje.armaEquipada[2] = item as Arma

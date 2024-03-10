@@ -7,7 +7,7 @@ interface Equipable<T> {
 
     fun equipar(item: T, personaje: Personaje)
 
-    fun preguntarParaEquipar(item: T):Boolean
+    fun preguntarParaEquipar(item: T, personaje: Personaje):Boolean
 }
 
 interface Sustituible<T, E> {
@@ -20,7 +20,7 @@ interface Guardable<A>{
 }
 
 interface Comprobable<T> {
-    fun comprobarAccion(accion: T, personaje: Personaje):Int
+    fun comprobarAccion(accion: T):Int
 
     fun comprobarDatosPrevios():Boolean
 

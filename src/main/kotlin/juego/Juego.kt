@@ -81,7 +81,13 @@ open class Juego :Mostrable,Jugable {
         terminal.print(colorBlanco("                                                                                       > "))
     }
 
-
+    fun generarPersonaje():Personaje{
+        mostrarClasePersonaje()
+        mostrarInformacionClases()
+        val clase = selectorClasePersonaje()
+        val personaje = crearPersonaje(clase)
+        return personaje
+    }
     fun crearPersonaje(clase: Clases):Personaje{
         val nombre = pedirNombrePersonaje()
         val genero = pedirGeneroPersonaje()
@@ -106,7 +112,8 @@ open class Juego :Mostrable,Jugable {
         terminal.print(colorBlanco("                                                                              Please enter a name: "))
         var nombre = readln() //Cadena para el nombre del personaje
         while (nombre == "" || nombre.isEmpty() || nombre.isBlank()){
-            terminal.warning("                                                                           Please enter a valid name: ")
+            terminal.warning("                                                                           Please enter a valid name")
+            terminal.print(colorBlanco("                                                                              Please enter a name: "))
             nombre = readln().capitalizar()
         }
         return nombre
@@ -134,8 +141,8 @@ open class Juego :Mostrable,Jugable {
 
     override fun mostrarInformacionRazas(){
         println()
-        println("                  The survivors of a race whose kindgom,               A humanoid race that was born when a                 Humanoid race that appeared during\n" +
-                "                 extended past the Solar System now fight              colony ship disappeared in a space -                Earth's Golden Age. They are robots \n" +
+        println("                  The survivors of a race whose kindgom               A humanoid race that was born when a                 Humanoid race that appeared during\n" +
+                "                extended past the Solar System, now fight              colony ship disappeared in a space -                Earth's Golden Age. They are robots \n" +
                 "                     for survival after the Traveller                     time anomaly during the first                     with conscience and feelings built\n" +
                 "                  unintentionally led them to their first                          collapse.                                           by humanity.\n" +
                 "                                 collapse.")
@@ -174,26 +181,14 @@ open class Juego :Mostrable,Jugable {
             Thread.sleep(1000)
             terminal.print(GameModes.GAMBIT.color("."))
         }
+        println()
         var rotations = veces
         if (featured) rotations++
         repeat(rotations){
             val probabilidadEasterEgg = Random.nextInt(1,100)
             encontrarEasterEgg(probabilidadEasterEgg)
             val itemObtenido = obtenerItem(gameMode)
-            when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
-                is Armadura -> {
-                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                        if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                        else (item).sustituir(itemObtenidoProcesado, personaje)
-                    }
-                }
-                else -> {
-                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                        if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                        else (item).sustituir(itemObtenidoProcesado, personaje)
-                    }
-                }
-            }
+            administrarItem(itemObtenido, personaje)
         }
     }
 
@@ -204,26 +199,14 @@ open class Juego :Mostrable,Jugable {
             Thread.sleep(1000)
             terminal.print(GameModes.NIGHTFALL.color("."))
         }
+        println()
         var rotations = veces
         if (featured) rotations++
         repeat(rotations){
             val probabilidadEasterEgg = Random.nextInt(1,100)
             encontrarEasterEgg(probabilidadEasterEgg)
             val itemObtenido = obtenerItem(gameMode)
-            when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
-                is Armadura -> {
-                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                        if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                        else (item).sustituir(itemObtenidoProcesado, (personaje))
-                    }
-                }
-                else -> {
-                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                        if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                        else (item).sustituir(itemObtenidoProcesado, personaje)
-                    }
-                }
-            }
+            administrarItem(itemObtenido, personaje)
         }
     }
 
@@ -234,26 +217,14 @@ open class Juego :Mostrable,Jugable {
             Thread.sleep(1000)
             terminal.print(GameModes.RAIDS_DUNGEONS.color("."))
         }
+        println()
         var rotations = veces
         if (featured) rotations++
         repeat(rotations){
             val probabilidadEasterEgg = Random.nextInt(1,100)
             encontrarEasterEgg(probabilidadEasterEgg)
             val itemObtenido = obtenerItem(gameMode)
-            when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
-                is Armadura -> {
-                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                        if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                        else (item).sustituir(itemObtenidoProcesado, (personaje))
-                    }
-                }
-                else -> {
-                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                        if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                        else (item).sustituir(itemObtenidoProcesado, personaje)
-                    }
-                }
-            }
+            administrarItem(itemObtenido, personaje)
         }
     }
 
@@ -264,26 +235,14 @@ open class Juego :Mostrable,Jugable {
             Thread.sleep(1000)
             terminal.print(GameModes.TRIALS.color("."))
         }
+        println()
         var rotations = veces
         if (featured) rotations++
         repeat(rotations){
             val probabilidadEasterEgg = Random.nextInt(1,100)
             encontrarEasterEgg(probabilidadEasterEgg)
             val itemObtenido = obtenerItem(gameMode)
-            when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
-                is Armadura -> {
-                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                        if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                        else (item).sustituir(itemObtenidoProcesado, (personaje))
-                    }
-                }
-                else -> {
-                    if(item.preguntarParaEquipar(itemObtenidoProcesado)) {
-                        if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                        else (item).sustituir(itemObtenidoProcesado, personaje)
-                    }
-                }
-            }
+            administrarItem(itemObtenido, personaje)
         }
     }
 
@@ -299,7 +258,20 @@ open class Juego :Mostrable,Jugable {
         }
     }
 
-    fun administrarItem(){
-
+    fun administrarItem(itemObtenido:String, personaje: Personaje){
+        when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
+            is Armadura -> {
+                if(item.preguntarParaEquipar(itemObtenidoProcesado, personaje)) {
+                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, (personaje))
+                }
+            }
+            else -> {
+                if(item.preguntarParaEquipar(itemObtenidoProcesado, personaje)) {
+                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
+                    else (item).sustituir(itemObtenidoProcesado, personaje)
+                }
+            }
+        }
     }
 }

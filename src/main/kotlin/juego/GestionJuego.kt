@@ -7,7 +7,10 @@ import org.practicatrim2.items.Arma
 import org.practicatrim2.items.Armadura
 import org.practicatrim2.items.Comprobable
 import org.practicatrim2.items.Item
+import org.practicatrim2.personajes.Hunter
 import org.practicatrim2.personajes.Personaje
+import org.practicatrim2.personajes.Titan
+import org.practicatrim2.personajes.Warlock
 import java.io.File
 import kotlin.random.Random
 
@@ -25,7 +28,7 @@ object GestionJuego :Juego(), Comprobable<String> {
 
 
     private fun separador(){
-        repeat(15){
+        repeat(35){
             println()
         }
     }
@@ -33,10 +36,20 @@ object GestionJuego :Juego(), Comprobable<String> {
     fun comenzarJuego(){
         terminal.println((color_Blanco)("                                                                          WELCOME TO DESTINY - LITE"))
         menuInicio()
-        ejecutarAccionInicial()
-        while (true){
-            jugar()
+        val datosExistentes = ejecutarAccionInicial()
+        if (datosExistentes) {
+            val personaje = cargarDatos()
+            while (true){
+                jugar(personaje)
+            }
         }
+        else {
+            val personaje = generarPersonaje()
+            while (true){
+                jugar(personaje)
+            }
+        }
+
     }
     private fun menuInicio(){
         println()
@@ -45,29 +58,44 @@ object GestionJuego :Juego(), Comprobable<String> {
         terminal.println(color_Rojo("                                                                                    3 - Exit Game"))
     }
 
-    private fun ejecutarAccionInicial(){
+    private fun ejecutarAccionInicial(): Boolean{
         println()
-        val persona = cargarDatos()
         terminal.print(color_Blanco("                                                                        What are you going to do today? :"))
         var accion = readln()
-        while(comprobarAccion(accion,persona) !in 1..3){
+        while(comprobarAccion(accion) !in 1..3){
             terminal.print(color_Blanco("                                                                         What are you going to do today? :"))
             accion = readln()
         }
-    }
-
-    override fun comprobarAccion(accion:String,personaje: Personaje):Int {
         when(accion){
             "1" -> {
                 comprobarDatosPrevios()
+                return false
+            }
+            "2" -> {
+                if(comprobarDatosPrevios()){
+                    cargarDatos()
+                    return true
+                }
+                else { generarNuevoJuego()
+                    return false
+                }
+            }
+            else -> {
+                acabarJuego()
+                return false
+            }
+        }
+    }
+
+    override fun comprobarAccion(accion:String):Int {
+        when(accion){
+            "1" -> {
                 return 1
             }
             "2" -> {
-                cargarDatos()
                 return 2
             }
             "3" -> {
-                acabarJuego()
                 return 3
             }
             else -> {
@@ -78,7 +106,6 @@ object GestionJuego :Juego(), Comprobable<String> {
     }
 
     override fun comprobarSeleccionModoJuego(): String {
-        mostrarMenuModosJuego()
         while (true) {
 
             var entrada: String = readln().lowercase()
@@ -177,14 +204,14 @@ object GestionJuego :Juego(), Comprobable<String> {
             }
         }
         else {
-            terminal.print(color_Rojo("                                                         It seems there isn't saved data, would you like to start a new game? (y / n): ")) // Entrada del usuario que indica lo que desea hacer
-            val decision = readln().lowercase()
+            terminal.print(color_Rojo("                                                         It seems there isn't saved data, would you like to start a new game? (y / n): "))
+            val decision = readln().lowercase()// Entrada del usuario que indica lo que desea hacer
             when (decision) {
                 "y", "yes" -> {
                     generarNuevoJuego()
                     terminal.println((colorVerde)("                                                                                   CREATING SAVE FILES...."))
                     val animacion = AnimationManager.animacionCargando()
-                    return true
+                    return false
                 }
 
                 "n", "no" -> {
@@ -205,7 +232,7 @@ object GestionJuego :Juego(), Comprobable<String> {
     }
 
     private fun cargarDatos():Personaje {
-        val datosPersonaje = FicheroPersonaje.useLines { it.toString() }
+        val datosPersonaje = FicheroPersonaje.useLines { it.toList() }[0]
         val datosArmaduras = FicheroArmaduras.useLines { it.toList() }
         val datosArmas = FicheroArmas.useLines { it.toList() }
         val personaje = Personaje.generarPersonaje(datosPersonaje)
@@ -236,11 +263,18 @@ object GestionJuego :Juego(), Comprobable<String> {
         FicheroArmaduras.writeText("")
         FicheroPersonaje.writeText("")
         personaje.armaEquipada.forEach {
-            FicheroArmas.appendText("\nW ; ${it.nombre} ; ${it.arquetipo} ; ${it.tipoArma} ; ${it.elemento} ; ${it.rareza} ; ${it.rarity} ; ${it.colorElemento}")
+            FicheroArmas.appendText("\nW ; ${it.nombre} ; ${it.arquetipo} ; ${it.tipoArma} ; ${it.elemento} ; ${it.rareza}")
         }
         personaje.armaduraEquipada.forEach {
-            FicheroArmaduras.appendText("\nA ; ${it.nombre} ; ${it.parte} ; ${it.rareza} ; ${it.rarity}")
+            FicheroArmaduras.appendText("\nA ; ${it.nombre} ; ${it.parte} ; ${it.rareza}")
         }
+
+        when(personaje){
+            is Titan -> FicheroPersonaje.writeText("T ; ${personaje.nombre} ; ${personaje.genero} ; ${personaje.raza}")
+            is Warlock -> FicheroPersonaje.writeText("W ; ${personaje.nombre} ; ${personaje.genero} ; ${personaje.raza}")
+            is Hunter -> FicheroPersonaje.writeText("H ; ${personaje.nombre} ; ${personaje.genero} ; ${personaje.raza}")
+        }
+
     }
     private fun acabarJuego():Boolean{
         return false
