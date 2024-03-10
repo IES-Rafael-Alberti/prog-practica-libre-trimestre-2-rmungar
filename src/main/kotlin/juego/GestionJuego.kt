@@ -255,7 +255,6 @@ object GestionJuego :Juego(), Comprobable<String> {
     private fun generarNuevoJuego(){
         FicheroArmaduras.writeText("")
         FicheroArmas.writeText("")
-        FicheroVault.writeText("")
         FicheroPersonaje.writeText("")
     }
 
