@@ -298,4 +298,8 @@ open class Juego :Mostrable,Jugable {
             mostrarEasterEgg(huevoEncontrado)
         }
     }
+
+    fun administrarItem(){
+
+    }
 }

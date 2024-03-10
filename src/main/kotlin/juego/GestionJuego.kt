@@ -30,8 +30,13 @@ object GestionJuego :Juego(), Comprobable<String> {
         }
     }
 
-    fun comenzarJuego():Juego{
-        TODO()
+    fun comenzarJuego(){
+        terminal.println((color_Blanco)("                                                                          WELCOME TO DESTINY - LITE"))
+        menuInicio()
+        ejecutarAccionInicial()
+        while (true){
+            jugar()
+        }
     }
     private fun menuInicio(){
         println()
@@ -45,7 +50,7 @@ object GestionJuego :Juego(), Comprobable<String> {
         val persona = cargarDatos()
         terminal.print(color_Blanco("                                                                        What are you going to do today? :"))
         var accion = readln()
-        while(comprobarAccion(accion,persona) in 1..3){
+        while(comprobarAccion(accion,persona) !in 1..3){
             terminal.print(color_Blanco("                                                                         What are you going to do today? :"))
             accion = readln()
         }
@@ -62,7 +67,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                 return 2
             }
             "3" -> {
-                acabarJuego(personaje)
+                acabarJuego()
                 return 3
             }
             else -> {
@@ -72,54 +77,75 @@ object GestionJuego :Juego(), Comprobable<String> {
         }
     }
 
-    override fun comprobarSeleccionModoJuego(personaje: Personaje) {
+    override fun comprobarSeleccionModoJuego(): String {
         mostrarMenuModosJuego()
         while (true) {
-            val focusedMode = Random.nextInt(1,4)
-            val entrada: String = readln().lowercase()
+
+            var entrada: String = readln().lowercase()
             when(entrada){
                 "1","gambit","gambit prime" -> {
-                    var featured = false
-                    if (focusedMode == 1) featured = true
-                    jugarGambito(personaje, featured)
+                    entrada = "Gambit"
+                    return entrada
                 }
                 "2","nightfall","grandmaster nightfall" -> {
-                    var featured = false
-                    if (focusedMode == 2) featured = true
-                    jugarOcaso(personaje, featured)
+                    entrada = "Nightfall"
+                    return entrada
                 }
                 "3", "trials","trials of osiris" -> {
-                    var featured = false
-                    if (focusedMode == 3) featured = true
-                    jugarTrials(personaje, featured)
+                    entrada = "Trials"
+                    return entrada
                 }
                 "4", "raids", "dungeons", "raids_dungeons","raids and dungeons" -> {
-                    var featured = false
-                    if (focusedMode == 4) featured = true
-                    jugarRyD(personaje, featured)
+                    entrada = "Raids_Dungeons"
+                    return entrada
                 }
-                "s", "save" -> guardarDatos(personaje)
-                "e", "exit" -> acabarJuego(personaje)
+                "s", "save" -> {
+                    entrada = "Save"
+                    return entrada
+                }
+                "e", "exit" -> {
+                    entrada = "Exit"
+                    return entrada
+                }
                 else -> terminal.warning("                                                                      Please, answer the requested prompt correctly")
             }
         }
     }
 
 
-    fun jugar(){
-        terminal.println((color_Blanco)("                                                                          WELCOME TO DESTINY - LITE"))
-        menuInicio()
-        ejecutarAccionInicial()
-        mostrarClasePersonaje()
-        mostrarInformacionClases()
-        val clase = selectorClasePersonaje()
-        val personaje = crearPersonaje(clase)
-
-
+    fun jugar(personaje: Personaje){
+        while (true){
+            var featured = false
+            val focusedMode = Random.nextInt(1,4)
+            mostrarMenuModosJuego()
+            val modo = comprobarSeleccionModoJuego()
+            when (modo){
+                "Gambit" -> {
+                    if (focusedMode == 1) featured = true
+                    jugarGambito(personaje, featured)
+                }
+                "Nightfall" -> {
+                    if (focusedMode == 2) featured = true
+                    jugarOcaso(personaje, featured)
+                }
+                "Raids_Dungeons" -> {
+                    if (focusedMode == 3) featured = true
+                    jugarRyD(personaje, featured)
+                }
+                "Trials" -> {
+                    if (focusedMode == 4) featured = true
+                    jugarTrials(personaje, featured)
+                }
+                "Save" -> {
+                    guardarDatos(personaje)
+                }
+                "Exit" -> break
+            }
+        }
     }
 
 
-    override fun comprobarDatosPrevios(){
+    override fun comprobarDatosPrevios():Boolean{
         val datosArmaduras = comprobarDatosArmaduras()
         val datosArmas = comprobarDatosArmas()
         if (!datosArmaduras && !datosArmas) {
@@ -134,6 +160,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                         println()
                         terminal.println((colorVerde)("                                                                                  DATA OVERWRITTEN"))
                         generarNuevoJuego()
+                        return true
                     }
 
                     "n", "no" -> {
@@ -141,6 +168,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                         terminal.println((colorVerde)("                                                                                   LOADING GAME...."))
                         val animacion = AnimationManager.animacionCargando()
                         cargarDatos()
+                        return true
                     }
                     else -> {
                         terminal.warning("                                                                      Please, answer the requested prompt correctly")
@@ -148,7 +176,23 @@ object GestionJuego :Juego(), Comprobable<String> {
                 }
             }
         }
+        else {
+            terminal.print(color_Rojo("                                                         It seems there isn't saved data, would you like to start a new game? (y / n): ")) // Entrada del usuario que indica lo que desea hacer
+            val decision = readln().lowercase()
+            when (decision) {
+                "y", "yes" -> {
+                    generarNuevoJuego()
+                    terminal.println((colorVerde)("                                                                                   CREATING SAVE FILES...."))
+                    val animacion = AnimationManager.animacionCargando()
+                    return true
+                }
 
+                "n", "no" -> {
+                    return false
+                }
+            }
+        }
+        return false
     }
 
     override fun comprobarDatosArmaduras():Boolean{
@@ -198,8 +242,7 @@ object GestionJuego :Juego(), Comprobable<String> {
             FicheroArmaduras.appendText("\nA ; ${it.nombre} ; ${it.parte} ; ${it.rareza} ; ${it.rarity}")
         }
     }
-    private fun acabarJuego(personaje: Personaje):Boolean{
-        guardarDatos(personaje)
+    private fun acabarJuego():Boolean{
         return false
     }
 }

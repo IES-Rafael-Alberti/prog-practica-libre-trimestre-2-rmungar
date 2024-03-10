@@ -22,13 +22,13 @@ interface Guardable<A>{
 interface Comprobable<T> {
     fun comprobarAccion(accion: T, personaje: Personaje):Int
 
-    fun comprobarDatosPrevios()
+    fun comprobarDatosPrevios():Boolean
 
     fun comprobarDatosArmaduras():Boolean
 
     fun comprobarDatosArmas():Boolean
 
-    fun comprobarSeleccionModoJuego(personaje: Personaje)
+    fun comprobarSeleccionModoJuego():String
 }
 
 interface Mostrable{
