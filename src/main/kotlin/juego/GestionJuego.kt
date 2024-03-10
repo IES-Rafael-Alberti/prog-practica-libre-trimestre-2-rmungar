@@ -194,6 +194,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                         separador()
                         terminal.println((colorVerde)("                                                                                   LOADING GAME...."))
                         val animacion = AnimationManager.animacionCargando()
+                        println()
                         cargarDatos()
                         return true
                     }

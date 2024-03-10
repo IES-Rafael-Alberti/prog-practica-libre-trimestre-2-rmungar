@@ -73,22 +73,14 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                         terminal.warning("You already have 5 armor items equipped")
                         return false
                     }
-                    else if(itemsEquipados.size < 5) {
-                        itemsEquipados.find { it.parte == parte }.let {
-                            terminal.warning("You already have one of this item type equipped")
-                            return false
-                        }
-                    }
-                    else return true
+                    return true
                 }
                 else -> {
                     if(itemsEquipados.size == 3){
                         terminal.warning("You already have 3 weapons equipped")
                         return false
                     }
-                    else{
-                        return true
-                    }
+                    return true
                 }
             }
         }
