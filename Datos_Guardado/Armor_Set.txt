@@ -1,0 +1,5 @@
+A ; Kentarch 3 ; Class Item ; Legendary
+A ; Kentarch 3 ; Class Item ; Legendary
+A ; Legacy's Oath ; Chest ; Legendary
+A ; Kentarch 3 ; Class Item ; Legendary
+A ; Legacy's Oath ; Chest ; Legendary

@@ -3,10 +3,7 @@ package org.practicatrim2.juego
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.capitalizar
-import org.practicatrim2.items.Armadura
-import org.practicatrim2.items.Item
-import org.practicatrim2.items.Jugable
-import org.practicatrim2.items.Mostrable
+import org.practicatrim2.items.*
 import org.practicatrim2.modosDeJuego.GameModes
 import org.practicatrim2.personajes.*
 import java.io.File
@@ -22,13 +19,14 @@ open class Juego :Mostrable,Jugable {
     private val colorBlanco = TextColors.brightWhite // Variable para el color blanco
     val colorVerde = TextColors.brightGreen // Variable para el color verde
     val colorMythic = TextColors.rgb("#da86e3")
-    val workingDirectory = System.getProperty("user.dir")!! // Directorio actual
 
-    private var item = Item()
+    val workingDirectory = System.getProperty("user.dir")!! // Directorio actual
+    private val FicheroVault = File("$workingDirectory/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
+
     private val veces = 1
     private val numeroEasterEgg = 33
     
-    private fun separador(){
+    fun separador(){
         repeat(35){
             println()
         }
@@ -47,6 +45,28 @@ open class Juego :Mostrable,Jugable {
                 "                   act with confidence and decision and             and it's powers. A warlock's mind is an              treasures. Being assassins, experts at\n" +
                 "                   serve as brute force instruments for            arsenal of lethal secrets between divinity             wielding knives and precision weapons.\n" +
                 "                           the Traveler's will.                                   and madness.                              They tend to write their own laws.")
+    }
+
+    override fun mostrarInterfazJuego() {
+        terminal.println("                                                     ${colorBlanco("CHARACTER INTERFACE")}                                              ${colorBlanco("STAR CHART")}")
+        repeat(5){
+            println()
+        }
+        terminal.println("                                                                                       ${colorBlanco("e - Exit")}")
+    }
+
+    fun selectorSeccionJuego():Int{
+        println()
+        while (true) {
+            terminal.println(colorBlanco("                                                                                         > "))
+            val seleccion = readln().lowercase()
+            when (seleccion) {
+                "1", "c" -> return 1
+                "2", "s" -> return 2
+                "e" -> return 3
+                else -> terminal.warning("                                                                Please, answer the requested prompt correctly")
+            }
+        }
     }
 
     fun selectorClasePersonaje():Clases{
@@ -69,7 +89,7 @@ open class Juego :Mostrable,Jugable {
     override fun mostrarMenuModosJuego(){
         terminal.print(colorBlanco("                                                                             LOADING STAR CHART"))
         repeat(3){
-            Thread.sleep(1000)
+            Thread.sleep(100)
             terminal.print(colorBlanco("."))
         }
         separador()
@@ -78,7 +98,6 @@ open class Juego :Mostrable,Jugable {
         println()
         terminal.println("       ${GameModes.GAMBIT.color ("⟁ GAMBIT PRIME ⟁")}                               ${GameModes.NIGHTFALL.color ("★ GRANDMASTER NIGHTFALL ★")}                               ${GameModes.TRIALS.color ("⚔ TRIALS OF OSIRIS ⚔")}                               ${GameModes.RAIDS_DUNGEONS.color("✦ RAIDS & DUNGEONS ✦")}")
         terminal.println("                                                         ${colorBlanco("s: Save")}                                                           ${colorBlanco("e: Exit")}")
-        terminal.print(colorBlanco("                                                                                       > "))
     }
 
     fun generarPersonaje():Personaje{
@@ -178,14 +197,14 @@ open class Juego :Mostrable,Jugable {
         val gameMode:GameModes = GameModes.GAMBIT
         terminal.print(GameModes.GAMBIT.color("                                                                             TRAVELLING TO THE DRIFTER'S REALM"))
         repeat(3){
-            Thread.sleep(1000)
+            Thread.sleep(100)
             terminal.print(GameModes.GAMBIT.color("."))
         }
         println()
         var rotations = veces
         if (featured) rotations++
         repeat(rotations){
-            val probabilidadEasterEgg = Random.nextInt(1,100)
+            val probabilidadEasterEgg = Random.nextInt(1,50)
             encontrarEasterEgg(probabilidadEasterEgg)
             val itemObtenido = obtenerItem(gameMode)
             administrarItem(itemObtenido, personaje)
@@ -196,14 +215,14 @@ open class Juego :Mostrable,Jugable {
         val gameMode:GameModes = GameModes.NIGHTFALL
         terminal.print(GameModes.NIGHTFALL.color("                                                                             TRAVELLING TO THE SCARLET KEEP"))
         repeat(3){
-            Thread.sleep(1000)
+            Thread.sleep(100)
             terminal.print(GameModes.NIGHTFALL.color("."))
         }
         println()
         var rotations = veces
         if (featured) rotations++
         repeat(rotations){
-            val probabilidadEasterEgg = Random.nextInt(1,100)
+            val probabilidadEasterEgg = Random.nextInt(1,50)
             encontrarEasterEgg(probabilidadEasterEgg)
             val itemObtenido = obtenerItem(gameMode)
             administrarItem(itemObtenido, personaje)
@@ -214,14 +233,14 @@ open class Juego :Mostrable,Jugable {
         val gameMode:GameModes = GameModes.RAIDS_DUNGEONS
         terminal.print(GameModes.RAIDS_DUNGEONS.color("                                                                             TRAVELLING TO THE ROOT OF NIGHTMARES"))
         repeat(3){
-            Thread.sleep(1000)
+            Thread.sleep(100)
             terminal.print(GameModes.RAIDS_DUNGEONS.color("."))
         }
         println()
         var rotations = veces
         if (featured) rotations++
         repeat(rotations){
-            val probabilidadEasterEgg = Random.nextInt(1,100)
+            val probabilidadEasterEgg = Random.nextInt(1,50)
             encontrarEasterEgg(probabilidadEasterEgg)
             val itemObtenido = obtenerItem(gameMode)
             administrarItem(itemObtenido, personaje)
@@ -232,46 +251,76 @@ open class Juego :Mostrable,Jugable {
         val gameMode:GameModes = GameModes.TRIALS
         terminal.print(GameModes.TRIALS.color("                                                                             TRAVELLING TO THE LIGHTHOUSE"))
         repeat(3){
-            Thread.sleep(1000)
+            Thread.sleep(100)
             terminal.print(GameModes.TRIALS.color("."))
         }
         println()
         var rotations = veces
         if (featured) rotations++
         repeat(rotations){
-            val probabilidadEasterEgg = Random.nextInt(1,100)
+            val probabilidadEasterEgg = Random.nextInt(1,50)
             encontrarEasterEgg(probabilidadEasterEgg)
             val itemObtenido = obtenerItem(gameMode)
             administrarItem(itemObtenido, personaje)
         }
     }
 
-    override fun mostrarEasterEgg(huevo: List<String>) {
-        terminal.println(colorBlanco("YOU FOUND ${colorMythic(huevo[1])} ${colorMythic(huevo[5])} ${colorMythic(huevo[2])}!! WHOSE SPECIAL ABILITY IS: ${colorMythic(huevo[3])} AND DEALS ${colorMythic(huevo[4])} DAMAGE!!"))
+    override fun mostrarEasterEgg(huevo: ActionFigure) {
+        terminal.println(huevo.toString())
     }
 
     private fun encontrarEasterEgg(probabilidadEasterEgg: Int){
         if (probabilidadEasterEgg == numeroEasterEgg){
             val huevoEncontrado = File("$workingDirectory/Loot_Pool/EasterEggs.txt").useLines { it.toList() }.random().split(" ; ")
+            val huevo = ActionFigure(huevoEncontrado[1], huevoEncontrado[2], huevoEncontrado[3], huevoEncontrado[4], huevoEncontrado[5])
             terminal.warning("HEY, YOU FOUND AN EASTER EGG!!!")
-            mostrarEasterEgg(huevoEncontrado)
+            mostrarEasterEgg(huevo)
         }
     }
 
     fun administrarItem(itemObtenido:String, personaje: Personaje){
-        when(val itemObtenidoProcesado = item.procesarItem(itemObtenido)){
+        when(val itemObtenidoProcesado = Item.procesarItem(itemObtenido)){
             is Armadura -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado, personaje)) {
-                    if((item).equipable(personaje.armaduraEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, (personaje))
+                if(itemObtenidoProcesado.preguntarParaEquipar(itemObtenidoProcesado, personaje)) {
+                    if(itemObtenidoProcesado.equipable(personaje.armaduraEquipada as MutableList<Item>)) itemObtenidoProcesado.equipar(itemObtenidoProcesado, personaje)
+                    else itemObtenidoProcesado.sustituir(itemObtenidoProcesado, (personaje))
                 }
             }
             else -> {
-                if(item.preguntarParaEquipar(itemObtenidoProcesado, personaje)) {
-                    if((item).equipable(personaje.armaEquipada as MutableList<Item>)) (item).equipar(itemObtenidoProcesado, personaje)
-                    else (item).sustituir(itemObtenidoProcesado, personaje)
+                if(itemObtenidoProcesado.preguntarParaEquipar(itemObtenidoProcesado, personaje)) {
+                    if(itemObtenidoProcesado.equipable(personaje.armaEquipada as MutableList<Item>)) itemObtenidoProcesado.equipar(itemObtenidoProcesado, personaje)
+                    else itemObtenidoProcesado.sustituir(itemObtenidoProcesado, personaje)
                 }
             }
         }
     }
+
+    fun extraerArmaDeVault(personaje: Personaje){
+        mostrarVault()
+        while (true){
+            terminal.println(colorBlanco("Enter the ID of the chosen item (<ENTER> to cancel): "))
+            val input = readln()
+            when(input){
+                in "1".."${FicheroVault.useLines { it.toList() }.size}" -> {
+                    val item = FicheroVault.useLines { it.toList() }[input.toInt() - 1]
+                    administrarItem(item, personaje)
+                    break
+                }
+                "" -> break
+                else -> terminal.warning("                                                                Please, answer the requested prompt correctly")
+            }
+        }
+    }
+    fun mostrarVault(){
+        val itemsPorProcesar = FicheroVault.useLines { it.toList() }
+        var id = 1
+        itemsPorProcesar.forEach {
+            val item = Item.procesarItem(it)
+            println("$id - $item")
+            println()
+            id++
+        }
+    }
+
+
 }

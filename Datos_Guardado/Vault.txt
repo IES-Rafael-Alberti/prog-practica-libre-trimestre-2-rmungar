@@ -1,2 +1,19 @@
-
-W ; Shayura's Wrath ; Aggressive Frame ; SMG ; VOID ;Legendary
+W ; Rufus's Fury ; Rapid-Fire Frame ; Auto Rifle ; Strand ; Legendary
+W ; Word of Crota ; Precision Frame ; Hand Cannon ; Void ; Legendary
+W ; Defiance of Yasmin ; Adaptive Frame ; Sniper Rifle ; Kinetic ; Legendary
+W ; Apex Predator ; Adaptive Frame ; Rocket Launcher ; Solar ; Legendary
+W ; Oversoul Edict ; Rapid-Fire Frame ; Pulse Rifle ; Arc ; Legendary
+W ; Fatebringer ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
+W ; Cataclysmic ; Precision Frame ; Linear Fusion Rifle ; Solar ; Legendary
+W ; Sacred Provenance ; Aggressive Burst ; Pulse Fire ; Kinetic ; Legendary
+W ; Adjudicator ; Precision Frame ; SMG ; Kinetic ; Legendary
+W ; Eyasluna ; Adaptive Frame ; Hand Cannon ; Stasis ; Legendary
+W ; Lingering Dread ; Lightweight Frame ; Grenade Launcher ; Stasis ; Legendary
+W ; Necrochasm ; Cursebringer ; Auto Rifle ; Kinetic ; Exotic
+W ; Conditional Finality ; Split Decision ; Shotgun ; Stasis & Solar ; Exotic
+W ; One Thousand Voices ; Ahamkara's Eye ; Fusion Rifle ; Solar ; Exotic
+W ; Vex Mythoclast ; Timeless Mythoclast ; Fusion Rifle ; Solar ; Exotic
+W ; D.F.A. ; Adaptive Frame ; Hand Cannon ; KINETIC ; Legendary
+W ; Yesteryear ; Adaptive Frame ; Pulse Rifle ; VOID ; Legendary
+W ; The Militia's Birthright ; Lightweight Frame ; Grenade Launcher ; KINETIC ; Legendary
+W ; Fatebringer ; Adaptive Frame ; Hand Cannon ; KINETIC ; Legendary

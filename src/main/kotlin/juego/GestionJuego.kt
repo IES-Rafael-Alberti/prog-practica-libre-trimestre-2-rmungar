@@ -23,15 +23,10 @@ object GestionJuego :Juego(), Comprobable<String> {
 
     private val FicheroArmaduras = File("$workingDirectory/Datos_Guardado/Armor_Set.txt") // Fichero donde se guardan las armaduras de una partida previa
     private val FicheroArmas = File("$workingDirectory/Datos_Guardado/Weapons_Set.txt") // Fichero donde se guardan las armas de una partida previa
-    private val FicheroVault = File("$workingDirectory/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
+
     private val FicheroPersonaje = File("$workingDirectory/Datos_Guardado/Character.txt") // Fichero donde se guardan los datos del personaje de una partida previa
 
 
-    private fun separador(){
-        repeat(35){
-            println()
-        }
-    }
 
     fun comenzarJuego(){
         terminal.println((color_Blanco)("                                                                          WELCOME TO DESTINY - LITE"))
@@ -107,7 +102,7 @@ object GestionJuego :Juego(), Comprobable<String> {
 
     override fun comprobarSeleccionModoJuego(): String {
         while (true) {
-
+            terminal.print(color_Blanco("                                                                                       > "))
             var entrada: String = readln().lowercase()
             when(entrada){
                 "1","gambit","gambit prime" -> {
@@ -141,6 +136,7 @@ object GestionJuego :Juego(), Comprobable<String> {
 
 
     fun jugar(personaje: Personaje){
+        val modo = selectorSeccionJuego()
         while (true){
             var featured = false
             val focusedMode = Random.nextInt(1,4)
@@ -246,12 +242,12 @@ object GestionJuego :Juego(), Comprobable<String> {
 
 
         datosArmaduras.forEach {
-            val armaduraItem = Item().procesarItem(it)
+            val armaduraItem = Item.procesarItem(it)
             val armadura = Armadura(armaduraItem.nombre, armaduraItem.parte, armaduraItem.rareza, armaduraItem.rarity)
             personaje.armaduraEquipada.add(armadura)
         }
         datosArmas.forEach {
-            val armaItem = Item().procesarItem(it)
+            val armaItem = Item.procesarItem(it)
             val arma = Arma(armaItem.nombre, armaItem.arquetipo, armaItem.tipoArma, armaItem.elemento, armaItem.rareza, armaItem.rarity, armaItem.colorElemento)
             personaje.armaEquipada.add(arma)
         }
@@ -259,19 +255,21 @@ object GestionJuego :Juego(), Comprobable<String> {
     }
 
     private fun generarNuevoJuego(){
-        FicheroArmaduras.writeText("")
-        FicheroArmas.writeText("")
-        FicheroPersonaje.writeText("")
+        FicheroArmaduras.delete()
+        FicheroArmas.delete()
+        FicheroPersonaje.delete()
+        FicheroArmaduras.createNewFile()
+        FicheroPersonaje.createNewFile()
+        FicheroArmas.createNewFile()
     }
 
     private fun guardarDatos(personaje: Personaje){
-        FicheroArmas.writeText("")
-        FicheroArmaduras.writeText("")
-        FicheroPersonaje.writeText("")
         personaje.armaEquipada.forEach {
+            if (it == personaje.armaEquipada[0]) FicheroArmas.writeText("W ; ${it.nombre} ; ${it.arquetipo} ; ${it.tipoArma} ; ${it.elemento} ; ${it.rareza}")
             FicheroArmas.appendText("\nW ; ${it.nombre} ; ${it.arquetipo} ; ${it.tipoArma} ; ${it.elemento} ; ${it.rareza}")
         }
         personaje.armaduraEquipada.forEach {
+            if (it == personaje.armaduraEquipada[0]) FicheroArmas.writeText("A ; ${it.nombre} ; ${it.arquetipo} ; ${it.tipoArma} ; ${it.elemento} ; ${it.rareza}")
             FicheroArmaduras.appendText("\nA ; ${it.nombre} ; ${it.parte} ; ${it.rareza}")
         }
 

@@ -41,15 +41,14 @@ interface Mostrable{
 
     fun mostrarInformacionRazas()
 
+    fun mostrarInterfazJuego()
+
     fun mostrarMenuModosJuego()
 
-    fun mostrarEasterEgg(huevo:List<String>)
+    fun mostrarEasterEgg(huevo: ActionFigure)
 
 }
 
-interface Informable{
-    fun mostrarInformacion(item: Item)
-}
 
 interface Jugable{
     fun jugarGambito(personaje: Personaje, featured:Boolean)

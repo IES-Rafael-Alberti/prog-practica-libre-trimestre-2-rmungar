@@ -1,7 +1,9 @@
 package org.practicatrim2
 
+import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.animaciones.AnimationManager
+import org.practicatrim2.items.Armadura
 import org.practicatrim2.juego.GestionJuego
 import org.practicatrim2.juego.Juego
 
@@ -22,19 +24,19 @@ fun String.capitalizar():String{
 }
 
 fun main() {
-    val workingDirectory = System.getProperty("user.dir")
-    val terminal = Terminal()
+
+    //val arm = Armadura("Kentarck", "Helmet", "Legendary",TextColors.brightWhite)
+//
+//
+    //try {
+    //    val gestor = GestionJuego
+//
+    //    gestor.comenzarJuego()
+    //}
+    //catch (e:Exception){
+    //    println(e.message)
+    //}
     val juego = Juego()
-    val gestor = GestionJuego
-    try {
-        gestor.comenzarJuego()
-    }
-    catch (e:Exception){
-        println(e.message)
-    }
-
-    val manager = AnimationManager
-    //terminal.println(TextColors.rgb("#da86e3")("                                                                       CHOOSE A CLASS FOR YOUR CHARACTER"))
-    //juego.mostrarMenuModosJuego()
-
+    juego.mostrarInterfazJuego()
+    juego.selectorSeccionJuego()
 }

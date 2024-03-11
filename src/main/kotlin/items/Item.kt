@@ -4,6 +4,7 @@ import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.rendering.TextColors.*
 import com.github.ajalt.mordant.rendering.TextStyle
 import com.github.ajalt.mordant.terminal.Terminal
+import org.practicatrim2.juego.GestionJuego
 import org.practicatrim2.personajes.Personaje
 import java.io.File
 
@@ -15,7 +16,7 @@ interface GestorItem{       //DIP --> SOLID
     fun obtenerRareza(itemAprocesar: List<String>): TextStyle
 }
 
-open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item>, Informable {
+open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> {
     open var nombre: String = ""
     open var parte: String = ""
     open var rareza: String = ""
@@ -27,43 +28,45 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
     private val terminal = Terminal()
 
 
-    override fun procesarItem(item: String): Item {
-        val itemAprocesar = item.split(" ; ")
-        val itemProcesado = clasificarItem(itemAprocesar)
-        return itemProcesado
-    }
+   companion object:GestorItem{
+       override fun procesarItem(item: String): Item {
+           val itemAprocesar = item.split(" ; ")
+           val itemProcesado = clasificarItem(itemAprocesar)
+           return itemProcesado
+       }
 
-    override fun clasificarItem(itemAprocesar: List<String>) : Item {
-        if (itemAprocesar[0] == "W") {
-            val elemento = obtenerElemento(itemAprocesar).first // Elemento del arma
-            val colorElemento = obtenerElemento(itemAprocesar).second
-            val rarity = obtenerRareza(itemAprocesar) // Patrón de color para la terminal de acuerdo a la rareza del arma
-            val weapon = Arma(itemAprocesar[1], itemAprocesar[2], itemAprocesar[3], elemento, itemAprocesar[5], rarity, colorElemento)
-            return weapon
-        }
-        else{
-            val rarity = obtenerRareza(itemAprocesar) // Patrón de color para la terminal de acuerdo a la rareza del arma
-            val armor = Armadura(itemAprocesar[1], itemAprocesar[2], itemAprocesar[3], rarity)
-            return armor
-        }
-    }
+       override fun clasificarItem(itemAprocesar: List<String>) : Item {
+           if (itemAprocesar[0] == "W") {
+               val elemento = obtenerElemento(itemAprocesar).first // Elemento del arma
+               val colorElemento = obtenerElemento(itemAprocesar).second
+               val rarity = obtenerRareza(itemAprocesar) // Patrón de color para la terminal de acuerdo a la rareza del arma
+               val weapon = Arma(itemAprocesar[1], itemAprocesar[2], itemAprocesar[3], elemento, itemAprocesar[5], rarity, colorElemento)
+               return weapon
+           }
+           else{
+               val rarity = obtenerRareza(itemAprocesar) // Patrón de color para la terminal de acuerdo a la rareza del arma
+               val armor = Armadura(itemAprocesar[1], itemAprocesar[2], itemAprocesar[3], rarity)
+               return armor
+           }
+       }
 
-    override fun obtenerElemento(itemAprocesar: List<String>): Pair<Elementos,TextStyle> {
-        when (itemAprocesar[4]) {
-            "Void" -> return Pair(Elementos.VOID, TextColors.rgb("#9500ff"))
-            "Solar" -> return Pair(Elementos.SOLAR, brightRed)
-            "Arc" -> return Pair(Elementos.ARC, brightCyan)
-            "Strand" -> return Pair(Elementos.STRAND, green)
-            "Stasis" -> return Pair(Elementos.STASIS, blue)
-        }
-        return Pair(Elementos.KINETIC, brightWhite)
-    }
-    override fun obtenerRareza(itemAprocesar: List<String>):TextStyle{
-        when(itemAprocesar[itemAprocesar.size - 1]){
-            "Exotic" -> return TextColors.rgb("#bf8506")
-        }
-        return TextColors.rgb("#9500ff")
-    }
+       override fun obtenerElemento(itemAprocesar: List<String>): Pair<Elementos,TextStyle> {
+           when (itemAprocesar[4]) {
+               "Void" -> return Pair(Elementos.VOID, TextColors.rgb("#9500ff"))
+               "Solar" -> return Pair(Elementos.SOLAR, brightRed)
+               "Arc" -> return Pair(Elementos.ARC, brightCyan)
+               "Strand" -> return Pair(Elementos.STRAND, green)
+               "Stasis" -> return Pair(Elementos.STASIS, blue)
+           }
+           return Pair(Elementos.KINETIC, brightWhite)
+       }
+       override fun obtenerRareza(itemAprocesar: List<String>):TextStyle{
+           when(itemAprocesar[itemAprocesar.size - 1]){
+               "Exotic" -> return TextColors.rgb("#bf8506")
+           }
+           return TextColors.rgb("#9500ff")
+       }
+   }
 
     override fun equipable(itemsEquipados: MutableList<Item>): Boolean {
         if (itemsEquipados.isNotEmpty()){
@@ -90,17 +93,28 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
     }
 
     override fun guardar(item: Item) {
+        val ficheroVault = File("${GestionJuego.workingDirectory}/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
         when(item){
             is Armadura -> {
-                val workingDirectory = System.getProperty("user.dir")
-                val armaduraFormateada = "\nA ; ${item.nombre} ; ${item.parte} ; ${item.rareza}"
-                File("$workingDirectory/Datos_Guardado/Vault.txt").appendText(armaduraFormateada, Charsets.UTF_8)
+                if (ficheroVault.useLines { it.toList() }.isEmpty()){
+                    val armaduraFormateada = "A ; ${item.nombre} ; ${item.parte} ; ${item.rareza}"
+                    ficheroVault.appendText(armaduraFormateada)
+                }
+                else {
+                    val armaduraFormateada = "\nA ; ${item.nombre} ; ${item.parte} ; ${item.rareza}"
+                    ficheroVault.appendText(armaduraFormateada)
+                }
                 terminal.println(brightGreen("${item.rarity(item.nombre)} stored successfully"))
             }
             else -> {
-                val workingDirectory = System.getProperty("user.dir")
-                val armaFormateada = "\nW ; ${item.nombre} ; ${item.arquetipo} ; ${item.tipoArma} ; ${item.elemento} ;${item.rareza}"
-                File("$workingDirectory/Datos_Guardado/Vault.txt").appendText(armaFormateada)
+                if (ficheroVault.useLines { it.toList() }.isEmpty()){
+                    val armaFormateada = "W ; ${item.nombre} ; ${item.arquetipo} ; ${item.tipoArma} ; ${item.elemento} ; ${item.rareza}"
+                    ficheroVault.appendText(armaFormateada)
+                }
+                else{
+                    val armaFormateada = "\nW ; ${item.nombre} ; ${item.arquetipo} ; ${item.tipoArma} ; ${item.elemento} ; ${item.rareza}"
+                    ficheroVault.appendText(armaFormateada)
+                }
                 terminal.println(brightGreen("${item.rarity(item.nombre)} stored successfully"))
             }
         }
@@ -135,7 +149,10 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                             equipar(item, personaje)
                             break
                         }
-                        "n", "no" -> return false
+                        "n", "no" -> {
+                            terminal.println(brightRed("Item sent to the DCV, rest in peace"))
+                            return false
+                        }
                         else -> terminal.warning("Please, answer the requested prompt correctly")
                     }
                 }
@@ -144,8 +161,7 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                     val respuesta = readln().lowercase()
                     when (respuesta) {
                         "y", "yes" -> {
-                            equipar(item, personaje)
-                            break
+                            return true
                         }
                         "n", "no" -> return false
                         else -> terminal.warning("Please, answer the requested prompt correctly")
@@ -153,7 +169,7 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                 }
             }
         }
-        return true
+       return false
     }
 
     override fun equipar(item: Item, personaje: Personaje) {
@@ -205,34 +221,36 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                 while (!seleccionValida1) {
                     println("Exchange weapon? (y / n)")
                     val decision = readln().lowercase() // String para obtener la respuesta del usuario
+                    var slotArma = 0
                     when (decision) {
                         "y", "yes" -> {
+                            //personaje.armaEquipada.forEach {
+                            //    mostrarInformacion(personaje.armaEquipada[slotArma])
+                            //    slotArma++
+                            //}
                             personaje.armaEquipada.forEach {
-                                mostrarInformacion(it)
+                                println(it)
                             }
                             while (!seleccionValida2){
                                 terminal.println(brightWhite("Select a weapon slot :"))
                                 val slot = readln()
-                                when(slot.toInt()-1){
-                                    1 -> {
+                                when(slot){
+                                    "1" -> {
                                         val armaAguardar = personaje.armaEquipada[0]
-                                        personaje.armaEquipada.remove(armaAguardar)
                                         personaje.armaEquipada[0] = item as Arma
                                         preguntarParaGuardar(armaAguardar)
                                         seleccionValida2 = true
                                         seleccionValida1 = true
                                     }
-                                    2 -> {
+                                    "2" -> {
                                         val armaAguardar = personaje.armaEquipada[1]
-                                        personaje.armaEquipada.remove(armaAguardar)
                                         personaje.armaEquipada[1] = item as Arma
                                         preguntarParaGuardar(armaAguardar)
                                         seleccionValida2 = true
                                         seleccionValida1 = true
                                     }
-                                    3 -> {
+                                    "3" -> {
                                         val armaAguardar = personaje.armaEquipada[2]
-                                        personaje.armaEquipada.remove(armaAguardar)
                                         personaje.armaEquipada[2] = item as Arma
                                         preguntarParaGuardar(armaAguardar)
                                         seleccionValida2 = true
@@ -253,13 +271,6 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
                     }
                 }
             }
-        }
-    }
-
-    override fun mostrarInformacion(item: Item) {
-        when (item){
-            is Armadura -> terminal.println("${rarity(nombre)} -- ${rarity(rareza)} $parte")
-            else -> terminal.println("${rarity(nombre)} -- ${colorElemento(elemento.desc)} -- ${rarity(rareza)} $tipoArma \n -------------- $arquetipo")
         }
     }
 }
