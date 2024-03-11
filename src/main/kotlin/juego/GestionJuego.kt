@@ -136,35 +136,56 @@ object GestionJuego :Juego(), Comprobable<String> {
 
 
     fun jugar(personaje: Personaje){
-        val modo = selectorSeccionJuego()
-        while (true){
+        while (true) {
+            val modoPrincipal = selectorSeccionJuego()
+            if (modoPrincipal == 1) {
+                while (true) {
+                    TODO("HACER LA INTERFAZ DEL PERSONAJE")
+                }
+            }
+            else if (modoPrincipal == 2) {
+                jugarModo2(personaje)
+            }
+
+            else {
+                break
+            }
+        }
+    }
+
+    fun jugarModo2(personaje: Personaje){
+        while (true) {
             var featured = false
-            val focusedMode = Random.nextInt(1,4)
-            mostrarMenuModosJuego()
-            val modo = comprobarSeleccionModoJuego()
-            when (modo){
+            val focusedMode = Random.nextInt(1, 4)
+            GestionJuego.mostrarMenuModosJuego()
+            val modo = GestionJuego.comprobarSeleccionModoJuego()
+            when (modo) {
                 "Gambit" -> {
                     if (focusedMode == 1) featured = true
-                    jugarGambito(personaje, featured)
+                    GestionJuego.jugarGambito(personaje, featured)
                 }
+
                 "Nightfall" -> {
                     if (focusedMode == 2) featured = true
-                    jugarOcaso(personaje, featured)
+                    GestionJuego.jugarOcaso(personaje, featured)
                 }
+
                 "Raids_Dungeons" -> {
                     if (focusedMode == 3) featured = true
-                    jugarRyD(personaje, featured)
+                    GestionJuego.jugarRyD(personaje, featured)
                 }
+
                 "Trials" -> {
                     if (focusedMode == 4) featured = true
-                    jugarTrials(personaje, featured)
+                    GestionJuego.jugarTrials(personaje, featured)
                 }
+
                 "Save" -> {
                     guardarDatos(personaje)
                 }
+
                 "Exit" -> break
             }
-        }
     }
 
 
