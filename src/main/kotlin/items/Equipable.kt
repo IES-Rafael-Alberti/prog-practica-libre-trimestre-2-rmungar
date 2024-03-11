@@ -25,6 +25,7 @@ interface Comprobable<T> {
     fun comprobarDatosPrevios():Boolean
 
     fun comprobarDatosArmaduras():Boolean
+    fun comprobarDatosPersonaje():Boolean
 
     fun comprobarDatosArmas():Boolean
 

@@ -175,7 +175,8 @@ object GestionJuego :Juego(), Comprobable<String> {
     override fun comprobarDatosPrevios():Boolean{
         val datosArmaduras = comprobarDatosArmaduras()
         val datosArmas = comprobarDatosArmas()
-        if (!datosArmaduras && !datosArmas) {
+        val datosPersonaje = comprobarDatosPersonaje()
+        if (!datosArmaduras && !datosArmas && !datosPersonaje) {
             while (true) {
                 terminal.print(color_Rojo("                                                         It seems you have saved data, would you like to overwrite it? (y / n): ")) // Entrada del usuario que indica lo que desea hacer
                 val decision = readln().lowercase()
@@ -216,7 +217,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                 }
 
                 "n", "no" -> {
-                    return false
+                   acabarJuego()
                 }
             }
         }
@@ -230,6 +231,11 @@ object GestionJuego :Juego(), Comprobable<String> {
     override fun comprobarDatosArmas(): Boolean{
         val datosArmas = FicheroArmas.useLines { it.toList() }
         return datosArmas.isEmpty()
+    }
+
+    override fun comprobarDatosPersonaje(): Boolean {
+        val datosPersonaje = FicheroPersonaje.useLines { it.toList() }
+        return datosPersonaje.isEmpty()
     }
 
     private fun cargarDatos():Personaje {

@@ -69,14 +69,14 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
         if (itemsEquipados.isNotEmpty()){
             when(itemsEquipados[0]){
                 is Armadura -> {
-                    if (itemsEquipados.size == 5){
+                    if (itemsEquipados.size >= 5){
                         terminal.warning("You already have 5 armor items equipped")
                         return false
                     }
                     return true
                 }
                 else -> {
-                    if(itemsEquipados.size == 3){
+                    if(itemsEquipados.size >= 3){
                         terminal.warning("You already have 3 weapons equipped")
                         return false
                     }
@@ -201,63 +201,56 @@ open class Item:GestorItem, Equipable<Item>, Sustituible<Item, Personaje>, Guard
             else -> {
                 var seleccionValida1 = false // Booleano para abrir y cerrar el primer bucle while, indica si el usuario ha ingresado una entrada válida
                 var seleccionValida2 = false // Booleano para abrir y cerrar el segundo bucle while, indica si el usuario ha ingresado una entrada válida
-                if (personaje.armaEquipada.size == 3) {
-                    while (!seleccionValida1) {
-                        println("Exchange weapon? (y / n)")
-                        val decision = readln().lowercase() // String para obtener la respuesta del usuario
-                        var cont = 1 // Entero para mostrar por pantalla
-                        when (decision) {
-                            "y", "yes" -> {
-                                personaje.armaEquipada.forEach {
-                                    println("$cont - ")
-                                    mostrarInformacion(it)
-                                    cont++
-                                }
-                                while (!seleccionValida2){
-                                    terminal.println(brightWhite("Select a weapon slot :"))
-                                    val slot = readln()
-                                    when(slot.toInt()-1){
-                                        1 -> {
-                                            val armaAguardar = personaje.armaEquipada[0]
-                                            personaje.armaEquipada.remove(armaAguardar)
-                                            personaje.armaEquipada[0] = item as Arma
-                                            preguntarParaGuardar(armaAguardar)
-                                            seleccionValida2 = true
-                                            seleccionValida1 = true
-                                        }
-                                        2 -> {
-                                            val armaAguardar = personaje.armaEquipada[1]
-                                            personaje.armaEquipada.remove(armaAguardar)
-                                            personaje.armaEquipada[1] = item as Arma
-                                            preguntarParaGuardar(armaAguardar)
-                                            seleccionValida2 = true
-                                            seleccionValida1 = true
-                                        }
-                                        3 -> {
-                                            val armaAguardar = personaje.armaEquipada[2]
-                                            personaje.armaEquipada.remove(armaAguardar)
-                                            personaje.armaEquipada[2] = item as Arma
-                                            preguntarParaGuardar(armaAguardar)
-                                            seleccionValida2 = true
-                                            seleccionValida1 = true
-                                        }
-                                        else -> {
-                                            terminal.warning("Please, answer the requested prompt correctly")
-                                        }
+
+                while (!seleccionValida1) {
+                    println("Exchange weapon? (y / n)")
+                    val decision = readln().lowercase() // String para obtener la respuesta del usuario
+                    when (decision) {
+                        "y", "yes" -> {
+                            personaje.armaEquipada.forEach {
+                                mostrarInformacion(it)
+                            }
+                            while (!seleccionValida2){
+                                terminal.println(brightWhite("Select a weapon slot :"))
+                                val slot = readln()
+                                when(slot.toInt()-1){
+                                    1 -> {
+                                        val armaAguardar = personaje.armaEquipada[0]
+                                        personaje.armaEquipada.remove(armaAguardar)
+                                        personaje.armaEquipada[0] = item as Arma
+                                        preguntarParaGuardar(armaAguardar)
+                                        seleccionValida2 = true
+                                        seleccionValida1 = true
+                                    }
+                                    2 -> {
+                                        val armaAguardar = personaje.armaEquipada[1]
+                                        personaje.armaEquipada.remove(armaAguardar)
+                                        personaje.armaEquipada[1] = item as Arma
+                                        preguntarParaGuardar(armaAguardar)
+                                        seleccionValida2 = true
+                                        seleccionValida1 = true
+                                    }
+                                    3 -> {
+                                        val armaAguardar = personaje.armaEquipada[2]
+                                        personaje.armaEquipada.remove(armaAguardar)
+                                        personaje.armaEquipada[2] = item as Arma
+                                        preguntarParaGuardar(armaAguardar)
+                                        seleccionValida2 = true
+                                        seleccionValida1 = true
+                                    }
+                                    else -> {
+                                        terminal.warning("Please, answer the requested prompt correctly")
                                     }
                                 }
                             }
-                            "n", "no" -> {
-                                preguntarParaGuardar(item)
-                                seleccionValida2 = true
-                                seleccionValida1 = true
-                            }
-                            else -> terminal.warning("Please, answer the requested prompt correctly")
                         }
+                        "n", "no" -> {
+                            preguntarParaGuardar(item)
+                            seleccionValida2 = true
+                            seleccionValida1 = true
+                        }
+                        else -> terminal.warning("Please, answer the requested prompt correctly")
                     }
-                }
-                else{
-                    personaje.armaEquipada.add(item as Arma)
                 }
             }
         }
