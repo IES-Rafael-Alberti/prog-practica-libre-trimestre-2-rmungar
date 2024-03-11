@@ -186,6 +186,7 @@ object GestionJuego :Juego(), Comprobable<String> {
 
                 "Exit" -> break
             }
+        }
     }
 
 
