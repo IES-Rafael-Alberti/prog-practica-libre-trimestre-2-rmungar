@@ -58,7 +58,7 @@ open class Juego :Mostrable,Jugable {
     fun selectorSeccionJuego():Int{
         println()
         while (true) {
-            terminal.println(colorBlanco("                                                                                         > "))
+            terminal.print(colorBlanco("                                                                                         > "))
             val seleccion = readln().lowercase()
             when (seleccion) {
                 "1", "c" -> return 1
@@ -69,7 +69,7 @@ open class Juego :Mostrable,Jugable {
         }
     }
 
-    fun selectorClasePersonaje():Clases{
+    private fun selectorClasePersonaje():Clases{
         while (true) {
             println()
             terminal.print(colorBlanco("                                                            Enter the class you wish to create a character of: "))
@@ -107,7 +107,7 @@ open class Juego :Mostrable,Jugable {
         val personaje = crearPersonaje(clase)
         return personaje
     }
-    fun crearPersonaje(clase: Clases):Personaje{
+    private fun crearPersonaje(clase: Clases):Personaje{
         val nombre = pedirNombrePersonaje()
         val genero = pedirGeneroPersonaje()
         val raza = selectorRazaPersonaje()

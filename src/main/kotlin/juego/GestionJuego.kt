@@ -137,20 +137,36 @@ object GestionJuego :Juego(), Comprobable<String> {
 
     fun jugar(personaje: Personaje){
         while (true) {
+            mostrarInterfazJuego()
             val modoPrincipal = selectorSeccionJuego()
             if (modoPrincipal == 1) {
                 while (true) {
-                    TODO("HACER LA INTERFAZ DEL PERSONAJE")
+                    interfazPersonaje(personaje)
                 }
             }
             else if (modoPrincipal == 2) {
                 jugarModo2(personaje)
             }
-
             else {
                 break
             }
         }
+    }
+
+    fun interfazPersonaje(personaje: Personaje){
+        terminal.print(color_Blanco("Loading Character details"))
+        repeat(3){
+            print(".")
+            Thread.sleep(100)
+        }
+        println()
+        terminal.println(color_Blanco("Character Details"))
+        var posicion = 0
+        personaje.armaduraEquipada.forEach {
+            terminal.println("$it                                                                                 ${personaje.armaEquipada[posicion].rarity("${personaje.armaEquipada[posicion].nombre} -- ${personaje.armaEquipada[0].tipoArma}")}")
+            posicion++
+        }
+
     }
 
     fun jugarModo2(personaje: Personaje){
