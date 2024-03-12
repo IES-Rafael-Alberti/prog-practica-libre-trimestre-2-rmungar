@@ -23,7 +23,7 @@ open class Juego : Jugable {
         println()
         while (true) {
             GestorConsola.marcadorEntradaTexto()
-            val seleccion = readln().lowercase()
+            val seleccion = GestorEntrada.pedirEntradaDeSeccionDeJuego()
             when (seleccion) {
                 "1", "c" -> return 1
                 "2", "s" -> return 2
@@ -37,7 +37,7 @@ open class Juego : Jugable {
         while (true) {
             println()
             GestorConsola.mostrarTextoSeleccionClase()
-            val claseAcrear = readln().uppercase()
+            val claseAcrear = GestorEntrada.pedirClaseDePersonaje()
             when(claseAcrear){
                 "TITAN" -> return Clases.TITAN
 
@@ -50,7 +50,6 @@ open class Juego : Jugable {
         }
     }
 
-
     fun generarPersonaje():Personaje{
         GestorConsola.mostrarClasePersonaje()
         GestorConsola.mostrarInformacionClases()
@@ -58,6 +57,7 @@ open class Juego : Jugable {
         val personaje = crearPersonaje(clase)
         return personaje
     }
+
     private fun crearPersonaje(clase: Clases):Personaje{
         val nombre = pedirNombrePersonaje()
         val genero = pedirGeneroPersonaje()
@@ -80,11 +80,11 @@ open class Juego : Jugable {
     private fun pedirNombrePersonaje():String{
         GestorConsola.separador()
         GestorConsola.mostrarEntradaDeNombre()
-        var nombre = readln() //Cadena para el nombre del personaje
+        var nombre = GestorEntrada.pedirNombreDePersonaje() //Cadena para el nombre del personaje
         while (nombre == "" || nombre.isEmpty() || nombre.isBlank()){
             GestorConsola.mostrarEntradaIncorrecta()
             GestorConsola.mostrarEntradaDeNombre()
-            nombre = readln().capitalizar()
+            nombre = GestorEntrada.pedirNombreDePersonaje()
         }
         return nombre
     }
@@ -93,10 +93,10 @@ open class Juego : Jugable {
         println()
         while(true) {
         GestorConsola.mostrarEntradaDeGenero()
-            val genero = readln().capitalizar()
+            val genero = pedirGeneroPersonaje()
             when(genero){
-                "Male" -> return "Male"
-                "Female" -> return "Female"
+                "Male","M" -> return "Male"
+                "Female","F" -> return "Female"
                 else -> GestorConsola.mostrarEntradaIncorrecta()
             }
         }
@@ -108,13 +108,13 @@ open class Juego : Jugable {
         while (true) {
             println()
             GestorConsola.mostrarTextoSeleccionRaza()
-            val razaAcrear = readln().uppercase() //Cadena ingresada por el usuario a comprobar
+            val razaAcrear = GestorEntrada.pedirRazaDePersoanje()
             when (razaAcrear) {
-                "HUMAN" -> return Razas.HUMAN
+                "HUMAN","H" -> return Razas.HUMAN
 
-                "AWOKEN" -> return Razas.AWOKEN
+                "AWOKEN","A" -> return Razas.AWOKEN
 
-                "EXO" -> return Razas.EXO
+                "EXO","E" -> return Razas.EXO
 
                 else -> GestorConsola.mostrarEntradaIncorrecta()
             }
@@ -223,4 +223,5 @@ open class Juego : Jugable {
             }
         }
     }
+
 }

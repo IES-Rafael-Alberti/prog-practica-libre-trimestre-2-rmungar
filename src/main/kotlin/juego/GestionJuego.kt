@@ -15,13 +15,9 @@ import kotlin.random.Random
 
 object GestionJuego :Juego(), Comprobable<String> {
 
-    private val color_Blanco = TextColors.brightWhite // Variable del color blanco
-    private val color_Rojo = TextColors.brightRed // Variable del color rojo
-    private val color_Amarillo = TextColors.brightYellow // Variable del color amarillo
 
     private val FicheroArmaduras = File("$workingDirectory/Datos_Guardado/Armor_Set.txt") // Fichero donde se guardan las armaduras de una partida previa
     private val FicheroArmas = File("$workingDirectory/Datos_Guardado/Weapons_Set.txt") // Fichero donde se guardan las armas de una partida previa
-
     private val FicheroPersonaje = File("$workingDirectory/Datos_Guardado/Character.txt") // Fichero donde se guardan los datos del personaje de una partida previa
 
 
@@ -48,10 +44,10 @@ object GestionJuego :Juego(), Comprobable<String> {
     private fun ejecutarAccionInicial(): Boolean{
         println()
         GestorConsola.mostrarEntradaDeAccionInicial()
-        var accion = readln()
+        var accion = GestorEntrada.pedirEntradaInicial()
         while(comprobarAccion(accion) !in 1..3){
             GestorConsola.mostrarEntradaDeAccionInicial()
-            accion = readln()
+            accion = GestorEntrada.pedirEntradaInicial()
         }
         when(accion){
             "1" -> {
@@ -95,7 +91,7 @@ object GestionJuego :Juego(), Comprobable<String> {
     override fun comprobarSeleccionModoJuego(): String {
         while (true) {
             GestorConsola.marcadorEntradaTexto()
-            var entrada: String = readln().lowercase()
+            var entrada: String = GestorEntrada.pedirEntradaDeModoDeJuego()
             when(entrada){
                 "1","gambit","gambit prime" -> {
                     entrada = "Gambit"
