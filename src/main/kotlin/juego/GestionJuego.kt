@@ -1,8 +1,6 @@
 package org.practicatrim2.juego
 
-import com.github.ajalt.mordant.rendering.TextColors
-import com.github.ajalt.mordant.terminal.Terminal
-import org.practicatrim2.animaciones.AnimationManager
+
 import org.practicatrim2.items.Arma
 import org.practicatrim2.items.Armadura
 import org.practicatrim2.items.Item

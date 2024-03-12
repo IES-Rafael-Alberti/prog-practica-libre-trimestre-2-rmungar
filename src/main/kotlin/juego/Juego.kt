@@ -1,8 +1,5 @@
 package org.practicatrim2.juego
 
-import com.github.ajalt.mordant.rendering.TextColors
-import com.github.ajalt.mordant.terminal.Terminal
-import org.practicatrim2.capitalizar
 import org.practicatrim2.items.*
 import org.practicatrim2.modosDeJuego.GameModes
 import org.practicatrim2.personajes.*
