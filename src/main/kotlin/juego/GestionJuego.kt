@@ -5,7 +5,6 @@ import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.animaciones.AnimationManager
 import org.practicatrim2.items.Arma
 import org.practicatrim2.items.Armadura
-import org.practicatrim2.items.Comprobable
 import org.practicatrim2.items.Item
 import org.practicatrim2.personajes.Hunter
 import org.practicatrim2.personajes.Personaje
@@ -15,7 +14,6 @@ import java.io.File
 import kotlin.random.Random
 
 object GestionJuego :Juego(), Comprobable<String> {
-    private val terminal = Terminal() //Variable apra el uso de Mordant
 
     private val color_Blanco = TextColors.brightWhite // Variable del color blanco
     private val color_Rojo = TextColors.brightRed // Variable del color rojo
@@ -29,8 +27,8 @@ object GestionJuego :Juego(), Comprobable<String> {
 
 
     fun comenzarJuego(){
-        terminal.println((color_Blanco)("                                                                          WELCOME TO DESTINY - LITE"))
-        menuInicio()
+        GestorConsola.bienvenida()
+        GestorConsola.mostrarMenuInicio()
         val datosExistentes = ejecutarAccionInicial()
         if (datosExistentes) {
             val personaje = cargarDatos()
@@ -46,19 +44,13 @@ object GestionJuego :Juego(), Comprobable<String> {
         }
 
     }
-    private fun menuInicio(){
-        println()
-        terminal.println(color_Amarillo("                                                                                    1 - New Game"))
-        terminal.println(colorVerde("                                                                                    2 - Continue Game"))
-        terminal.println(color_Rojo("                                                                                    3 - Exit Game"))
-    }
 
     private fun ejecutarAccionInicial(): Boolean{
         println()
-        terminal.print(color_Blanco("                                                                        What are you going to do today? :"))
+        GestorConsola.mostrarEntradaDeAccionInicial()
         var accion = readln()
         while(comprobarAccion(accion) !in 1..3){
-            terminal.print(color_Blanco("                                                                         What are you going to do today? :"))
+            GestorConsola.mostrarEntradaDeAccionInicial()
             accion = readln()
         }
         when(accion){
@@ -94,7 +86,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                 return 3
             }
             else -> {
-                terminal.warning("                                                                      Please, answer the requested prompt correctly")
+                GestorConsola.mostrarEntradaIncorrecta()
                 return 4
             }
         }
@@ -102,7 +94,7 @@ object GestionJuego :Juego(), Comprobable<String> {
 
     override fun comprobarSeleccionModoJuego(): String {
         while (true) {
-            terminal.print(color_Blanco("                                                                                       > "))
+            GestorConsola.marcadorEntradaTexto()
             var entrada: String = readln().lowercase()
             when(entrada){
                 "1","gambit","gambit prime" -> {
@@ -129,7 +121,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                     entrada = "Exit"
                     return entrada
                 }
-                else -> terminal.warning("                                                                      Please, answer the requested prompt correctly")
+                else -> GestorConsola.mostrarEntradaIncorrecta()
             }
         }
     }
@@ -137,11 +129,11 @@ object GestionJuego :Juego(), Comprobable<String> {
 
     fun jugar(personaje: Personaje){
         while (true) {
-            mostrarInterfazJuego()
+            GestorConsola.mostrarInterfazJuego()
             val modoPrincipal = selectorSeccionJuego()
             if (modoPrincipal == 1) {
                 while (true) {
-                    interfazPersonaje(personaje)
+                    GestorConsola.mostrarInterfazPersonaje(personaje)
                 }
             }
             else if (modoPrincipal == 2) {
@@ -153,28 +145,13 @@ object GestionJuego :Juego(), Comprobable<String> {
         }
     }
 
-    fun interfazPersonaje(personaje: Personaje){
-        terminal.print(color_Blanco("Loading Character details"))
-        repeat(3){
-            print(".")
-            Thread.sleep(100)
-        }
-        println()
-        terminal.println(color_Blanco("Character Details"))
-        var posicion = 0
-        personaje.armaduraEquipada.forEach {
-            terminal.println("$it                                                                                 ${personaje.armaEquipada[posicion].rarity("${personaje.armaEquipada[posicion].nombre} -- ${personaje.armaEquipada[0].tipoArma}")}")
-            posicion++
-        }
-
-    }
 
     fun jugarModo2(personaje: Personaje){
         while (true) {
             var featured = false
             val focusedMode = Random.nextInt(1, 4)
-            GestionJuego.mostrarMenuModosJuego()
-            val modo = GestionJuego.comprobarSeleccionModoJuego()
+            GestorConsola.mostrarMenuModosJuego()
+            val modo = comprobarSeleccionModoJuego()
             when (modo) {
                 "Gambit" -> {
                     if (focusedMode == 1) featured = true
@@ -212,41 +189,37 @@ object GestionJuego :Juego(), Comprobable<String> {
         val datosPersonaje = comprobarDatosPersonaje()
         if (!datosArmaduras && !datosArmas && !datosPersonaje) {
             while (true) {
-                terminal.print(color_Rojo("                                                         It seems you have saved data, would you like to overwrite it? (y / n): ")) // Entrada del usuario que indica lo que desea hacer
+
                 val decision = readln().lowercase()
                 when (decision) {
                     "y", "yes" -> {
-                        separador()
-                        terminal.println((color_Rojo)("                                                                                  OVERWRITING DATA"))
-                        val animacion = AnimationManager.animacionCargando()
-                        println()
-                        terminal.println((colorVerde)("                                                                                  DATA OVERWRITTEN"))
+                        GestorConsola.separador()
+                        GestorConsola.sobreescribiendoDatos()
+                        GestorConsola.datosSobreescritos()
                         generarNuevoJuego()
                         return true
                     }
 
                     "n", "no" -> {
-                        separador()
-                        terminal.println((colorVerde)("                                                                                   LOADING GAME...."))
-                        val animacion = AnimationManager.animacionCargando()
-                        println()
+                        GestorConsola.separador()
+                        GestorConsola.cargandoDatos()
                         cargarDatos()
                         return true
                     }
                     else -> {
-                        terminal.warning("                                                                      Please, answer the requested prompt correctly")
+                       GestorConsola.mostrarEntradaIncorrecta()
                     }
                 }
             }
         }
         else {
-            terminal.print(color_Rojo("                                                         It seems there isn't saved data, would you like to start a new game? (y / n): "))
+            GestorConsola.mostrarNoExistenciaDatosPrevios()
             val decision = readln().lowercase()// Entrada del usuario que indica lo que desea hacer
             when (decision) {
                 "y", "yes" -> {
                     generarNuevoJuego()
-                    terminal.println((colorVerde)("                                                                                   CREATING SAVE FILES...."))
-                    val animacion = AnimationManager.animacionCargando()
+                    GestorConsola.creandoDatos()
+                    GestorConsola.cargandoDatos()
                     return false
                 }
 
