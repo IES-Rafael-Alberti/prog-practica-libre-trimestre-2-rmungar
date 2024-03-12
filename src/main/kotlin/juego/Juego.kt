@@ -9,7 +9,7 @@ import kotlin.random.Random
 open class Juego : Jugable {
 
     val workingDirectory = System.getProperty("user.dir")!! // Directorio actual
-    val ficheroVault = File("$workingDirectory/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
+    private val ficheroVault = File("$workingDirectory/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
 
 
     private val veces = 1
