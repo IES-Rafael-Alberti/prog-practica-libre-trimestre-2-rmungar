@@ -209,11 +209,12 @@ object GestorConsola : Mostrable{
     }
 
     override fun mostrarEntradaDeId() {
-        terminal.println(colorBlanco("Enter the ID of the chosen item (<ENTER> to cancel): "))
+        terminal.print(colorBlanco("                                                              Enter the ID of the chosen item (<ENTER> to cancel): "))
     }
 
     override fun mostrarOpcionAbrirVault() {
-        terminal.println(colorBlanco("Do you want to access the vault? (y / n)              <ENTER> to exit"))
+        terminal.println(colorBlanco("                                                      Do you want to access the vault? (y / n)              <ENTER> to exit"))
+        println()
         marcadorEntradaTexto()
     }
 
@@ -283,7 +284,7 @@ object GestorConsola : Mostrable{
                 }
                 itemsPorProcesar.forEach {
                     val item = Item.procesarItem(it)
-                    row (id, item.rarity(item.nombre) +"           ", item.arquetipo + "       ", item.tipoArma + "       ", item.colorElemento(item.elemento.desc) + "    ")
+                    row (id, item.rarity(item.nombre) +"           ", item.arquetipo + "       ", item.tipoArma + "       ", item.colorElemento(item.elemento.desc) + "     ")
                     id++
                 }
             }

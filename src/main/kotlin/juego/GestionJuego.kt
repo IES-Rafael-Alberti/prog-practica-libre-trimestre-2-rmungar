@@ -147,7 +147,6 @@ object GestionJuego :Juego(), Comprobable<String> {
             when(decision){
                 "y","yes" -> {
                     GestorConsola.mostrarVault()
-                    GestorConsola.mostrarEntradaDeId()
                     extraerArmaDeVault(personaje)
                 }
                 "n","no" ->{

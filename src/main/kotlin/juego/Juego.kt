@@ -208,7 +208,6 @@ open class Juego : Jugable {
     }
 
     fun extraerArmaDeVault(personaje: Personaje){
-        GestorConsola.mostrarVault()
         while (true){
             GestorConsola.mostrarEntradaDeId()
             when(val input = GestorEntrada.pedirOpcionExtraerVault()){
