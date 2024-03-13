@@ -1,7 +1,7 @@
 package org.practicatrim2
 
 import org.practicatrim2.juego.GestionJuego
-import org.practicatrim2.juego.Juego
+import org.practicatrim2.juego.GestorConsola
 
 
 fun String.capitalizar():String{
@@ -21,13 +21,14 @@ fun String.capitalizar():String{
 
 fun main() {
 
-   try {
-       val gestor = GestionJuego
-       gestor.comenzarJuego()
-   }
-   catch (e:Exception){
-       println(e.message)
-   }
-    val juego = Juego()
-
+//   try {
+//       val gestor = GestionJuego
+//       gestor.comenzarJuego()
+//   }
+//   catch (e:Exception){
+//       println(e.message)
+//   }
+//    val juego = Juego()
+    val personaje = GestionJuego.cargarDatos()
+    GestorConsola.mostrarVault()
 }

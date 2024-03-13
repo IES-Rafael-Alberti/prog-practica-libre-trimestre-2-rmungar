@@ -10,6 +10,14 @@ object GestorEntrada: Introducible {
         return accion
     }
 
+//      DATOS   --------------------------------------------------------------------------------------------------------
+
+    override fun pedirDecisionDatos(): String {
+        val decision = readln().lowercase()
+        return decision
+    }
+
+
 //      SELECCION DE MODO DE JUEGO  ------------------------------------------------------------------------------------
 
     override fun pedirEntradaDeModoDeJuego():String {
@@ -31,7 +39,7 @@ object GestorEntrada: Introducible {
     }
 
     override fun pedirNombreDePersonaje(): String {
-        val nombre = readln() //Cadena para el nombre del personaje
+        val nombre = readln().capitalizar() //Cadena para el nombre del personaje
         return nombre
     }
 

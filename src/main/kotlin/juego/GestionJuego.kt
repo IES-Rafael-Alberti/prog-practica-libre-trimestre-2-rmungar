@@ -139,7 +139,11 @@ object GestionJuego :Juego(), Comprobable<String> {
         }
     }
 
+    fun jugarModo1(personaje: Personaje){
+        while (true){
 
+        }
+    }
     fun jugarModo2(personaje: Personaje){
         while (true) {
             var featured = false
@@ -184,7 +188,7 @@ object GestionJuego :Juego(), Comprobable<String> {
         if (!datosArmaduras && !datosArmas && !datosPersonaje) {
             while (true) {
 
-                val decision = readln().lowercase()
+                val decision = GestorEntrada.pedirDecisionDatos()
                 when (decision) {
                     "y", "yes" -> {
                         GestorConsola.separador()
@@ -208,7 +212,7 @@ object GestionJuego :Juego(), Comprobable<String> {
         }
         else {
             GestorConsola.mostrarNoExistenciaDatosPrevios()
-            val decision = readln().lowercase()// Entrada del usuario que indica lo que desea hacer
+            val decision = GestorEntrada.pedirDecisionDatos()
             when (decision) {
                 "y", "yes" -> {
                     generarNuevoJuego()
@@ -239,7 +243,7 @@ object GestionJuego :Juego(), Comprobable<String> {
         return datosPersonaje.isEmpty()
     }
 
-    private fun cargarDatos():Personaje {
+    fun cargarDatos():Personaje {
         val datosPersonaje = FicheroPersonaje.useLines { it.toList() }[0]
         val datosArmaduras = FicheroArmaduras.useLines { it.toList() }
         val datosArmas = FicheroArmas.useLines { it.toList() }

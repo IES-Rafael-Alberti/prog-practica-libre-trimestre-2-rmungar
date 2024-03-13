@@ -50,6 +50,12 @@ interface Mostrable {
 
     fun mostrarTextoSeleccionRaza()
 
+    fun mostrarInfoPersonaje(personaje: Personaje)
+
+    fun mostrarArmaduraPersonaje(personaje: Personaje)
+
+    fun mostrarArmasPersonaje(personaje: Personaje)
+
 //      INTERFACES  ----------------------------------------------------------------------------------------------------
 
     fun mostrarInterfazJuego()

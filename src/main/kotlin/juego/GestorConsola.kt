@@ -1,6 +1,9 @@
 package org.practicatrim2.juego
 
+import com.github.ajalt.mordant.rendering.TextAlign
 import com.github.ajalt.mordant.rendering.TextColors
+import com.github.ajalt.mordant.table.Borders
+import com.github.ajalt.mordant.table.table
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.animaciones.AnimationManager
 import org.practicatrim2.items.ActionFigure
@@ -41,13 +44,15 @@ object GestorConsola : Mostrable{
     }
 
     override fun cargandoDatos() {
-        terminal.println((colorVerde)("                                                                                   LOADING GAME...."))
+        terminal.println((colorVerde)("                                                                                   LOADING DATA...."))
         val animacion = AnimationManager.animacionCargando()
         println()
     }
 
     override fun cargandoJuego() {
-
+        terminal.println((colorVerde)("                                                                                   LOADING GAME...."))
+        val animacion = AnimationManager.animacionCargando()
+        println()
     }
 
     override fun creandoDatos() {
@@ -131,6 +136,26 @@ object GestorConsola : Mostrable{
 
     override fun mostrarTextoSeleccionRaza() {
         terminal.print(colorBlanco("                                                                     Enter the race you wish them to be: "))
+    }
+
+    override fun mostrarInfoPersonaje(personaje: Personaje) {
+        terminal.println("                                                                     " + colorBlanco(personaje.toString()))
+    }
+
+    override fun mostrarArmaduraPersonaje(personaje: Personaje){
+        terminal.println(colorBlanco("          CURRENTLY EQUIPPED ARMOR"))
+        println()
+        personaje.armaduraEquipada.forEach {
+            terminal.println(colorBlanco("        ${it.rarity(it.nombre)}   ---   ${it.parte}"))
+        }
+    }
+
+    override fun mostrarArmasPersonaje(personaje: Personaje){
+        terminal.println(colorBlanco("          CURRENTLY EQUIPPED WEAPONS"))
+        println()
+        personaje.armaEquipada.forEach {
+            terminal.println(it)
+        }
     }
 
 
@@ -235,12 +260,29 @@ object GestorConsola : Mostrable{
         val ficheroVault = File("$workingDirectory/Datos_Guardado/Vault.txt") // Fichero donde se guardan las armas y armaduras NO EQUIPADAS de una partida previa
         val itemsPorProcesar = ficheroVault.useLines { it.toList() }
         var id = 1
-        itemsPorProcesar.forEach {
-            val item = Item.procesarItem(it)
-            println("$id - $item")
-            println()
-            id++
+        val table = table {
+            cellBorders = Borders.ALL
+            align = TextAlign.CENTER
+            header {
+                style(italic = true)
+                style = colorBlanco
+                row ("ID", "Name", "Frame", "Weapon Type", "Element")
+            }
+            body {
+                cellBorders = Borders.NONE
+                align = TextAlign.LEFT
+                column(0){
+                    cellBorders = Borders.ALL
+                    style(color = colorBlanco)
+                }
+                itemsPorProcesar.forEach {
+                    val item = Item.procesarItem(it)
+                    row (id, item.rarity(item.nombre) +"           ", item.arquetipo + "       ", item.tipoArma + "       ", item.colorElemento(item.elemento.desc) + "    ")
+                    id++
+                }
+            }
         }
+        terminal.println(table)
     }
 }
 

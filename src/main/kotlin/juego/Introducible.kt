@@ -4,6 +4,9 @@ interface Introducible {
 //      MENU INICIAL    ------------------------------------------------------------------------------------------------
     fun pedirEntradaInicial(): String
 
+//      DATOS   --------------------------------------------------------------------------------------------------------
+    fun pedirDecisionDatos():String
+
 //      SELECCION DE MODO DE JUEGO  ------------------------------------------------------------------------------------
 
     fun pedirEntradaDeModoDeJuego(): String

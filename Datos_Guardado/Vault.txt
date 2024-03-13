@@ -4,8 +4,8 @@ W ; Defiance of Yasmin ; Adaptive Frame ; Sniper Rifle ; Kinetic ; Legendary
 W ; Apex Predator ; Adaptive Frame ; Rocket Launcher ; Solar ; Legendary
 W ; Oversoul Edict ; Rapid-Fire Frame ; Pulse Rifle ; Arc ; Legendary
 W ; Fatebringer ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
-W ; Cataclysmic ; Precision Frame ; Linear Fusion Rifle ; Solar ; Legendary
-W ; Sacred Provenance ; Aggressive Burst ; Pulse Fire ; Kinetic ; Legendary
+W ; Cataclysmic ; Precision Frame ; LFR ; Solar ; Legendary
+W ; Sacred Provenance ; Aggressive Burst ; Pulse Rifle ; Kinetic ; Legendary
 W ; Adjudicator ; Precision Frame ; SMG ; Kinetic ; Legendary
 W ; Eyasluna ; Adaptive Frame ; Hand Cannon ; Stasis ; Legendary
 W ; Lingering Dread ; Lightweight Frame ; Grenade Launcher ; Stasis ; Legendary

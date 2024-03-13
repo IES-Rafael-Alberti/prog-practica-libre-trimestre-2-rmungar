@@ -1,6 +1,8 @@
 package org.practicatrim2.juego
 
-import org.practicatrim2.items.*
+import org.practicatrim2.items.ActionFigure
+import org.practicatrim2.items.Armadura
+import org.practicatrim2.items.Item
 import org.practicatrim2.modosDeJuego.GameModes
 import org.practicatrim2.personajes.*
 import java.io.File
@@ -188,7 +190,7 @@ open class Juego : Jugable {
         }
     }
 
-    fun administrarItem(itemObtenido:String, personaje: Personaje){
+    private fun administrarItem(itemObtenido:String, personaje: Personaje){
         when(val itemObtenidoProcesado = Item.procesarItem(itemObtenido)){
             is Armadura -> {
                 if(itemObtenidoProcesado.preguntarParaEquipar(itemObtenidoProcesado, personaje)) {
