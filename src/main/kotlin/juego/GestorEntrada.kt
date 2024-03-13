@@ -52,4 +52,21 @@ object GestorEntrada: Introducible {
         val razaAcrear = readln().uppercase() //Cadena ingresada por el usuario a comprobar
         return razaAcrear
     }
+
+//      VAULT   --------------------------------------------------------------------------------------------------------
+
+    override fun pedirOpcionExtraerVault(): String {
+        val idArma = readln()
+        return idArma
+    }
+
+    override fun pedirOpcionAccederVault(): String {
+        val decision = readln().lowercase()
+        return decision
+    }
+
+    override fun pedirEnterParaSalir(): String {
+        val entrada = readln()
+        return entrada
+    }
 }

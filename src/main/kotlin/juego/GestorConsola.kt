@@ -178,11 +178,12 @@ object GestorConsola : Mostrable{
         }
         println()
         terminal.println(colorBlanco("Character Details"))
-        var posicion = 0
-        personaje.armaduraEquipada.forEach {
-            terminal.println("$it                                                                                 ${personaje.armaEquipada[posicion].rarity("${personaje.armaEquipada[posicion].nombre} -- ${personaje.armaEquipada[0].tipoArma}")}")
-            posicion++
-        }
+        mostrarInfoPersonaje(personaje)
+        println()
+        println()
+        mostrarArmaduraPersonaje(personaje)
+        println()
+        mostrarArmasPersonaje(personaje)
     }
 
 //      MARCADORES DE ENTRADA DEL USUARIO   ----------------------------------------------------------------------------
@@ -209,6 +210,11 @@ object GestorConsola : Mostrable{
 
     override fun mostrarEntradaDeId() {
         terminal.println(colorBlanco("Enter the ID of the chosen item (<ENTER> to cancel): "))
+    }
+
+    override fun mostrarOpcionAbrirVault() {
+        terminal.println(colorBlanco("Do you want to access the vault? (y / n)              <ENTER> to exit"))
+        marcadorEntradaTexto()
     }
 
 //      EASTER EGGS ----------------------------------------------------------------------------------------------------

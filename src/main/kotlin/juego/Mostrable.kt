@@ -74,6 +74,8 @@ interface Mostrable {
 
     fun mostrarEntradaDeAccionInicial()
 
+    fun mostrarOpcionAbrirVault()
+
 //      EASTER EGGS ----------------------------------------------------------------------------------------------------
 
     fun mostrarEasterEgg(huevo: ActionFigure)

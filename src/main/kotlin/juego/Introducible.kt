@@ -24,4 +24,12 @@ interface Introducible {
     fun pedirClaseDePersonaje(): String
 
     fun pedirRazaDePersoanje(): String
+
+//      VAULT   --------------------------------------------------------------------------------------------------------
+
+    fun pedirOpcionAccederVault():String
+
+    fun pedirOpcionExtraerVault():String
+
+    fun pedirEnterParaSalir():String
 }

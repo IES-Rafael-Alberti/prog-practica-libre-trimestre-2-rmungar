@@ -211,7 +211,7 @@ open class Juego : Jugable {
         GestorConsola.mostrarVault()
         while (true){
             GestorConsola.mostrarEntradaDeId()
-            when(val input = readln()){
+            when(val input = GestorEntrada.pedirOpcionExtraerVault()){
                 in "1".."${ficheroVault.useLines { it.toList() }.size}" -> {
                     val item = ficheroVault.useLines { it.toList() }[input.toInt() - 1]
                     administrarItem(item, personaje)

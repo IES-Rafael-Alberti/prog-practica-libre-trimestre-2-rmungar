@@ -141,7 +141,22 @@ object GestionJuego :Juego(), Comprobable<String> {
 
     fun jugarModo1(personaje: Personaje){
         while (true){
-
+            GestorConsola.mostrarInterfazPersonaje(personaje)
+            GestorConsola.mostrarOpcionAbrirVault()
+            val decision = GestorEntrada.pedirOpcionAccederVault()
+            when(decision){
+                "y","yes" -> {
+                    GestorConsola.mostrarVault()
+                    GestorConsola.mostrarEntradaDeId()
+                    extraerArmaDeVault(personaje)
+                }
+                "n","no" ->{
+                    GestorConsola.marcadorEntradaTexto()
+                    val entrada = GestorEntrada.pedirEnterParaSalir()
+                    if (entrada == "") break
+                }
+                "" -> break
+            }
         }
     }
     fun jugarModo2(personaje: Personaje){
