@@ -92,7 +92,7 @@ object GestorConsola : Mostrable{
         terminal.println(colorBlanco("                                                                                 --STAR CHART--"))
         println()
         terminal.println("       ${GameModes.GAMBIT.color ("⟁ GAMBIT PRIME ⟁")}                               ${GameModes.NIGHTFALL.color ("★ GRANDMASTER NIGHTFALL ★")}                               ${GameModes.TRIALS.color ("⚔ TRIALS OF OSIRIS ⚔")}                               ${GameModes.RAIDS_DUNGEONS.color("✦ RAIDS & DUNGEONS ✦")}")
-        terminal.println("                                                         ${colorBlanco("s: Save")}                                                           ${colorBlanco("e: Exit")}")
+        terminal.println("                                                         ${colorBlanco("s: Save")}                                                         ${colorBlanco("Enter: Exit")}")
     }
 
 
@@ -167,7 +167,7 @@ object GestorConsola : Mostrable{
         repeat(5){
             println()
         }
-        terminal.println("                                                                                       ${colorBlanco("e - Exit")}")
+        terminal.println("                                                                                      ${colorBlanco("e - Exit")}")
     }
 
     override fun mostrarInterfazPersonaje(personaje: Personaje) {
@@ -193,7 +193,7 @@ object GestorConsola : Mostrable{
 }
 
     override fun marcadorEntradaTexto() {
-        terminal.print(colorBlanco("                                                                                       > "))
+        terminal.print(colorBlanco("                                                                                         > "))
     }
 
     override fun mostrarEntradaDeNombre() {

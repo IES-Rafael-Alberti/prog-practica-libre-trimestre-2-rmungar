@@ -10,8 +10,10 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+
+    testImplementation("junit:junit:5.8.1")
     implementation("com.github.ajalt.mordant:mordant:2.3.0")
+
 }
 
 tasks.test {

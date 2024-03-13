@@ -49,7 +49,11 @@ object GestionJuego :Juego(), Comprobable<String> {
         }
         when(accion){
             "1" -> {
-                comprobarDatosPrevios()
+                if(comprobarDatosPrevios()){
+                    cargarDatos()
+                    return true
+                }
+                else generarNuevoJuego()
                 return false
             }
             "2" -> {
@@ -126,9 +130,7 @@ object GestionJuego :Juego(), Comprobable<String> {
             GestorConsola.mostrarInterfazJuego()
             val modoPrincipal = selectorSeccionJuego()
             if (modoPrincipal == 1) {
-                while (true) {
-                    GestorConsola.mostrarInterfazPersonaje(personaje)
-                }
+                jugarModo1(personaje)
             }
             else if (modoPrincipal == 2) {
                 jugarModo2(personaje)
@@ -158,6 +160,7 @@ object GestionJuego :Juego(), Comprobable<String> {
             }
         }
     }
+
     fun jugarModo2(personaje: Personaje){
         while (true) {
             var featured = false
@@ -189,11 +192,12 @@ object GestionJuego :Juego(), Comprobable<String> {
                     guardarDatos(personaje)
                 }
 
-                "Exit" -> break
+                "" -> break
+
+                else -> GestorConsola.mostrarEntradaIncorrecta()
             }
         }
     }
-
 
     override fun comprobarDatosPrevios():Boolean{
         val datosArmaduras = comprobarDatosArmaduras()
@@ -201,7 +205,7 @@ object GestionJuego :Juego(), Comprobable<String> {
         val datosPersonaje = comprobarDatosPersonaje()
         if (!datosArmaduras && !datosArmas && !datosPersonaje) {
             while (true) {
-
+                GestorConsola.mostrarExistenciaDatosPrevios()
                 val decision = GestorEntrada.pedirDecisionDatos()
                 when (decision) {
                     "y", "yes" -> {

@@ -213,6 +213,7 @@ open class Juego : Jugable {
             when(val input = GestorEntrada.pedirOpcionExtraerVault()){
                 in "1".."${ficheroVault.useLines { it.toList() }.size}" -> {
                     val item = ficheroVault.useLines { it.toList() }[input.toInt() - 1]
+                    acctualizarVault(item)
                     administrarItem(item, personaje)
                     break
                 }
@@ -222,4 +223,16 @@ open class Juego : Jugable {
         }
     }
 
+    private fun acctualizarVault(item: String){
+        val vault:MutableList<String> = ficheroVault.useLines { it.toMutableList() }
+        vault.find { it == item }.let {
+            ficheroVault.delete()
+            ficheroVault.createNewFile()
+            vault.remove(item)
+            vault.forEach {
+                val itemProcesado = Item.procesarItem(it)
+                itemProcesado.guardar(itemProcesado)
+            }
+        }
+    }
 }
