@@ -4,14 +4,25 @@ package org.practicatrim2
 import org.practicatrim2.juego.GestionJuego
 
 
-fun String.capitalizar():String{
+/**
+ * Función para capitalizar la primera letra de cada palabra en una cadena.
+ * @return La cadena con la primera letra de cada palabra capitalizada.
+ */
+fun String.capitalizar(): String {
+    // Convierte la cadena en una lista de caracteres.
     val texto = this.toList()
     var palabraCapitalizada = ""
     var posicion = 0
-    for (caracter in texto){
-        if (caracter == texto[0]) palabraCapitalizada += caracter.toString().uppercase()
-        else if (texto[posicion - 1] == ' ') palabraCapitalizada += caracter.toString().uppercase()
-        else{
+    // Itera sobre cada caracter en la lista.
+    for (caracter in texto) {
+        // Si es el primer caracter de la cadena, lo capitaliza.
+        if (caracter == texto[0]) {
+            palabraCapitalizada += caracter.toString().uppercase()
+        } else if (texto[posicion - 1] == ' ') {
+            // Si el caracter anterior es un espacio, capitaliza el caracter actual.
+            palabraCapitalizada += caracter.toString().uppercase()
+        } else {
+            // Si no, convierte el caracter actual en minúscula.
             palabraCapitalizada += caracter.lowercase()
         }
         posicion++

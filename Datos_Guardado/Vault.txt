@@ -1,0 +1,7 @@
+W ; Eyasluna ; Adaptive Frame ; Hand Cannon ; STASIS ; Legendary
+W ; Lingering Dread ; Lightweight Frame ; Grenade Launcher ; STASIS ; Legendary
+W ; Necrochasm ; Cursebringer ; Auto Rifle ; KINETIC ; Exotic
+W ; Conditional Finality ; Split Decision ; Shotgun ; KINETIC ; Exotic
+W ; One Thousand Voices ; Ahamkara's Eye ; Fusion Rifle ; SOLAR ; Exotic
+W ; Vex Mythoclast ; Timeless Mythoclast ; Fusion Rifle ; SOLAR ; Exotic
+W ; Sacred Provenance ; Aggressive Burst ; Pulse Rifle ; KINETIC ; Legendary
