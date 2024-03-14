@@ -25,12 +25,9 @@ object GestionJuego :Juego(), Comprobable<String> {
      * Esta función muestra la bienvenida, el menú de inicio, y luego procede con la ejecución de la acción inicial.
      */
     fun comenzarJuego() {
-        // Muestra un mensaje de bienvenida en la consola.
         GestorConsola.bienvenida()
-        // Muestra el menú de inicio en la consola.
         GestorConsola.mostrarMenuInicio()
-        // Ejecuta la acción inicial y verifica si existen datos guardados.
-        val datosExistentes = ejecutarAccionInicial()
+        val datosExistentes = ejecutarAccionInicial() // verifica si existen datos guardados.
         // Si existen datos guardados, carga el personaje y comienza el juego.
         if (datosExistentes) {
             val personaje = cargarDatos()
@@ -55,18 +52,16 @@ object GestionJuego :Juego(), Comprobable<String> {
      * @return Un valor booleano que indica si se cargaron datos previos (true) o se generó un nuevo juego (false).
      */
     private fun ejecutarAccionInicial(): Boolean {
-        println() // Imprime una línea en blanco para mejorar la legibilidad.
+        println()
         // Muestra en la consola la solicitud de entrada para la acción inicial.
         GestorConsola.mostrarEntradaDeAccionInicial()
-        // Solicita al usuario que ingrese la acción inicial y almacena la entrada en la variable "accion".
         var accion = GestorEntrada.pedirEntradaInicial()
         // Verifica si la acción inicial ingresada es válida.
         while (comprobarAccion(accion) !in 1..3) {
-            // Si la acción no es válida, muestra nuevamente la solicitud de entrada de acción inicial y vuelve a solicitar la entrada.
             GestorConsola.mostrarEntradaDeAccionInicial()
             accion = GestorEntrada.pedirEntradaInicial()
         }
-        // Realiza una acción dependiendo de la acción inicial ingresada por el usuario.
+        // Realiza una acción dependiendo de la acción inicial
         when (accion) {
             "1" -> {
                 // Si el usuario elige cargar datos previos y existen datos previos, carga los datos y retorna true.
@@ -129,9 +124,7 @@ object GestionJuego :Juego(), Comprobable<String> {
     override fun comprobarSeleccionModoJuego(): String {
         // Repite el proceso hasta que se seleccione un modo de juego válido.
         while (true) {
-            // Muestra un marcador para la entrada de texto en la consola.
             GestorConsola.marcadorEntradaTexto()
-            // Solicita al usuario que ingrese el modo de juego y almacena la entrada en la variable "entrada".
             val entrada: String = GestorEntrada.pedirEntradaDeModoDeJuego()
             // Comprueba la selección del usuario y retorna el modo de juego correspondiente.
             when (entrada) {
@@ -147,7 +140,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                 "s", "save" -> return "Save"
                 // Salir del juego
                 "e", "exit" -> return "Exit"
-                // Si la selección no es válida, muestra un mensaje de entrada incorrecta.
+
                 else -> GestorConsola.mostrarEntradaIncorrecta()
             }
         }
@@ -160,11 +153,8 @@ object GestionJuego :Juego(), Comprobable<String> {
     private fun jugar(personaje: Personaje) {
         // Repite el proceso hasta que se seleccione un modo de juego válido.
         while (true) {
-            // Muestra la interfaz del juego en la consola.
             GestorConsola.mostrarInterfazJuego()
-            // Selecciona el modo principal de juego.
             val modoPrincipal = selectorSeccionJuego()
-            // Realiza una acción dependiendo del modo de juego seleccionado.
             when (modoPrincipal) {
                 // Modo 1
                 1 -> {
@@ -178,7 +168,6 @@ object GestionJuego :Juego(), Comprobable<String> {
                     jugarModo2(personaje)
                     break
                 }
-                // Salir del juego
                 else -> {
                     // Sale del bucle y termina la función.
                     break
@@ -194,20 +183,17 @@ object GestionJuego :Juego(), Comprobable<String> {
     private fun jugarModo1(personaje: Personaje) {
         // Repite el proceso hasta que se tome una decisión válida.
         while (true) {
-            // Muestra la interfaz del personaje en la consola.
             GestorConsola.mostrarInterfazPersonaje(personaje)
-            // Muestra la opción para abrir el Vault en la consola.
             GestorConsola.mostrarOpcionAbrirVault()
-            // Solicita al usuario que tome una decisión para acceder al Vault y almacena la decisión en la variable "decision".
             val decision = GestorEntrada.pedirOpcionAccederVault()
             // Realiza una acción dependiendo de la decisión tomada por el usuario.
             when (decision) {
-                // Si el usuario decide abrir el Vault (sí), muestra el Vault y permite extraer un arma.
+                // Si el usuario decide lo decide, muestra el Vault y permite extraer un arma.
                 "y", "yes" -> {
                     GestorConsola.mostrarVault()
                     extraerArmaDeVault(personaje)
                 }
-                // Si el usuario decide no abrir el Vault (no), permite salir del Modo 1.
+                // Si no permite salir del Modo 1.
                 "n", "no" -> {
                     GestorConsola.marcadorEntradaTexto()
                     val entrada = GestorEntrada.pedirEnterParaSalir()
@@ -226,11 +212,8 @@ object GestionJuego :Juego(), Comprobable<String> {
     private fun jugarModo2(personaje: Personaje) {
         // Repite el proceso hasta que se salga del Modo 2.
         while (true) {
-            // Variable para indicar si el modo de juego está en modo destacado.
             var featured = false
-            // Genera un número aleatorio entre 1 y 4 para determinar el modo destacado.
             val focusedMode = Random.nextInt(1, 5)
-            // Muestra el menú de modos de juego en la consola y solicita la selección del modo de juego.
             GestorConsola.mostrarMenuModosJuego()
             val modo = comprobarSeleccionModoJuego()
             // Realiza una acción dependiendo del modo de juego seleccionado.
@@ -239,38 +222,32 @@ object GestionJuego :Juego(), Comprobable<String> {
                 "Gambit" -> {
                     // Si el modo focused coincide con Gambit, se marca como "featured".
                     if (focusedMode == 1) featured = true
-                    // Juega Gambit con el personaje.
                     GestionJuego.jugarGambito(personaje, featured)
                 }
                 // Nightfall
                 "Nightfall" -> {
                     // Si el modo focused coincide con Nightfall, se marca como "featured".
                     if (focusedMode == 2) featured = true
-                    // Juega Nightfall con el personaje.
                     GestionJuego.jugarOcaso(personaje, featured)
                 }
                 // Raids y Dungeons
                 "Raids_Dungeons" -> {
                     // Si el modo focused coincide con Raids y Dungeons, se marca como "featured".
                     if (focusedMode == 3) featured = true
-                    // Juega Raids y Dungeons con el personaje.
                     GestionJuego.jugarRyD(personaje, featured)
                 }
                 // Trials
                 "Trials" -> {
                     // Si el modo focused coincide con Trials, se marca como "featured".
                     if (focusedMode == 4) featured = true
-                    // Juega Trials con el personaje.
                     GestionJuego.jugarTrials(personaje, featured)
                 }
-                // Guardar partida
                 "Save" -> {
                     // Guarda los datos del personaje.
                     guardarDatos(personaje)
                 }
                 // Si no se ingresa nada (se deja en blanco), sale del Modo 2.
                 "" -> break
-                // Si se ingresa una opción no válida, muestra un mensaje de entrada incorrecta.
                 else -> GestorConsola.mostrarEntradaIncorrecta()
             }
         }
@@ -285,7 +262,6 @@ object GestionJuego :Juego(), Comprobable<String> {
         val datosArmaduras = comprobarDatosArmaduras()
         val datosArmas = comprobarDatosArmas()
         val datosPersonaje = comprobarDatosPersonaje()
-        // Si no existen datos de armaduras, armas y personaje, se solicita al usuario que tome una decisión.
         if (!datosArmaduras && !datosArmas && !datosPersonaje) {
             while (true) {
                 // Muestra un mensaje indicando que no existen datos previos y solicita una decisión al usuario.
@@ -308,7 +284,6 @@ object GestionJuego :Juego(), Comprobable<String> {
                         cargarDatos()
                         return true
                     }
-                    // Si se ingresa una opción no válida, muestra un mensaje de entrada incorrecta y continúa el bucle.
                     else -> {
                         GestorConsola.mostrarEntradaIncorrecta()
                     }
@@ -333,7 +308,6 @@ object GestionJuego :Juego(), Comprobable<String> {
                 }
             }
         }
-        // Retorna false si no se cumplen las condiciones anteriores.
         return false
     }
 
@@ -344,7 +318,6 @@ object GestionJuego :Juego(), Comprobable<String> {
     override fun comprobarDatosArmaduras(): Boolean {
         // Lee los datos de armaduras del fichero y los almacena en una lista.
         val datosArmadura = FicheroArmaduras.useLines { it.toList() }
-        // Retorna true si la lista de datos de armaduras está vacía, lo que indica que no existen datos previos de armaduras.
         return datosArmadura.isEmpty()
     }
 
@@ -355,7 +328,6 @@ object GestionJuego :Juego(), Comprobable<String> {
     override fun comprobarDatosArmas(): Boolean {
         // Lee los datos de armas del fichero y los almacena en una lista.
         val datosArmas = FicheroArmas.useLines { it.toList() }
-        // Retorna true si la lista de datos de armas está vacía, lo que indica que no existen datos previos de armas.
         return datosArmas.isEmpty()
     }
 
@@ -375,11 +347,8 @@ object GestionJuego :Juego(), Comprobable<String> {
      * @return El personaje creado a partir de los datos cargados.
      */
     private fun cargarDatos(): Personaje {
-        // Lee los datos del primer personaje del fichero y lo almacena en una variable.
         val datosPersonaje = FicheroPersonaje.useLines { it.toList() }[0]
-        // Lee los datos de armaduras del fichero y los almacena en una lista.
         val datosArmaduras = FicheroArmaduras.useLines { it.toList() }
-        // Lee los datos de armas del fichero y los almacena en una lista.
         val datosArmas = FicheroArmas.useLines { it.toList() }
         // Genera un personaje a partir de los datos del primer personaje.
         val personaje = Personaje.generarPersonaje(datosPersonaje)
@@ -406,12 +375,12 @@ object GestionJuego :Juego(), Comprobable<String> {
      * y creando nuevos ficheros vacíos para empezar un juego desde cero.
      */
     private fun generarNuevoJuego() {
-        // Elimina los ficheros existentes de armaduras, armas y personaje.
+        // Elimina los ficheros existentes
         FicheroArmaduras.delete()
         FicheroArmas.delete()
         FicheroPersonaje.delete()
 
-        // Crea nuevos ficheros vacíos para armaduras, armas y personaje.
+        // Crea nuevos ficheros
         FicheroArmaduras.createNewFile()
         FicheroPersonaje.createNewFile()
         FicheroArmas.createNewFile()

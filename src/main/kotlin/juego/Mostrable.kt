@@ -1,8 +1,13 @@
 package org.practicatrim2.juego
 
 import org.practicatrim2.items.ActionFigure
+import org.practicatrim2.items.Item
 import org.practicatrim2.personajes.Personaje
 
+
+/**
+ * Interfaz que establece las bases de las funciones que se emplean para mostrar datos por pantalla
+ */
 interface Mostrable {
 
 
@@ -56,6 +61,16 @@ interface Mostrable {
 
     fun mostrarArmasPersonaje(personaje: Personaje)
 
+    fun mostrarExcesoArmas()
+
+    fun mostrarExcesoArmaduras()
+
+    fun mostrarArmaEquipada()
+
+    fun mostrarArmaduraEquipada()
+
+    fun pedirSlot()
+
 //      INTERFACES  ----------------------------------------------------------------------------------------------------
 
     fun mostrarInterfazJuego()
@@ -76,6 +91,14 @@ interface Mostrable {
 
     fun mostrarOpcionAbrirVault()
 
+    fun preguntarParaEquiparArma(item: Item)
+
+    fun preguntarParaEquiparArmadura(item: Item)
+
+    fun preguntarParaCambiarArma()
+
+    fun preguntarParaCambiarArmadura()
+
 //      EASTER EGGS ----------------------------------------------------------------------------------------------------
 
     fun mostrarEasterEgg(huevo: ActionFigure)
@@ -94,4 +117,10 @@ interface Mostrable {
     fun mostrarEntradaDeId()
 
     fun mostrarVault()
+
+    fun mostrarObjetoGuardado(item: Item)
+
+    fun preguntarParaGuardar(item: Item)
+
+    fun mostrarObjetoEliminado()
 }

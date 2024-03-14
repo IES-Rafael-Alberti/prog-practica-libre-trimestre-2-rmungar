@@ -24,9 +24,8 @@ abstract class Personaje(open val nombre: String, open val genero:String, open v
          * @return El objeto Personaje generado.
          */
         fun generarPersonaje(datosPersonaje: String): Personaje {
-            // Divide los datos del personaje en una lista de strings usando el separador " ; ".
+            // Divide los datos del personaje en una lista de strings
             val datosPersonajeProcesados = datosPersonaje.split(" ; ")
-            // Obtiene la raza del personaje.
             val raza = obtenerRaza(datosPersonajeProcesados)
             // Crea un objeto Personaje según el tipo especificado en los datos.
             return when (datosPersonajeProcesados[0]){

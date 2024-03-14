@@ -5,13 +5,13 @@ import com.github.ajalt.mordant.rendering.TextColors.*
 import com.github.ajalt.mordant.rendering.TextStyle
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.juego.GestionJuego
+import org.practicatrim2.juego.GestorConsola
 import org.practicatrim2.personajes.Personaje
 import java.io.File
 
 
 /**
  * Interfaz para gestionar la creación y clasificación de ítems.
- * Aplica el principio de inversión de dependencias (DIP) del principio SOLID.
  */
 interface GestorItem {
     /**
@@ -43,7 +43,18 @@ interface GestorItem {
     fun obtenerRareza(itemAprocesar: List<String>): TextStyle
 }
 
-
+/**
+ * Clase base para representar un ítem en el juego.
+ *
+ * @property nombre El nombre del ítem.
+ * @property parte La parte del cuerpo asociada al ítem (en caso de ser una armadura).
+ * @property rareza La rareza del ítem.
+ * @property rarity El estilo de texto que representa la rareza del ítem.
+ * @property arquetipo El arquetipo del ítem (en caso de ser un arma).
+ * @property tipoArma El tipo de arma (en caso de ser un arma).
+ * @property elemento El elemento asociado al ítem (en caso de ser un arma elemental).
+ * @property colorElemento El estilo de texto que representa el color del elemento del arma.
+ */
 open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> {
     open var nombre: String = ""
     open var parte: String = ""
@@ -65,9 +76,8 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
         * @return El ítem procesado como un objeto Item.
         */
        override fun procesarItem(item: String): Item {
-           // Divide el string del ítem en una lista de strings usando el separador " ; ".
+           // Divide el string del ítem en una lista de strings
            val itemAprocesar = item.split(" ; ")
-           // Clasifica y convierte el ítem usando la función clasificarItem.
            val itemProcesado = clasificarItem(itemAprocesar)
            // Retorna el ítem procesado.
            return itemProcesado
@@ -81,18 +91,15 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
        override fun clasificarItem(itemAprocesar: List<String>): Item {
            // Verifica si el ítem es un arma ("W") o una armadura (A).
            if (itemAprocesar[0] == "W") {
-               // Si es un arma, obtiene el elemento y el color del elemento.
                val elemento = obtenerElemento(itemAprocesar).first // Elemento del arma
-               val colorElemento = obtenerElemento(itemAprocesar).second
-               // Obtiene la rareza del arma.
+               val colorElemento = obtenerElemento(itemAprocesar).second // Obtiene la rareza del arma.
                val rarity = obtenerRareza(itemAprocesar) // Patrón de color para la terminal de acuerdo a la rareza del arma
                // Crea un objeto Arma con los datos proporcionados.
                val weapon = Arma(itemAprocesar[1], itemAprocesar[2], itemAprocesar[3], elemento, itemAprocesar[5], rarity, colorElemento)
                // Retorna el arma creada.
                return weapon
            } else {
-               // Si no es un arma, obtiene la rareza del ítem.
-               val rarity = obtenerRareza(itemAprocesar) // Patrón de color para la terminal de acuerdo a la rareza del arma
+               val rarity = obtenerRareza(itemAprocesar)
                // Crea un objeto Armadura con los datos proporcionados.
                val armor = Armadura(itemAprocesar[1], itemAprocesar[2], itemAprocesar[3], rarity)
                // Retorna la armadura creada.
@@ -128,7 +135,6 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
            when (itemAprocesar[itemAprocesar.size - 1]) {
                "Exotic" -> return TextColors.rgb("#bf8506") // Si la rareza es Exótica
            }
-           // Si no se encuentra una rareza válida, se devuelve el color por defecto (#9500ff).
            return TextColors.rgb("#9500ff")
        }
    }
@@ -145,23 +151,19 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
             // Comprueba el tipo del primer ítem equipado.
             when (itemsEquipados[0]) {
                 is Armadura -> {
-                    // Si el primer ítem es una armadura, verifica si ya hay 5 armaduras equipadas.
                     if (itemsEquipados.size >= 5) {
                         // Muestra un mensaje de advertencia si ya hay 5 armaduras equipadas.
-                        terminal.warning("You already have 5 armor items equipped")
+                        GestorConsola.mostrarExcesoArmaduras()
                         return false
                     }
-                    // Devuelve true si se pueden equipar más armaduras.
                     return true
                 }
                 else -> {
-                    // Si el primer ítem no es una armadura, verifica si ya hay 3 armas equipadas.
                     if (itemsEquipados.size >= 3) {
                         // Muestra un mensaje de advertencia si ya hay 3 armas equipadas.
-                        terminal.warning("You already have 3 weapons equipped")
+                        GestorConsola.mostrarExcesoArmas()
                         return false
                     }
-                    // Devuelve true si se pueden equipar más armas.
                     return true
                 }
             }
@@ -176,9 +178,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
      * @param item El ítem a guardar.
      */
     override fun guardar(item: Item) {
-        // Ruta al archivo del Vault.
-        val ficheroVault = File("${GestionJuego.workingDirectory}/Datos_Guardado/Vault.txt")
-
+        val ficheroVault = File("${GestionJuego.workingDirectory}/Datos_Guardado/Vault.txt")        // Ruta al archivo del Vault.
         // Verifica el tipo del ítem y realiza la acción correspondiente.
         when (item) {
             is Armadura -> {
@@ -190,8 +190,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                 }
                 // Agrega la armadura al archivo del Vault.
                 ficheroVault.appendText(armaduraFormateada)
-                // Imprime un mensaje de confirmación.
-                terminal.println(brightGreen("${item.rarity(item.nombre)} stored successfully"))
+                GestorConsola.mostrarObjetoGuardado(item)
             }
             else -> {
                 // Formatea el arma.
@@ -202,8 +201,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                 }
                 // Agrega el arma al archivo del Vault.
                 ficheroVault.appendText(armaFormateada)
-                // Imprime un mensaje de confirmación.
-                terminal.println(brightGreen("${item.rarity(item.nombre)} stored successfully"))
+                GestorConsola.mostrarObjetoGuardado(item)
             }
         }
     }
@@ -214,13 +212,9 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
      */
     override fun preguntarParaGuardar(item: Item) {
         while (true) {
-            // Muestra el mensaje de pregunta al usuario.
-            terminal.println("Would you like to store ${item.rarity(item.nombre)}? (y / n)")
-            //TODO("CAMBIAR LO ANTERIOR POR GESTORCONSOLA")
 
-            // Lee la entrada del usuario y la convierte a minúsculas.
+            GestorConsola.preguntarParaGuardar(item)
             val decision = readln().lowercase()
-
             // Realiza acciones basadas en la decisión del usuario.
             when (decision) {
                 "y", "yes" -> {
@@ -229,13 +223,11 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                     break
                 }
                 "n", "no" -> {
-                    // Si el usuario decide no guardar el ítem, muestra un mensaje indicando que el ítem ha sido enviado al DCV y sale del bucle.
-                    terminal.println(brightRed("Item sent to the DCV, rest in peace"))
+                    GestorConsola.mostrarObjetoEliminado()
                     break
                 }
                 else -> {
-                    // Si el usuario proporciona una respuesta no válida, muestra un mensaje de advertencia y vuelve a solicitar una respuesta.
-                    terminal.warning("Please, answer the requested prompt correctly")
+                    GestorConsola.mostrarEntradaIncorrecta()
                 }
             }
         }
@@ -252,16 +244,13 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
             // Selecciona el tipo de mensaje a mostrar según el tipo de ítem.
             when (item) {
                 is Armadura -> {
-                    // Muestra el mensaje de pregunta al usuario para una armadura.
-                    terminal.println(brightWhite("Do you wish to equip: ${item.rarity(item.nombre)} ${item.parte}? (y / n)"))
+                    GestorConsola.preguntarParaEquiparArmadura(item)
                 }
                 else -> {
-                    // Muestra el mensaje de pregunta al usuario para un arma.
-                    terminal.println(brightWhite("Do you wish to equip: ${item.rarity(item.nombre)}? (y / n)"))
+                    GestorConsola.preguntarParaEquiparArma(item)
                 }
             }
 
-            // Lee la respuesta del usuario y la convierte a minúsculas.
             val respuesta = readln().lowercase()
 
             // Realiza acciones basadas en la respuesta del usuario.
@@ -272,13 +261,11 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                     return true
                 }
                 "n", "no" -> {
-                    // Si el usuario decide no equipar el ítem, muestra un mensaje indicando que el ítem ha sido enviado al DCV y devuelve false.
-                    terminal.println(brightRed("Item sent to the DCV, rest in peace"))
+                    GestorConsola.mostrarObjetoEliminado()
                     return false
                 }
                 else -> {
-                    // Si el usuario proporciona una respuesta no válida, muestra un mensaje de advertencia y vuelve a solicitar una respuesta.
-                    terminal.warning("Please, answer the requested prompt correctly")
+                    GestorConsola.mostrarEntradaIncorrecta()
                 }
             }
         }
@@ -295,14 +282,12 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
             is Armadura -> {
                 // Si el ítem es una armadura, lo añade a la lista de armaduras equipadas del personaje.
                 personaje.armaduraEquipada.add(item)
-                // Muestra un mensaje indicando que la armadura se ha equipado con éxito.
-                terminal.println(brightGreen("Armor equipped successfully"))
+                GestorConsola.mostrarArmaduraEquipada()
             }
             is Arma -> {
                 // Si el ítem es un arma, lo añade a la lista de armas equipadas del personaje.
                 personaje.armaEquipada.add(item)
-                // Muestra un mensaje indicando que el arma se ha equipado con éxito.
-                terminal.println(brightGreen("Weapon equipped successfully"))
+                GestorConsola.mostrarArmaEquipada()
             }
         }
     }
@@ -318,7 +303,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
             is Armadura -> {
                 // Si el ítem es una armadura, pregunta al usuario si desea intercambiarla.
                 while(true) {
-                    terminal.println(brightWhite("Exchange armor? (y / n)"))
+                    GestorConsola.preguntarParaCambiarArmadura()
                     val decision = readln().lowercase() // Obtiene la respuesta del usuario
                     var posicionArmadura = 0 // Inicializa un contador para iterar en la lista de armaduras equipadas
                     when(decision) {
@@ -330,8 +315,8 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                                     val armaduraPrevia = personaje.armaduraEquipada[posicionArmadura] // Guarda la armadura que se va a reemplazar
                                     personaje.armaduraEquipada.remove(personaje.armaduraEquipada[posicionArmadura])
                                     personaje.armaduraEquipada.add(item)
-                                    terminal.println(brightGreen("Armor equipped successfully")) // Muestra un mensaje de éxito
-                                    preguntarParaGuardar(armaduraPrevia) // Pregunta al usuario si desea guardar la armadura anterior
+                                    GestorConsola.mostrarArmaduraEquipada()
+                                    preguntarParaGuardar(armaduraPrevia)
                                 }
                                 posicionArmadura++
                             }
@@ -342,7 +327,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                             preguntarParaGuardar(item)
                             break
                         }
-                        else -> terminal.warning("Please, answer the requested prompt correctly") // Muestra un mensaje de advertencia si la entrada no es válida
+                        else -> GestorConsola.mostrarEntradaIncorrecta()
                     }
                 }
             }
@@ -351,7 +336,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                 var seleccionValida1 = false // Indica si el usuario ha ingresado una entrada válida para el primer bucle while
                 var seleccionValida2 = false // Indica si el usuario ha ingresado una entrada válida para el segundo bucle while
                 while (!seleccionValida1) {
-                    terminal.println(brightWhite("Exchange weapon? (y / n)"))
+                    GestorConsola.preguntarParaCambiarArma()
                     val decision = readln().lowercase() // Obtiene la respuesta del usuario
                     var slotArma = 0 // Inicializa un contador para iterar en la lista de armas equipadas
                     when (decision) {
@@ -361,7 +346,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                                 println(it)
                             }
                             while (!seleccionValida2){
-                                terminal.println(brightWhite("Select a weapon slot :"))
+                                GestorConsola.pedirSlot()
                                 val slot = readln() // Obtiene la ranura seleccionada por el usuario
                                 when(slot){
                                     "1" -> {
@@ -389,7 +374,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                                         seleccionValida1 = true
                                     }
                                     else -> {
-                                        terminal.warning("Please, answer the requested prompt correctly") // Muestra un mensaje de advertencia si la entrada no es válida
+                                        GestorConsola.mostrarEntradaIncorrecta()
                                     }
                                 }
                             }
@@ -397,10 +382,10 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                         "n", "no" -> {
                             // Si el usuario no desea intercambiar el arma, pregunta si desea guardar el ítem nuevo.
                             preguntarParaGuardar(item)
-                            seleccionValida2 = true // Indica que se ha completado la operación y sale del segundo bucle while
-                            seleccionValida1 = true // Indica que se ha completado la operación y sale del primer bucle while
+                            seleccionValida2 = true // sale del segundo bucle while
+                            seleccionValida1 = true // sale del primer bucle while
                         }
-                        else -> terminal.warning("Please, answer the requested prompt correctly") // Muestra un mensaje de advertencia si la entrada no es válida
+                        else -> GestorConsola.mostrarEntradaIncorrecta()
                     }
                 }
             }

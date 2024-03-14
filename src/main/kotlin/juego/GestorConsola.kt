@@ -12,6 +12,10 @@ import org.practicatrim2.modosDeJuego.GameModes
 import org.practicatrim2.personajes.Personaje
 import java.io.File
 
+
+/**
+ * Este objeto se encarga unicamente de lo relacionado con mostrar mensajes / menus por consola mediante el uso de mordant
+ */
 object GestorConsola : Mostrable{
     private val terminal = Terminal()
     private val colorTitanes = TextColors.brightRed // Color para mordant para la clase Titan
@@ -158,7 +162,25 @@ object GestorConsola : Mostrable{
         }
     }
 
+    override fun mostrarExcesoArmas() {
+        terminal.warning("You already have 3 weapons equipped")
+    }
 
+    override fun mostrarExcesoArmaduras() {
+        terminal.warning("You already have 5 armor pieces equipped")
+    }
+
+    override fun mostrarArmaEquipada() {
+        terminal.println(colorVerde("Weapon equipped successfully"))
+    }
+
+    override fun mostrarArmaduraEquipada() {
+        terminal.println(colorVerde("Armor equipped successfully"))
+    }
+
+    override fun pedirSlot() {
+        terminal.println(colorBlanco("Select a weapon slot :"))
+    }
 
 //      INTERFACES  ----------------------------------------------------------------------------------------------------
 
@@ -216,6 +238,22 @@ object GestorConsola : Mostrable{
         terminal.println(colorBlanco("                                                      Do you want to access the vault? (y / n)              <ENTER> to exit"))
         println()
         marcadorEntradaTexto()
+    }
+
+    override fun preguntarParaEquiparArma(item: Item) {
+        terminal.println(colorBlanco("Do you wish to equip: ${item.rarity(item.nombre)}? (y / n)"))
+    }
+
+    override fun preguntarParaEquiparArmadura(item: Item) {
+        terminal.println(colorBlanco("Do you wish to equip: ${item.rarity(item.nombre)} ${item.parte}? (y / n)"))
+    }
+
+    override fun preguntarParaCambiarArma() {
+        terminal.println(colorBlanco("Exchange weapon? (y / n)"))
+    }
+
+    override fun preguntarParaCambiarArmadura() {
+        terminal.println(colorBlanco("Exchange armor? (y / n)"))
     }
 
 //      EASTER EGGS ----------------------------------------------------------------------------------------------------
@@ -290,6 +328,18 @@ object GestorConsola : Mostrable{
             }
         }
         terminal.println(table)
+    }
+
+    override fun mostrarObjetoGuardado(item: Item) {
+        terminal.println(colorVerde("${item.rarity(item.nombre)} stored successfully"))
+    }
+
+    override fun preguntarParaGuardar(item: Item) {
+        terminal.println(colorBlanco("Would you like to store ${item.rarity(item.nombre)}? (y / n)"))
+    }
+
+    override fun mostrarObjetoEliminado() {
+        terminal.println(colorRojo("Item sent to the DCV, rest in peace"))
     }
 }
 

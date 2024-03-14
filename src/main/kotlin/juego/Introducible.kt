@@ -1,5 +1,9 @@
 package org.practicatrim2.juego
 
+
+/**
+ * Interfaz que sienta las bases para aquellas entradas que se le solicitan al usuario
+ */
 interface Introducible {
 //      MENU INICIAL    ------------------------------------------------------------------------------------------------
     fun pedirEntradaInicial(): String

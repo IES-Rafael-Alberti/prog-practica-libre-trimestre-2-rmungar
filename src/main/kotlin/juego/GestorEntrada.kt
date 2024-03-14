@@ -2,6 +2,10 @@ package org.practicatrim2.juego
 
 import org.practicatrim2.capitalizar
 
+
+/**
+ * Un objeto que se va a encargar de lo relacionado con las entradas del usuario por consola
+ */
 object GestorEntrada: Introducible {
 
 //      MENU INICIAL    ------------------------------------------------------------------------------------------------
