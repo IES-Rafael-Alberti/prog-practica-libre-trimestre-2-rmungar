@@ -5,6 +5,7 @@ import com.github.ajalt.mordant.rendering.TextColors.*
 import com.github.ajalt.mordant.rendering.TextStyle
 import com.github.ajalt.mordant.terminal.Terminal
 import org.practicatrim2.juego.GestionJuego
+import org.practicatrim2.juego.GestorConsola
 import org.practicatrim2.personajes.Personaje
 import java.io.File
 
@@ -148,7 +149,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                     // Si el primer ítem es una armadura, verifica si ya hay 5 armaduras equipadas.
                     if (itemsEquipados.size >= 5) {
                         // Muestra un mensaje de advertencia si ya hay 5 armaduras equipadas.
-                        terminal.warning("You already have 5 armor items equipped")
+                        GestorConsola.mostrarYaHay5Armaduras()
                         return false
                     }
                     // Devuelve true si se pueden equipar más armaduras.
@@ -158,7 +159,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                     // Si el primer ítem no es una armadura, verifica si ya hay 3 armas equipadas.
                     if (itemsEquipados.size >= 3) {
                         // Muestra un mensaje de advertencia si ya hay 3 armas equipadas.
-                        terminal.warning("You already have 3 weapons equipped")
+                        GestorConsola.mostrarYaHay3Armas()
                         return false
                     }
                     // Devuelve true si se pueden equipar más armas.
@@ -191,7 +192,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                 // Agrega la armadura al archivo del Vault.
                 ficheroVault.appendText(armaduraFormateada)
                 // Imprime un mensaje de confirmación.
-                terminal.println(brightGreen("${item.rarity(item.nombre)} stored successfully"))
+                GestorConsola.mostrarArmaGuardada(item)
             }
             else -> {
                 // Formatea el arma.
@@ -203,7 +204,7 @@ open class Item: Equipable<Item>, Sustituible<Item, Personaje>, Guardable<Item> 
                 // Agrega el arma al archivo del Vault.
                 ficheroVault.appendText(armaFormateada)
                 // Imprime un mensaje de confirmación.
-                terminal.println(brightGreen("${item.rarity(item.nombre)} stored successfully"))
+                GestorConsola.mostrarArmaGuardada(item)
             }
         }
     }

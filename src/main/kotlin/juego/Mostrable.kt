@@ -1,6 +1,8 @@
 package org.practicatrim2.juego
 
+import com.github.ajalt.mordant.rendering.TextColors
 import org.practicatrim2.items.ActionFigure
+import org.practicatrim2.items.Item
 import org.practicatrim2.personajes.Personaje
 
 interface Mostrable {
@@ -56,6 +58,10 @@ interface Mostrable {
 
     fun mostrarArmasPersonaje(personaje: Personaje)
 
+    fun mostrarYaHay3Armas()
+
+    fun mostrarYaHay5Armaduras()
+
 //      INTERFACES  ----------------------------------------------------------------------------------------------------
 
     fun mostrarInterfazJuego()
@@ -94,4 +100,6 @@ interface Mostrable {
     fun mostrarEntradaDeId()
 
     fun mostrarVault()
+
+    fun mostrarArmaGuardada(item:Item)
 }

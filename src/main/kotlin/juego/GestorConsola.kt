@@ -158,6 +158,14 @@ object GestorConsola : Mostrable{
         }
     }
 
+    override fun mostrarYaHay3Armas() {
+        terminal.warning("You already have 3 weapons equipped")
+    }
+
+    override fun mostrarYaHay5Armaduras() {
+        terminal.warning("You already have 5 armor items equipped")
+    }
+
 
 
 //      INTERFACES  ----------------------------------------------------------------------------------------------------
@@ -290,6 +298,10 @@ object GestorConsola : Mostrable{
             }
         }
         terminal.println(table)
+    }
+
+    override fun mostrarArmaGuardada(item: Item) {
+        terminal.println(TextColors.brightGreen("${item.rarity(item.nombre)} stored successfully"))
     }
 }
 
