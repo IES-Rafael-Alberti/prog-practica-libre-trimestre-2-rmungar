@@ -196,8 +196,50 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
 #### **Criterio global 6: Diseño de jerarquía de clases**
 - **(7.d, 7.e, 7.f, 7.g)**: Presenta la jerarquía de clases que diseñaste. ¿Cómo probaste y depuraste esta jerarquía para asegurar su correcto funcionamiento? ¿Qué tipo de herencia has utilizado: Especificación, Especialización, Extensión, Construcción?
 
+     *ESPECIFICACIÓN*
+  En cuanto a herencias de especificación en mi proyecto tenemos varias, **GestorConsola** con **Mostrable**, **GestorEntrada** con **Introducible** o incluso el **Companion Object de Item** con **GestorItem**.
+  Un ejemplo de lo anterior es el siguiente:
+  
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/items/Item.kt#L16-L44
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/items/Item.kt#L69-L140
+  
+     *ESPECIALIZACIÓN*
+  En el apartado de especialización tenemos las 6 más intuitivas, **Arma** y **Armadura** con **Item** y las **3 clases de personaje** con **personaje**. Esto quiere decir que cada una hereda los métodos y las
+  propiedades de la superclase.
+  **PERSONAJE**
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/personajes/Personaje.kt#L4-L19
+  
+  **CLASES DE PERSONAJES**
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/personajes/Hunter.kt#L4-L17
+  
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/personajes/Warlock.kt#L4-L17
+
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/personajes/Titan.kt#L4-L17
+  
+     *EXTENSIÓN*
+  El único ejemplo de herencia de extensión es **GestionJuego** con **Juego**. En esta herencia, **GestionJuego** añade funcionalidades a **Juego** sin alterar el funcionamiento de este en la mayoria de            ocasiones.
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/juego/Juego.kt#L10-L22
+  
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/juego/GestionJuego.kt#L13-L20
+  
+     *CONSTRUCCIÓN*
+  En cuanto a herencias de construcción, no he empleado ninguna, pero se trata de usar una clase como base para otra aunque no tengan nada que ver. El ejemplo mas claro lo tenemos con las **listas** y las 
+  **pilas**. Una **lista** tiene la misma funcionalidad que una **pila** ya que ambas guardan datos. Sin embargo, **pila** los almacena de forma distinta a **lista** y aun así **puede emplear los métodos que 
+  hereda de lista añadiendoles restricciones o funcionalidades acorde a su propósito**.
+
 #### **Criterio global 7: Librerías de clases**
 - **(2.g, 4.k)**: Describe cualquier librería externa que hayas incorporado en tu proyecto. Explica cómo y por qué las elegiste, y cómo las incorporaste en tu proyecto. ¿Cómo extendió la funcionalidad de tu aplicación? Proporciona ejemplos específicos de su uso en tu proyecto.
+  
+  Para el proyecto he decidio usar la libreria ***MORDANT***, que me permite añadir un toque estético a la consola, haciendo que la información que se muestra aparezca más atractiva. Además, ayuda a la estética 
+  del proyecto haciendo que sea mas agradable para la vista.
+  Para incorporarlas, hubo que hacer un par de modificaciones a las dependencias:
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/build.gradle.kts#L11-L17
+  Y una vez esté incorporada solo hay que importar lo necesario. Podemos su uso y su potencial en el objeto **GestorConsola** donde instanciamos una terminal con propiedades de Mordant:
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/juego/GestorConsola.kt#L2-L28
+  Tambien cuenta con potencial para crear tablas:
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/juego/GestorConsola.kt#L302-L331
+  O crear animaciones:
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/animaciones/AnimationManager.kt#L2-L35
 
 #### **Criterio global 8: Documentado**
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
