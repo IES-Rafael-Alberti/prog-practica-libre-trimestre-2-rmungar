@@ -197,6 +197,7 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
 - **(7.d, 7.e, 7.f, 7.g)**: Presenta la jerarquía de clases que diseñaste. ¿Cómo probaste y depuraste esta jerarquía para asegurar su correcto funcionamiento? ¿Qué tipo de herencia has utilizado: Especificación, Especialización, Extensión, Construcción?
 
      *ESPECIFICACIÓN*
+  
   En cuanto a herencias de especificación en mi proyecto tenemos varias, **GestorConsola** con **Mostrable**, **GestorEntrada** con **Introducible** o incluso el **Companion Object de Item** con **GestorItem**.
   Un ejemplo de lo anterior es el siguiente:
   
@@ -204,6 +205,7 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/items/Item.kt#L69-L140
   
      *ESPECIALIZACIÓN*
+  
   En el apartado de especialización tenemos las 6 más intuitivas, **Arma** y **Armadura** con **Item** y las **3 clases de personaje** con **personaje**. Esto quiere decir que cada una hereda los métodos y las
   propiedades de la superclase.
   **PERSONAJE**
@@ -217,12 +219,14 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/personajes/Titan.kt#L4-L17
   
      *EXTENSIÓN*
+  
   El único ejemplo de herencia de extensión es **GestionJuego** con **Juego**. En esta herencia, **GestionJuego** añade funcionalidades a **Juego** sin alterar el funcionamiento de este en la mayoria de            ocasiones.
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/juego/Juego.kt#L10-L22
   
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/juego/GestionJuego.kt#L13-L20
   
      *CONSTRUCCIÓN*
+  
   En cuanto a herencias de construcción, no he empleado ninguna, pero se trata de usar una clase como base para otra aunque no tengan nada que ver. El ejemplo mas claro lo tenemos con las **listas** y las 
   **pilas**. Una **lista** tiene la misma funcionalidad que una **pila** ya que ambas guardan datos. Sin embargo, **pila** los almacena de forma distinta a **lista** y aun así **puede emplear los métodos que 
   hereda de lista añadiendoles restricciones o funcionalidades acorde a su propósito**.
