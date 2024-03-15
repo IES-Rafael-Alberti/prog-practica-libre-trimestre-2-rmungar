@@ -80,6 +80,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
+
 Sí, en cuanto a métodos estáticos, he empleado varios en la clase item. Se han hecho estáticos, no solo por la capacidad de ser llamados sin la necesidad de instanciar una clase, sino porque son propios de la clase, no de los objetos:
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/033590c71a1d34cf1fcb1df7f108e9db580ea6d5/src/main/kotlin/items/Item.kt#L72-L140
 Si nos vamos al código, podemos ver que se llaman en situaciones como esta:
