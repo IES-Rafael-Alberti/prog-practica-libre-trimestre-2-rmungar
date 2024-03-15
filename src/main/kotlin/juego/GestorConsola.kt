@@ -62,6 +62,7 @@ object GestorConsola : Mostrable{
     override fun creandoDatos() {
         terminal.println((colorVerde)("                                                                                   CREATING SAVE FILES...."))
         val animacion = AnimationManager.animacionCargando()
+        println()
     }
 
     override fun mostrarExistenciaDatosPrevios() {

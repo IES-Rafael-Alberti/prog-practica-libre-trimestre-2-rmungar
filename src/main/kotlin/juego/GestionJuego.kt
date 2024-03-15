@@ -247,7 +247,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                     guardarDatos(personaje)
                 }
                 // Si no se ingresa nada (se deja en blanco), sale del Modo 2.
-                "" -> break
+                "Enter" -> break
                 else -> GestorConsola.mostrarEntradaIncorrecta()
             }
         }
@@ -304,7 +304,7 @@ object GestionJuego :Juego(), Comprobable<String> {
                 }
                 // Si el usuario decide salir del juego, finaliza el juego.
                 "n", "no" -> {
-                    acabarJuego()
+                   acabarJuego()
                 }
             }
         }

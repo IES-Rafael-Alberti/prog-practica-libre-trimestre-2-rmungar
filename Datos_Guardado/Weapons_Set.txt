@@ -1,3 +1,0 @@
-W ; Fatebringer ; Adaptive Frame ; Hand Cannon ; Kinetic ; Legendary
-W ; Cataclysmic ; Precision Frame ; LFR ; Solar ; Legendary
-W ; Sacred Provenance ; Aggressive Burst ; Pulse Rifle ; Kinetic ; Legendary
