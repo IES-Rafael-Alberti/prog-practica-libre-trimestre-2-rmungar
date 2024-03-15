@@ -74,7 +74,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
   En cuanto al uso, se pueden ver varios:
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/033590c71a1d34cf1fcb1df7f108e9db580ea6d5/src/main/kotlin/juego/GestorConsola.kt#L332-L340
   
-  Debido a la naturaleza de las clases Arma y Armadura en este proyecto, no se les puede dar otro uso que no sea de argumento para una función, ya que ambas son data clases. En otros casos, o en otros códigos se   les puede emplear a la hora de llamar a métodos específicos como los siguientes:
+  Debido a la naturaleza de las clases Arma y Armadura en este proyecto, no se les puede dar otro uso que no sea de argumento para una función, ya que ambas son data clases. En otros casos, o en otros códigos se   les puede emplear a la hora de llamar a métodos específicos como el siguiente, donde se pasan como parámetro:
   https://github.com/rmungar/SistemaVehiculos_II/blob/bd7271edbcd156d3365eee8de0da924d94dc2226/src/Main.kt#L19-L28
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
@@ -238,7 +238,7 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
   del proyecto haciendo que sea mas agradable para la vista.
   Para incorporarlas, hubo que hacer un par de modificaciones a las dependencias:
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/build.gradle.kts#L11-L17
-  Y una vez esté incorporada solo hay que importar lo necesario. Podemos su uso y su potencial en el objeto **GestorConsola** donde instanciamos una terminal con propiedades de Mordant:
+  Y una vez esté incorporada solo hay que importar lo necesario. Podemos ver su uso y su potencial en el objeto **GestorConsola** donde instanciamos una terminal con propiedades de Mordant:
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/juego/GestorConsola.kt#L2-L28
   Tambien cuenta con potencial para crear tablas:
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/69d4e5a648a1ea1ffe6556ff5952aa94dae25624/src/main/kotlin/juego/GestorConsola.kt#L302-L331
@@ -247,7 +247,18 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
 
 #### **Criterio global 8: Documentado**
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
+  
+  La única forma de comprobar que funciona es ponerlo a prueba. En mi caso he realizado una especie de prueba del ciego, y he solicitado a gente sin conocimientos de programación que leyendo la descripcion de una función me dijeran como creían que iba a ser el 
+  contenido de esta y viceversa. Puesto que las propias funciones tienen comentarios internos en caso de que sean necesarios para su comprensión y depuración.
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/6e380a6d21f025fa2d10191192febc52714dc28d/src/main/kotlin/juego/GestionJuego.kt#L96-L119
+
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/6e380a6d21f025fa2d10191192febc52714dc28d/src/main/kotlin/juego/GestionJuego.kt#L313-L323
 
 #### **Criterio global 9: Genéricos**
 - **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?
+  En el proyecto he realizado varios usos de los genéricos, algunos de ellos son los siguientes:
+  https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/6e380a6d21f025fa2d10191192febc52714dc28d/src/main/kotlin/items/E_S_G.kt#L4-L36
 
+  Las tres interfaces anteriores hacen uso de los genericos para permitirme llevar a cabo sus funciones sin importar el tipo de dato que estos van a tomar mediante los parámetros genéricos **T**, **E** y **A**. En cuanto a las clases con genéricos, no tengo 
+  ninguna en mi código. Las clases genéricas no difieren mucho de las interfaces genéricas. Se las pasa el parámetro genérico y cuando se quiera instanciar la clase, se le pasa el tipo del parámetro que se va a emplear en los métodos de la función.
+  
