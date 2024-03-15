@@ -154,7 +154,7 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
 
    - **OCP** **O**pen Closed Principle
      
-        El OCP nos deice que debemos tener un código abierto a la extensión, pero no a la modificación. Es por eso que he elegido el uso de las interfaces como forma de implementar dicho principio. Las                   interfaces genéricas nos permiten pasar cualquier tipo de dato, que la funcionalidad no se ve alterada.
+   El OCP nos deice que debemos tener un código abierto a la extensión, pero no a la modificación. Es por eso que he elegido el uso de las interfaces como forma de implementar dicho principio. Las                   interfaces genéricas nos permiten pasar cualquier tipo de dato, que la funcionalidad no se ve alterada.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/033590c71a1d34cf1fcb1df7f108e9db580ea6d5/src/main/kotlin/items/E_S_G.kt#L17-L27
 
@@ -162,9 +162,10 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
    
         El LSP nos dice que debemos poder emplear elementos de una subclase en vez de elementos de una superclase sin que el código se vea alterado o deje de funcionar. Un claro ejemplo de esto lo tenemos aquí:
 
-https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/033590c71a1d34cf1fcb1df7f108e9db580ea6d5/src/main/kotlin/juego/Juego.kt#L306-L334 
+https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/033590c71a1d34cf1fcb1df7f108e9db580ea6d5/src/main/kotlin/juego/Juego.kt#L306-L334
 
-        Aunque esta función parezca complicada, administra un String. Primero lo convierte a lista e instancia un objeto con dichos datos. Si nos fijamos bien, vemos que cuando sustituimos o equipamos, llamamos          a **itemObtenidoProcesado**. Esta variable, puede ser Arma o Armadura, pero puede ser cambiado por Item y el código seguiría funcionando.
+   Aunque esta función parezca complicada, administra un String. Primero lo convierte a lista e instancia un objeto con dichos datos. Si nos fijamos bien, vemos que cuando sustituimos o equipamos, llamamos          a **itemObtenidoProcesado**. Esta variable, puede ser Arma o Armadura, pero puede ser cambiado por Item y el código seguiría funcionando.
+      
 
    - **ISP** **I**nterface Segregation Principle
 
@@ -176,8 +177,8 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
 
    - **DIP** **D**ependency Inversion Principle
 
-        El DIP dice que debemos hacer a nuestro código depender de abstracciones, no de instancias, de esta manera los detalles son los que tienen que depender de las abstracciones, no al revés.
-        En mi código desconozco si hay algún ejemplo claro del **DIP** pero, considero que **GestorEntrada** y **GestorConsola** son ejemplos muy cercanos a lo que propone este principio.
+     El DIP dice que debemos hacer a nuestro código depender de abstracciones, no de instancias, de esta manera los detalles son los que tienen que depender de las abstracciones, no al revés.
+     En mi código desconozco si hay algún ejemplo claro del **DIP** pero, considero que **GestorEntrada** y **GestorConsola** son ejemplos muy cercanos a lo que propone este principio.
      
      *MOSTRABLE*
      https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/033590c71a1d34cf1fcb1df7f108e9db580ea6d5/src/main/kotlin/juego/Mostrable.kt#L7-L34
