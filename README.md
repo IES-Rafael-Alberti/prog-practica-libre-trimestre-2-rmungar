@@ -167,7 +167,7 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
 
    - **ISP** **I**nterface Segregation Principle
 
-        El ISP nos indica que no debemos hacer a los usuarios del programa depender de interfaces que ellos no van a utilizar. Es decir, un Item es <Equipable>, <Sustituible> y <Guardable>, sin embargo, no es            <Jugable> o <Comprobable>. Con esto quiero llegar a que no podemos hacer depende un Item de interfaces que no aportan nada a su funcionamiento y solo complican el código y su comprensión.
+        El ISP nos indica que no debemos hacer a los usuarios del programa depender de interfaces que ellos no van a utilizar. Es decir, un Item es Equipable, Sustituible y Guardable, sin embargo, no es            Jugable o Comprobable. Con esto quiero llegar a que no podemos hacer depende un Item de interfaces que no aportan nada a su funcionamiento y solo complican el código y su comprensión.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/033590c71a1d34cf1fcb1df7f108e9db580ea6d5/src/main/kotlin/items/Item.kt#L45-L58
 
