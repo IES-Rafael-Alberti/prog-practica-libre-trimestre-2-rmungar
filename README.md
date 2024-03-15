@@ -154,7 +154,7 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
 
    - **OCP** **O**pen Closed Principle
      
-   El OCP nos deice que debemos tener un código abierto a la extensión, pero no a la modificación. Es por eso que he elegido el uso de las interfaces como forma de implementar dicho principio. Las                   interfaces genéricas nos permiten pasar cualquier tipo de dato, que la funcionalidad no se ve alterada.
+   El OCP nos dice que debemos tener un código abierto a la extensión, pero no a la modificación. Es por eso que he elegido el uso de las interfaces como forma de implementar dicho principio. Las                   interfaces genéricas nos permiten pasar cualquier tipo de dato, que la funcionalidad no se ve alterada.
 
 https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/033590c71a1d34cf1fcb1df7f108e9db580ea6d5/src/main/kotlin/items/E_S_G.kt#L17-L27
 
@@ -249,7 +249,7 @@ https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/bl
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
   
   La única forma de comprobar que funciona es ponerlo a prueba. En mi caso he realizado una especie de prueba del ciego, y he solicitado a gente sin conocimientos de programación que leyendo la descripcion de una función me dijeran como creían que iba a ser el 
-  contenido de esta y viceversa. Puesto que las propias funciones tienen comentarios internos en caso de que sean necesarios para su comprensión y depuración.
+  contenido de esta y viceversa. Puesto que las propias funciones tienen comentarios internos en caso de que sean necesarios para su comprensión y depuración. He empleado herramientas como KDoc.
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/6e380a6d21f025fa2d10191192febc52714dc28d/src/main/kotlin/juego/GestionJuego.kt#L96-L119
 
   https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-rmungar/blob/6e380a6d21f025fa2d10191192febc52714dc28d/src/main/kotlin/juego/GestionJuego.kt#L313-L323
